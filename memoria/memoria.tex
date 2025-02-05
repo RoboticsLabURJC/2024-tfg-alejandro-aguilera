@@ -1,3 +1,7 @@
+% !TeX document-id = {d83918a8-c659-4a46-8234-071d697471ea}
+% !TeX TXS-program:compile = txs:///xelatex/[--shell-escape]
+% !TeX TXS-program:bibliography = txs:///biber
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Plantilla de memoria en LaTeX para TFG/TFM - Universidad Rey Juan Carlos
 %%
@@ -91,7 +95,7 @@
 % Configura la fuente para letra monoespaciada: Source Code Pro, escala 0.85
 \setmonofont[Scale=0.85]{Source Code Pro}
 
-%%-- Familias de fuentes específicas
+%%-- Familias de fuentes específic¢as
 %%-- Se pueden definir etiquetas para familias de fuentes personalizadas
 %%-- que luego puedes emplear para cambiar el formato de una parte de texto
 %%-- Ejemplo:
@@ -451,15 +455,19 @@ As it is the translation of the ``Resumen'', which is supposed to be written at 
 \label{sec:intro}
 \pagenumbering{arabic} % para empezar la numeración de página con números
 
-En este capítulo se introduce el proyecto.
-Debería tener información general sobre el mismo, dando la información sobre el contexto en el que se ha desarrollado.
+Debido a el avance de las tecnologías, la robótica se encuentra en constante evolución, lo que hace que cada vez la podamos ver en más sectores, desde el mundo laboral hasta en nuestro día a día.Sin embargo, el aprendizaje de la robótica es un terreno complejo, ya que para poder empezar en este campo se requiere la instalación y configuración de distintas herramientas y entornos de programación, los cuales pueden resultas bastante complejos, en especial a nuevos usuarios que quiere empezar en el mundo de la robótica.
 
-No te olvides de echarle un ojo a la página con los cinco errores de escritura más frecuentes\footnote{\url{http://www.tallerdeescritores.com/errores-de-escritura-frecuentes}}.
+Otro gran problema del aprendizaje de la robótica es el coste de un robot en el cual ir probando nuestros códigos, ya que a diferencia de otras materias la robótica es un campo que su aprendizaje es a base de prueba y error.
 
-Aconsejo a todo el mundo que mire y se inspire en memorias pasadas.
-Las memorias de los proyectos que he llevado yo están (casi) todas almacenadas en mi web del GSyC\footnote{\url{https://gsyc.urjc.es/~grex/pfcs/}}.
+Este trabajo de fin de grado gira entorno a UNIBOTICS una plataforma web, que nace como solución a estos problemas. UNIBOTICS permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
 
-\section{Sección}
+Sin embargo, a pesar de sus ventajas, aún existen áreas de UNIBOTICS que podrían mejorarse. Actualmente, todos los datos de  usuarios desde los códigos de programación, tiempo de actividad, tiempo de resolución de actividades y muchos otros datos más, se recogen en una base de datos del tipo PostgreSQL, pero estos datos únicamente se almacenan y no se les saca todo el potencial que podrían tener.
+
+Dada esta situación, este proyecto quiere proporcionar una API que permita extraer y procesar estos datos. Además, se diseñarán unas Dashboards interactivas, donde se podrán ver de forma clara y detallada toda la información obtenida a través de la API.
+
+Con la implementación de estas Dashboards se busca que los profesores puedan ver de forma rápida y sencilla el trabajo realizado por sus alumnos, lo cual les podrá facilitar la enseñanza a los alumnos de robótica.
+
+\section{Objetivos}
 \label{sec:seccion}
 
 Esto es una sección, que es una estructura menor que un capítulo. 
@@ -467,71 +475,6 @@ Esto es una sección, que es una estructura menor que un capítulo.
 Por cierto, a veces me comentáis que no os compila por las tildes.
 Eso es un problema de codificación.
 Al guardar el archivo, guardad la codificación de ``ISO-Latin-1'' a ``UTF-8'' (o viceversa) y funcionará.
-
-\subsection{Estilo}
-\label{subsec:estilo}
-
-Recomiendo leer los consejos prácticos sobre escribir documentos científicos en \LaTeX \ de Diomidis Spinellis\footnote{\url{https://github.com/dspinellis/latex-advice}}.
-
-Lee sobre el uso de las comas\footnote{\url{http://narrativabreve.com/2015/02/opiniones-de-un-corrector-de-estilo-11-recetas-para-escribir-correctamente-la-coma.html}}. 
-Las comas en español no se ponen al tuntún.
-Y nunca, nunca entre el sujeto y el predicado (p.ej. en ``Yo, hago el TFG'' sobre la coma).
-La coma no debe separar el sujeto del predicado en una oración, pues se cortaría la secuencia natural del discurso.
-No se considera apropiado el uso de la llamada coma respiratoria o \emph{coma criminal}.
-Solamente se suele escribir una coma para marcar el lugar que queda cuando omitimos el verbo de una oración, pero es un caso que se da de manera muy infrecuente al escribir un texto científico (p.ej. ``El Real Madrid, campeón de Europa'').
-
-A continuación, viene una figura, la Figura~\ref{figura:foro_hilos}. 
-Observarás que el texto dentro de la referencia es el identificador de la figura (que se corresponden con el ``label'' dentro de la misma). 
-También habrás tomado nota de cómo se ponen las ``comillas dobles'' para que se muestren correctamente. 
-Nota que hay unas comillas de inicio (``) y otras de cierre (''), y que son diferentes.
-Volviendo a las referencias, nota que al compilar, la primera vez se crea un diccionario con las referencias, y en la segunda compilación se ``rellenan'' estas referencias. 
-Por eso hay que compilar dos veces tu memoria.
-Si no, no se crearán las referencias.
-
- \begin{figure}
-    \centering
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/foro1}
-    \caption{Página con enlaces a hilos}
-    \label{figura:foro_hilos}
- \end{figure}
-
-A continuación un bloque ``verbatim'', que se utiliza para mostrar texto tal cual.
-Se puede utilizar para ofrecer el contenido de correos electrónicos, código, entre otras cosas.
-
-{\footnotesize
-\begin{verbatim}
-    From gaurav at gold-solutions.co.uk  Fri Jan 14 14:51:11 2005
-    From: gaurav at gold-solutions.co.uk (gaurav_gold)
-    Date: Fri Jan 14 19:25:51 2005
-    Subject: [Mailman-Users] mailman issues
-    Message-ID: <003c01c4fa40$1d99b4c0$94592252@gaurav7klgnyif>
-    Dear Sir/Madam,
-    How can people reply to the mailing list?  How do i turn off
-    this feature? How can i also enable a feature where if someone
-    replies the newsletter the email gets deleted?
-    Thanks
-    From msapiro at value.net  Fri Jan 14 19:48:51 2005
-    From: msapiro at value.net (Mark Sapiro)
-    Date: Fri Jan 14 19:49:04 2005
-    Subject: [Mailman-Users] mailman issues
-    In-Reply-To: <003c01c4fa40$1d99b4c0$94592252@gaurav7klgnyif>
-    Message-ID: <PC173020050114104851057801b04d55@msapiro>
-    gaurav_gold wrote:
-    >How can people reply to the mailing list?  How do i turn off
-    this feature? How can i also enable a feature where if someone
-    replies the newsletter the email gets deleted?
-    See the FAQ
-    >Mailman FAQ: http://www.python.org/cgi-bin/faqw-mm.py
-    article 3.11
-\end{verbatim}
-}
-
-%%-- Objetivos del  proyecto
-%%-- Si la sección anterior ha quedado muy extensa, se puede considerar convertir
-%%-- Las siguientes tres secciones en un capítulo independiente de la memoria
-
-\section{Objetivos del proyecto}
-\label{sec:objetivos}
 
 \subsection{Objetivo general} % título de subsección (se muestra)
 \label{sec:objetivo-general} % identificador de subsección (no se muestra, es para poder referenciarla)
@@ -550,14 +493,19 @@ Los objetivos específicos se pueden entender como las tareas en las que se ha d
 
 Lo mejor suele ser utilizar una lista no numerada, como sigue:
 
-    \begin{itemize}
-        \item Un objetivo específico.
-        \item Otro objetivo específico.
-        \item Tercer objetivo específico.
-        \item \ldots
-    \end{itemize}
+\begin{itemize}
+	\item Un objetivo específico.
+	\item Otro objetivo específico.
+	\item Tercer objetivo específico.
+	\item \ldots
+\end{itemize}
 
-\section{Planificación temporal}
+\section{Planificacion}
+\label{sec:objetivos}
+
+
+
+\section{Estructura del documento}
 \label{sec:planificacion-temporal}
 
 Es conveniente que incluyas una descripción de lo que te ha llevado realizar el trabajo.
@@ -590,7 +538,7 @@ y qué contenidos se van a encontrar en cada capítulo.
 % ESTADO DEL ARTE %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Estado del arte}               %% a.k.a "Tecnologías utilizadas"
+\chapter{Tecnologías}               %% a.k.a "Tecnologías utilizadas"
 \label{chap:tecnologias}
 
 Descripción de las tecnologías que utilizas en tu trabajo. 
@@ -682,7 +630,7 @@ Además de por su perfil colaborativo, Overleaf destaca porque, pese a que en La
 % DISEÑO E IMPLEMENTACIÓN %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Diseño e implementación}
+\chapter{Arquitectura}
 \label{chap:diseño}
 
 
