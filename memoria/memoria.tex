@@ -538,67 +538,29 @@ y qué contenidos se van a encontrar en cada capítulo.
 \chapter{Tecnologías}               %% a.k.a "Tecnologías utilizadas"
 \label{chap:tecnologias}
 
-Descripción de las tecnologías que utilizas en tu trabajo. 
-Con dos o tres párrafos por cada tecnología, vale. 
-Se supone que aquí viene todo lo que no has hecho tú.
+En este capitulo describiré las tecnologías utilizadas para este proyecto.
 
-Puedes citar libros, como el de Bonabeau et al., sobre procesos estigmérgicos~\cite{bonabeau:_swarm}. 
-Me encantan los procesos estigmérgicos.
-Deberías leer más sobre ellos.
-Pero quizás no ahora, que tenemos que terminar la memoria para sacarnos por fin el título.
-Nota que el \~ \ añade un espacio en blanco, pero no deja que exista un salto de línea. 
-Imprescindible ponerlo para las citas.
 
-Citar es importantísimo en textos científico-técnicos. 
-Porque no partimos de cero.
-Es más, partir de cero es de tontos; lo suyo es aprovecharse de lo ya existente para construir encima y hacer cosas más sofisticadas.
-¿Dónde puedo encontrar textos científicos que referenciar?
-Un buen sitio es Google Scholar\footnote{\url{http://scholar.google.com}}.
-Por ejemplo, si buscas por ``stigmergy libre software'' para encontrar trabajo sobre software libre y el concepto de \emph{estigmergia} (¿te he comentado que me gusta el concepto de estigmergia ya?), encontrarás un artículo que escribí hace tiempo cuyo título es ``Self-organized development in libre software: a model based on the stigmergy concept''.
-Si pulsas sobre las comillas dobles (entre la estrella y el ``citado por ...'', justo debajo del extracto del resumen del artículo, te saldrá una ventana emergente con cómo citar.
-Abajo a la derecha, aparece un enlace BibTeX.
-Púlsalo y encontrarás la referencia en formato BibTeX, tal que así:
+\section{Python}
+\label{sec:python}
 
-\clearpage
-{\footnotesize
-\begin{minted}{bibtex}
-@inproceedings{robles2005self,
-  title={Self-organized development in libre software:
-         a model based on the stigmergy concept},
-  author={Robles, Gregorio and Merelo, Juan Juli\'an 
-          and Gonz\'alez-Barahona, Jes\'us M.},
-  booktitle={ProSim'05},
-  year={2005}
-}
-\end{minted}
-}
+Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y la programación imperativa.
 
-Copia el texto en BibTeX y pégalo en el fichero \texttt{memoria.bib}, que es donde están las referencias bibliográficas.
-Para incluir la referencia en el texto de la memoria, deberás citarlo, como hemos hecho antes con~\cite{bonabeau:_swarm}, lo que pasa es que en vez de el identificador de la cita anterior (bonabeau:\_swarm), tendrás que poner el nuevo (robles2005self).
-Compila el fichero \texttt{memoria.tex} (\texttt{pdflatex memoria.tex}), añade la bibliografía (\texttt{bibtex memoria.aux}) y vuelve a compilar \texttt{memoria.tex} (\texttt{pdflatex memoria.tex})\ldots y \emph{voilà} ¡tenemos una nueva cita~\cite{robles2005self}!
+El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma UNIBOTICS está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto.
+A continuación se enumeran y se detallan el funcionamiento de cada una: 
 
-También existe la posibilidad de poner notas al pie de página, por ejemplo, una para indicarte que visite la página del GSyC\footnote{\url{http://gsyc.es}}.
+\subsection{Pandas}
+Pandas es una de las herramientas más poderosas para la manipulación y análisis de datos en Python.Esta biblioteca se diseñó para hacer que la limpieza, transformación y análisis de datos sean rápidos y eficientes.
 
-\section{Sección 1} 
-\label{sec:seccion1}
+Una de las razones por las que he elegido pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva.
+La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
 
-Hemos hablado de cómo incluir figuras, pero no se ha descrito cómo incluir tablas.
-A continuación se presenta un ejemplo de tabla, la Tabla \ref{tabla:ejemplo} (fíjate 
-en cómo se introduce una referencia a la tabla).
+En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Ademas, como se menciona en Python for Data Analysis, 3rd Edition, pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
 
-\begin{table}
- \begin{center}
-  \begin{tabular}{ | l | c | r |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
-    \hline
-    Uno & 2 & 3 \\ \hline % el hline nos da una línea vertical
-    Cuatro & 5 & 6 \\ \hline
-    Siete & 8 & 9 \\
-    \hline
-  \end{tabular}
-  \caption{Ejemplo de tabla. Aquí viene una pequeña descripción (el \emph{caption}) del contenido de la tabla. Si la tabla no es autoexplicativa, siempre viene bien aclararla aquí.}
-  \label{tabla:ejemplo}
- \end{center}
-\end{table}
+\subsection{Dash}
+
+\section{PostgreSQL}
+\label{sec:PostgreSQL}
 
 \section{Entorno de desarrollo: PyCharm}
 \label{sec:entorno_de_desarrollo}
