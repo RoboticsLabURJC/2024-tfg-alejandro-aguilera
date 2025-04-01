@@ -43,11 +43,11 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("🌍 Dashboard 1C: Mapa de Duración Promedio de Sesión por País", className="title-large"),
+        html.H1("Dashboard 1C: Mapa de Duración Promedio de Sesión por País", className="title-large"),
 
-        dcc.Graph(id="world-map", style={"height": "80vh"}),
+        dcc.Graph(id="world-map", className="graph-map"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
     @dash_app.callback(
@@ -63,7 +63,6 @@ def init_dashboard(server):
                 locations=[],
                 color=[],
             )
-
 
         fig = px.choropleth(
             df,
@@ -82,8 +81,10 @@ def init_dashboard(server):
                 projection_type="natural earth",
                 fitbounds="locations"
             ),
-            margin=dict(l=0, r=0, t=50, b=0),
-            coloraxis_colorbar=dict(title="Duración Promedio (segundos)"),
+            autosize=True,
+            height=800,
+            margin=dict(l=0, r=0, t=30, b=0),
+            coloraxis_colorbar=dict(title="Duración Total (segundos)")
         )
 
         return fig

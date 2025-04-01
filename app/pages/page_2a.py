@@ -13,15 +13,14 @@ DB_CONFIG = {
 }
 
 def get_country_duration_data():
-    """Consulta la base de datos para obtener la duración total de sesiones por país."""
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         query = """
             SELECT country, SUM(duration) as total_duration
             FROM public.log_session
-            WHERE country IS NOT NULL  -- Asegurar que no haya valores nulos
+            WHERE country IS NOT NULL
             GROUP BY country
-            HAVING SUM(duration) > 0  -- Excluir países con duración 0
+            HAVING SUM(duration) > 0
             ORDER BY total_duration DESC;
         """
         df = pd.read_sql(query, conn)
@@ -32,7 +31,6 @@ def get_country_duration_data():
         return pd.DataFrame(columns=["country", "total_duration"])
 
 def init_dashboard(server):
-    """Crear la app Dash e integrarla con Flask"""
     dash_app = dash.Dash(
         server=server,
         routes_pathname_prefix="/2a/",
@@ -40,11 +38,11 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("🌍 Dashboard 2A: Mapa de Duración de Sesiones por País", className="title-large"),
+        html.H1("Dashboard 2A: Mapa de Duración de Sesiones por País", className="title-large"),
 
-        dcc.Graph(id="world-map", style={"height": "80vh"}),
+        dcc.Graph(id="world-map", className="graph-map"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
     @dash_app.callback(
@@ -67,7 +65,7 @@ def init_dashboard(server):
             locationmode="country names",
             color="total_duration",
             hover_name="country",
-            color_continuous_scale=["#F0F0F0", "#440154", "#21908D", "#FDE725"],  # De gris claro a colores fuertes
+            color_continuous_scale=["#F0F0F0", "#440154", "#21908D", "#FDE725"],
             title="Duración Total de Sesiones por País",
             labels={"total_duration": "Duración Total (segundos)"}
         )
@@ -78,8 +76,10 @@ def init_dashboard(server):
                 projection_type="natural earth",
                 fitbounds="locations"
             ),
-            margin=dict(l=0, r=0, t=50, b=0),
-            coloraxis_colorbar=dict(title="Duración Total (segundos)"),
+            autosize=True,
+            height=800,
+            margin=dict(l=0, r=0, t=30, b=0),
+            coloraxis_colorbar=dict(title="Duración Total (segundos)")
         )
 
         return fig

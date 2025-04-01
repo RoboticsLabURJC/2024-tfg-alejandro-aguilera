@@ -3,7 +3,7 @@ from dash import dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
 import psycopg2
-import numpy as np  # Para log(x)
+import numpy as np
 
 DB_CONFIG = {
     "dbname": "academy_db",
@@ -39,11 +39,11 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("📦 Dashboard 3C: Boxplot por Ejercicio (log Duración por Sesión)", className="title-large"),
+        html.H1("Dashboard 3C: Boxplot por Ejercicio (log Duración por Sesión)", className="title-large"),
 
-        dcc.Graph(id="boxplot-log-duration", style={"height": "85vh"}),
+        dcc.Graph(id="boxplot-log-duration", className="graph-boxplot"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
     @dash_app.callback(
@@ -73,7 +73,8 @@ def init_dashboard(server):
             autosize=True,
             margin=dict(l=40, r=40, t=60, b=150),
             xaxis_tickangle=-30,
-            font=dict(size=14)
+            font=dict(size=14),
+            height=800,
         )
 
         return fig

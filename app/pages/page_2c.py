@@ -18,7 +18,7 @@ def get_sessions_per_month():
         query = """
             SELECT DATE_TRUNC('month', start_date) AS month, COUNT(*) AS session_count
             FROM public.log_session
-            WHERE EXTRACT(YEAR FROM start_date) = 2024  -- Filtrar solo sesiones de 2024
+            WHERE EXTRACT(YEAR FROM start_date) = 2024
             GROUP BY month
             ORDER BY month;
         """
@@ -44,11 +44,11 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("📈 Dashboard 2C: Sesiones por Mes en 2024", className="title-large"),
+        html.H1("Dashboard 2C: Sesiones por Mes en 2024", className="title-large"),
 
-        dcc.Graph(id="sessions-line-chart"),
+        dcc.Graph(id="sessions-line-chart", className="responsive-graph"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
     @dash_app.callback(
@@ -76,7 +76,10 @@ def init_dashboard(server):
             title="Número de Sesiones por Mes en 2024",
             xaxis_title="Mes",
             yaxis_title="Número de Sesiones",
-            plot_bgcolor="white"
+            plot_bgcolor="white",
+        autosize = True,
+        height = 800,
+        margin = dict(l=0, r=0, t=30, b=0)
         )
 
         return fig

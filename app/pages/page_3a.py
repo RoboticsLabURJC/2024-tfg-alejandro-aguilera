@@ -3,9 +3,8 @@ from dash import dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
 import psycopg2
-import numpy as np  # Para log(x)
+import numpy as np
 
-# Configuración de la base de datos
 DB_CONFIG = {
     "dbname": "academy_db",
     "user": "user-dev",
@@ -15,19 +14,17 @@ DB_CONFIG = {
 }
 
 def get_exercise_list():
-    """Consulta la base de datos para obtener la lista única de ejercicios desde public.exercises"""
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         query = "SELECT DISTINCT exercise_id FROM public.exercises ORDER BY exercise_id;"
         df = pd.read_sql(query, conn)
         conn.close()
-        return sorted(df["exercise_id"].unique())  # Lista ordenada de ejercicios
+        return sorted(df["exercise_id"].unique())
     except Exception as e:
         print(f"Error al conectar a la BD: {e}")
         return []
 
 def get_exercise_duration_distribution(exercise_id):
-    """Consulta la base de datos para obtener la duración total de cada usuario en un ejercicio específico."""
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         query = """
@@ -57,7 +54,7 @@ def init_dashboard(server):
     exercise_options = [{"label": ex, "value": ex} for ex in get_exercise_list()]
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("📊 Dashboard 3A: Frecuencia (log) de Usuarios por Duración", className="title-large"),
+        html.H1("Dashboard 3A: Frecuencia (log) de Usuarios por Duración", className="title-large"),
 
         dcc.Dropdown(
             id="exercise-dropdown",
@@ -66,9 +63,9 @@ def init_dashboard(server):
             className="dropdown-box"
         ),
 
-        dcc.Graph(id="log-histogram"),
+        dcc.Graph(id="log-histogram", className="responsive-graph"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
     @dash_app.callback(
@@ -97,7 +94,10 @@ def init_dashboard(server):
             xaxis_title="log(Duración Total en segundos)",
             yaxis_title="Número de Usuarios",
             plot_bgcolor="white",
-            bargap=0.1
+            bargap=0.1,
+        autosize = True,
+        height = 800,
+        margin = dict(l=0, r=0, t=30, b=0)
         )
 
         return fig

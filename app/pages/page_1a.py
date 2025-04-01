@@ -39,7 +39,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("📊 Dashboard 1A: Análisis de Ejercicios por Usuario"),
+        html.H1("Dashboard 1A: Análisis de Ejercicios por Usuario", className="title-large"),
 
         dcc.Input(
             id="username-input",
@@ -49,12 +49,11 @@ def init_dashboard(server):
             className="input-box"
         ),
 
-        dcc.Graph(id="exercise-duration-graph"),
+        dcc.Graph(id="exercise-duration-graph", className="responsive-graph"),
 
-        html.A("⬅️ Volver al menú", href="/", className="back-link")
+        html.A("Volver al menú", href="/", className="back-link")
     ])
 
-    # actualizar para nuevo usario
     @dash_app.callback(
         Output("exercise-duration-graph", "figure"),
         Input("username-input", "value")
@@ -89,8 +88,8 @@ def init_dashboard(server):
         for i, row in df.iterrows():
             fig.add_shape(
                 type="line",
-                x0=0, x1=row["total_duration"],  # Desde el eje Y hasta el punto
-                y0=row["exercise"], y1=row["exercise"],  # En la misma posición en Y
+                x0=0, x1=row["total_duration"],
+                y0=row["exercise"], y1=row["exercise"],
                 line=dict(color="gray", width=1)
             )
 
@@ -101,7 +100,10 @@ def init_dashboard(server):
             xaxis_title="Duración Total (segundos)",
             yaxis_title="Ejercicio",
             plot_bgcolor="white",
-            yaxis=dict(categoryorder="total ascending")  # Ordenar de mayor a menor duración
+            yaxis=dict(categoryorder="total ascending"),
+            autosize=True,
+            height=800,
+            margin=dict(l=0, r=0, t=30, b=0)
         )
 
         return fig
