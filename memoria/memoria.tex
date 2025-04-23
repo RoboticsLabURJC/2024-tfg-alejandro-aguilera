@@ -633,6 +633,7 @@ Si utilizas una base de datos, no te olvides de incluir también un diagrama de 
 \cleardoublepage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % EXPERIMENTOS Y VALIDACIÓN %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -640,12 +641,50 @@ Si utilizas una base de datos, no te olvides de incluir también un diagrama de 
 \chapter{Experimentos y validación}
 \label{chap:experimentos}
 
-\textbf{Atención}: Este capítulo se introdujo como requisito en 2019.
+En esta sección expondré los distintos dashboards que he desarrollado con el objetivo de poder visualizar y analizar la información que está almacenada en la base de datos de Unibotics.
 
-Describe los experimentos y casos de test que tuviste que implementar para validar tus resultados. 
-Incluye también los resultados de validación que permiten afirmar que tus resultados son correctos.
+Cada dashboard se centra en distintas características del comportamiento del usuario, para su desarrollo he utilizado el framework Dash de Python junto con Plotly para la visualización gráfica y la información se extrae directamente desde la base de datos PostgreSQL mediante consultas SQL específicas.
 
-\section{Incorporación de código en la memoria}
+En los siguientes apartados expondré de forma individual cada uno de los dashboard desarrollados, explicando su propósito, los datos que representa, el porqué ese tipo de visualización y las diferentes conclusiones que pueden obtenerse sobre el comportamiento de los usuarios.
+
+\section{DASHBOARD 1A}
+El Dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
+Para poder obtener la información de duración por ejercicio, el dashboard se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente.
+Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el input.
+La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados. La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula GROUP BY agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada SUM() para sumar los datos de cada grupo.
+En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un DataFrame de Pandas para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de texto donde poder escribir el nombre del usuario que deseas visualizar su duración total por ejercicio, una vez escrito un nombre de usuario carga el dashboard con la información de ese usuario.
+
+El dashboard presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo lollipop. Este tipo de visualización es una variación de un diagrama de barras: la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
+
+Explicar porque elegimos este tipo de gráfico (tambien importante que lo ordenamos de arriba a abajo porque era mejor visualmente)
+
+La información presentada en el Dashboard 1A permite una rápida interpretación comparativa de la dedicación del usuario a los distintos ejercicios, gracias a ello podemos obtener varias conclusiones.
+
+Identificación de ejercicios más y menos trabajados: Las longitudes de las líneas revelan de un vistazo cuáles son los ejercicios en los que el usuario ha invertido más tiempo y cuáles menos.
+
+Detección de patrones de esfuerzo o dificultad: Una duración total muy elevada en cierto ejercicio podría indicar que el usuario tuvo dificultades significativas con ese ejercicio o que requirió múltiples intentos prolongados para completarlo,también podría significar que el ejercicio era muy extenso o el usuario dedicó tiempo extra explorando más allá de lo mínimo requerido. Por el contrario, ejercicios con duraciones muy bajas pueden sugerir que el usuario los completó rápidamente (quizá por ser sencillos o ya conocidos) o incluso que los abandonó pronto. En cualquier caso, los extremos en la distribución de tiempos señalan ejercicios que merecen una atención particular al evaluar el progreso del usuario.
+
+Distribución del tiempo de aprendizaje: El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
+
+
+
+
+\section{DASHBOARD 1B}
+\section{DASHBOARD 1C}
+\section{DASHBOARD 2A}
+\section{DASHBOARD 2B}
+\section{DASHBOARD 2C}
+\section{DASHBOARD 3A}
+\section{DASHBOARD 3B}
+\section{DASHBOARD 3C}
 
 Es bastante habitual que se reproduzcan fragmentos de código en la memoria de un TFG/TFM.
 Esto permite explicar detalladamente partes del desarrollo que se ha realizado que se consideren
