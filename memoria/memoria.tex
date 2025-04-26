@@ -648,10 +648,12 @@ Cada dashboard se centra en distintas características del comportamiento del us
 En los siguientes apartados expondré de forma individual cada uno de los dashboard desarrollados, explicando su propósito, los datos que representa, el porqué ese tipo de visualización y las diferentes conclusiones que pueden obtenerse sobre el comportamiento de los usuarios.
 
 \section{DASHBOARD 1A}
+
 El Dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
+
 Para poder obtener la información de duración por ejercicio, el dashboard se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente.
 Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el input.
-La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados. La consulta tiene esta forma:
+La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log_session ya que tabla almacena información sobre cada sesión iniciada por los usuarios, incluyendo la duración de dicha sesión en segundos. La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
 
@@ -674,17 +676,158 @@ Detección de patrones de esfuerzo o dificultad: Una duración total muy elevada
 
 Distribución del tiempo de aprendizaje: El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
 
-
-
-
 \section{DASHBOARD 1B}
 \section{DASHBOARD 1C}
+
+Este dashboard tiene como objetivo mostrar la duración promedio de las sesiones de los usuarios de Unibotics, agrupadas por país. A través de un mapa mundial interactivo, se representa gráficamente qué países presentan una mayor o menor media de tiempo por sesión, permitiendo identificar patrones geográficos en el uso de la plataforma.
+
+La información utilizada en este dashboard se obtiene desde la tabla log session de la base de datos PostgreSQL de la plataforma. Esta tabla almacena información sobre cada sesión iniciada por los usuarios, incluyendo el país de origen (si está disponible) y la duración de dicha sesión en segundos.
+
+La consulta SQL utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país, y posteriormente se calcula en Python la duración promedio dividiendo ambos valores. La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+A partir de esta consulta se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico. Este cálculo permite representar una métrica más equilibrada que la duración total (que podría estar sesgada por la cantidad de usuarios en un país), y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
+
+Explicar porque elegimos este tipo de gráfico
+
+El dashboard ofrece información útil tanto a nivel técnico como estratégico.España aparece con una alta duración promedio, lo que sugiere un uso intensivo y posiblemente más prolongado por sesión, frente a países donde el uso puede ser más breve o esporádico.Sin embargo, países con bajas duraciones promedio pueden estar reflejando una adopción más reciente, una menor familiaridad con la plataforma o simplemente menor disponibilidad de tiempo por parte de los usuarios.
+
+Desde el punto de vista de la administración de Unibotics, este dashboard puede ayudar a identificar mercados donde la plataforma tiene un mayor impacto o uso sostenido, lo cual puede influir en decisiones de soporte, localización de contenidos o expansión. Por el contrario, tambien puede ayudar a detectar regiones con bajo uso relativo, lo que puede motivar estrategias de difusión, colaboración educativa o mejora del acceso.
+
 \section{DASHBOARD 2A}
+
+Este dashboard tiene como objetivo mostrar la duración total acumulada de todas las sesiones de usuarios de Unibotics, agrupadas por país. A través de un mapa interactivo, permite observar en qué regiones geográficas se ha registrado un mayor tiempo de uso en conjunto, proporcionando una visión global de la distribución de la actividad en la plataforma.
+
+La información utilizada en este dashboard se obtiene desde la tabla log session de la
+base de datos PostgreSQL de la plataforma. Esta tabla almacena información sobre cada
+sesión iniciada por los usuarios, incluyendo el país de origen (si está disponible) y la du-
+ración de dicha sesión en segundos
+
+La consulta SQL que se utiliza agrupa los datos por país y calcula la suma total de la duración de todas las sesiones correspondientes a cada país. La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+A diferencia de otros dashboards que analizan promedios, en este caso se calcula simplemente la acumulación del tiempo total de uso de la plataforma por país. Esto permite identificar los países donde el uso absoluto de Unibotics ha sido más intenso.
+
+Una vez obtenidos los resultados, se cargan en un DataFrame de Pandas con el pais y su respectiva duración total de sesiones y se utilizan como base para la representación gráfica en el mapa.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly
+Express, en el que cada país se colorea en función de la duración total de sesión. Cuan-
+to mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática
+progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto
+anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada
+para resaltar visualmente los valores extremos.
+
+Explicar porque elegimos este tipo de gráfico
+
+Del análisis del mapa (ver figura), se pueden obtener conclusiones como:
+
+España destaca con el mayor volumen de tiempo total de sesiones, lo que refleja su fuerte implantación y uso intensivo de la plataforma, probablemente por ser el país de origen o principal mercado de Unibotics mientras que otros países europeos o latinoamericanos presentan niveles más bajos de duración acumulada, lo que puede interpretarse como una menor penetración o un uso más reciente de la plataforma en esas regiones.
+
+Tambien se observan diferencias geográficas claras, algunos continentes como África o Asia presentan en general un uso más bajo, salvo excepciones, lo que podría señalar oportunidades de expansión o barreras de adopción actuales.
+
+Desde el punto de vista de la gestión de Unibotics, este dashboard ayuda a ver en qué países la plataforma tiene más presencia. Esta información permite decidir mejor dónde hacer campañas, traducir contenidos o invertir en mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas
+
 \section{DASHBOARD 2B}
 \section{DASHBOARD 2C}
+
+Este dashboard muestra la evolución mensual del número de sesiones iniciadas en Unibotics a lo largo del año 2024, diferenciando también entre usuarios masculinos y femeninos. El objetivo es analizar cómo varía el uso de la plataforma mes a mes y si existen diferencias significativas por género.
+
+Los datos provienen de las tablas log session y common user de la base de datos PostgreSQL. En log session se almacena la fecha de inicio de cada sesión, y en common user se guarda la información personal de los usuarios, incluido su género.
+
+La consulta SQL utilizada realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
+La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los meses estén correctamente ordenados de enero a diciembre, y se formatea el nombre de los meses.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+El dashboard utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año. Se incluyen tres líneas:
+
+    Total de sesiones (en azul).
+    Sesiones femeninas (en rojo).
+    Sesiones masculinas (en verde).
+
+Cada punto en el gráfico representa el número de sesiones registradas en ese mes para cada categoría.
+
+Explicar porque elegimos este tipo de gráfico
+
+Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada no se que mas decir.
+
+
 \section{DASHBOARD 3A}
+
+Este dashboard analiza cómo se distribuyen los usuarios de Unibotics según el tiempo total que han dedicado a un ejercicio específico. Utiliza una escala logarítmica para poder representar mejor las diferencias en las duraciones, que pueden ser muy grandes entre unos usuarios y otros.
+
+Los datos provienen de las tablas log exercises y exercises de la base de datos PostgreSQL.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta una consulta SQL que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
+La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+Después de obtener los datos, se aplica una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+El dashboard muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
+
+Cada barra del histograma muestra cuántos usuarios cayeron en ese rango de duraciones. La escala logarítmica en el eje X permite visualizar mejor los datos, ya que de otra manera la mayoría de los usuarios quedarían agrupados en duraciones bajas y sería difícil distinguir diferencias.
+
+Explicar porque elegimos este tipo de gráfico
+
+El análisis del histograma permite entender cómo se comportan los usuarios al realizar un determinado ejercicio. Al observar la distribución de los tiempos, podemos ver si la mayoría de los usuarios completan el ejercicio en un tiempo parecido o si existen grandes diferencias entre ellos. 
+
+Cuando los tiempos se agrupan principalmente en valores bajos, suele indicar que el ejercicio es sencillo o que muchos usuarios no llegaron a dedicarle demasiado tiempo, quizás porque lo abandonaron pronto. En cambio, cuando hay una gran variedad de tiempos, podemos interpretar que el ejercicio tiene un nivel de dificultad más variable o que, por su diseño, permite a los usuarios dedicarle más tiempo explorando distintas soluciones. 
+
+Para los profesores, ofrece una forma de detectar si el ejercicio está bien equilibrado en cuanto a dificultad, o si sería necesario ajustarlo para mejorar la experiencia de aprendizaje.
+
 \section{DASHBOARD 3B}
+
+Este dashboard muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja (boxplots) aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
+
+Los datos se obtienen de la tabla log exercises de la base de datos PostgreSQL. Se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
+La consulta tiene esta forma:
+
+Aqui pego el codigo (pero nose como hacerlo bien)
+
+Una vez extraídos los datos, se calcula el logaritmo de la duración total para cada usuario. Esto se hace para normalizar los valores, ya que algunos usuarios pueden tener tiempos muy pequeños y otros muy grandes, y la escala logarítmica ayuda a visualizar mejor esa variabilidad.
+
+aqui pego la foto con un ejemplo (estoy esperando a la version final)
+
+Cada ejercicio se representa en el eje horizontal, mientras que en el eje vertical se muestra el logaritmo del tiempo total invertido por los usuarios. Para cada ejercicio, el boxplot muestra:
+
+La mediana de las duraciones (línea central del rectángulo).
+El rango intercuartílico (el ancho de la caja), que representa la mayoría de los usuarios.
+Los valores extremos o atípicos (puntos dispersos fuera de la caja).
+
+Gracias a este tipo de gráfico es posible visualizar de forma clara cómo varía la dedicación de los usuarios en cada ejercicio, y detectar si hay muchos usuarios que dedican tiempos muy distintos o si la mayoría se concentra en valores similares. Además, se muestran todos los puntos individuales sobre los diagramas, lo que permite ver mejor la dispersión real de los datos.
+
+Este dashboard permite comparar de manera rápida cómo se comportan los usuarios en cada ejercicio. Se puede ver si la mayoría de los alumnos dedican un tiempo similar o si hay mucha diferencia entre unos y otros. También ayuda a detectar ejercicios en los que algunos usuarios invierten mucho más tiempo, lo que podría significar que son más complicados o que resultan especialmente interesantes. Además, permite identificar actividades donde hay muchos casos extremos, lo que podría indicar que el ejercicio no está bien planteado o que su dificultad varía demasiado entre estudiantes. Para los profesores, esta información es útil para saber qué ejercicios podrían necesitar cambios o mejoras, y para entender mejor cómo se enfrentan los alumnos a las tareas. Para quienes diseñan los contenidos, el análisis sirve para ver si los ejercicios provocan el tipo de trabajo esperado o si sería buena idea añadir ayudas o dividir las actividades.
+
 \section{DASHBOARD 3C}
+
+Este dashboard es muy similar al anterior (Dashboard 3B), ya que también utiliza diagramas de caja (boxplots) para representar los datos, pero con una diferencia importante: en lugar de analizar el tiempo total que cada usuario dedica a un ejercicio, aquí se analiza la duración de cada sesión individual.
+
+Mientras que en el 3B (esto lo cambiare cuando esten todos) sumábamos todas las sesiones de un usuario para un ejercicio determinado, en este dashboard se estudia cada sesión por separado, sin agruparlas. Además, también se aplica una escala logarítmica para representar mejor las diferencias en los tiempos, ya que algunas sesiones pueden durar solo unos pocos segundos y otras mucho más.
+
+Para obtener estos datos se utiliza una consulta SQL sencilla que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración de esa sesión concreta:
+
+aqui pongo el codigo
+
+El objetivo de este dashboard es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el Dashboard 3B, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
+
+Esta representación es útil para entender mejor el comportamiento real dentro de cada ejercicio: permite ver si los estudiantes tienden a resolver los ejercicios de forma rápida o si, por el contrario, dedican mucho tiempo en intentos sucesivos. Además, puede ayudar a detectar ejercicios que generan más dispersión en el tiempo por sesión, lo que puede ser una pista sobre su dificultad o sobre la necesidad de mejorar su planteamiento o las instrucciones dadas.
+
+\section{como poner codigo}
+
 
 Es bastante habitual que se reproduzcan fragmentos de código en la memoria de un TFG/TFM.
 Esto permite explicar detalladamente partes del desarrollo que se ha realizado que se consideren
@@ -692,6 +835,10 @@ de especial interés. No obstante, tampoco es conveniente pasarse e incluir dema
 la memoria, puesto que se puede alargar mucho el documento. Un recurso muy habitual es subir
 todo el código a un repositorio de un servicio de control de versiones como GitHub o GitLab,
 y luego incluir en la memoria la URL que enlace a dicho repositorio.
+
+
+
+
 
 Para incluir fragmentos de código en un documento \LaTeX se pueden combinar varias
 herramientas:
