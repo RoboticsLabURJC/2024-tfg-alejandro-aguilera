@@ -16,9 +16,14 @@ def get_sessions_per_month():
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         query = """
-            SELECT DATE_TRUNC('month', start_date) AS month, COUNT(*) AS session_count
-            FROM public.log_session
-            WHERE EXTRACT(YEAR FROM start_date) = 2024
+            SELECT 
+                DATE_TRUNC('month', s.start_date) AS month,
+                COUNT(*) AS total_sessions,
+                COUNT(CASE WHEN u.gender = 'F' THEN 1 END) AS female_sessions,
+                COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
+            FROM public.log_session s
+            JOIN public.common_user u ON s.username = u.username
+            WHERE EXTRACT(YEAR FROM s.start_date) = 2024
             GROUP BY month
             ORDER BY month;
         """
@@ -34,7 +39,7 @@ def get_sessions_per_month():
         return df.sort_values("month")
     except Exception as e:
         print(f"Error al conectar a la BD: {e}")
-        return pd.DataFrame(columns=["month", "session_count"])
+        return pd.DataFrame(columns=["month", "total_sessions", "female_sessions", "male_sessions"])
 
 def init_dashboard(server):
     dash_app = dash.Dash(
@@ -63,13 +68,34 @@ def init_dashboard(server):
 
         fig = go.Figure()
 
+        # Línea de sesiones totales
         fig.add_trace(go.Scatter(
             x=df["month"],
-            y=df["session_count"],
+            y=df["total_sessions"],
             mode="lines+markers",
-            marker=dict(size=12, color="red"),
-            line=dict(width=3, color="blue"),
-            name="Sesiones"
+            marker=dict(size=10),
+            line=dict(width=3),
+            name="Total Sesiones",
+        ))
+
+        # Línea de sesiones femeninas
+        fig.add_trace(go.Scatter(
+            x=df["month"],
+            y=df["female_sessions"],
+            mode="lines+markers",
+            marker=dict(size=10),
+            line=dict(width=3),
+            name="Sesiones Femeninas"
+        ))
+
+        # Línea de sesiones masculinas
+        fig.add_trace(go.Scatter(
+            x=df["month"],
+            y=df["male_sessions"],
+            mode="lines+markers",
+            marker=dict(size=10),
+            line=dict(width=3),
+            name="Sesiones Masculinas"
         ))
 
         fig.update_layout(
@@ -77,9 +103,9 @@ def init_dashboard(server):
             xaxis_title="Mes",
             yaxis_title="Número de Sesiones",
             plot_bgcolor="white",
-        autosize = True,
-        height = 800,
-        margin = dict(l=0, r=0, t=30, b=0)
+            autosize=True,
+            height=800,
+            margin=dict(l=0, r=0, t=30, b=0)
         )
 
         return fig
