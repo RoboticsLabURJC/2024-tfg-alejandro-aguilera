@@ -2,6 +2,7 @@ import dash
 from dash import dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import psycopg2
 import numpy as np
 
@@ -74,12 +75,16 @@ def init_dashboard(server):
     )
     def update_histogram(exercise_id):
         if not exercise_id:
-            return px.histogram(title="Selecciona un ejercicio para ver datos")
+            fig = go.Figure()
+            fig.update_layout(title_text="Selecciona un ejercicio para ver datos")
+            return fig
 
         df = get_exercise_duration_distribution(exercise_id)
 
         if df.empty:
-            return px.histogram(title=f"No hay datos para '{exercise_id}'")
+            fig = go.Figure()
+            fig.update_layout(title_text=f"No hay datos para '{exercise_id}'")
+            return fig
 
         fig = px.histogram(
             df,
@@ -95,9 +100,9 @@ def init_dashboard(server):
             yaxis_title="Número de Usuarios",
             plot_bgcolor="white",
             bargap=0.1,
-        autosize = True,
-        height = 800,
-        margin = dict(l=0, r=0, t=30, b=0)
+            autosize=True,
+            height=800,
+            margin=dict(l=0, r=0, t=30, b=0)
         )
 
         return fig
