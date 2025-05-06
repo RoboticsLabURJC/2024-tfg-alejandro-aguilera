@@ -544,25 +544,33 @@ En este capitulo describiré las tecnologías utilizadas para este proyecto.
 \section{Python}
 \label{sec:python}
 
-Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y la programación imperativa.
+Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y la programación imperativa.
 
-El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma UNIBOTICS está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto.
-A continuación se enumeran y se detallan el funcionamiento de cada una: 
+El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma UNIBOTICS está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto. A continuación se enumeran y se detallan el funcionamiento de cada una:
 
-\subsection{Pandas}
-Pandas es una de las herramientas más poderosas para la manipulación y análisis de datos en Python.Esta biblioteca se diseñó para hacer que la limpieza, transformación y análisis de datos sean rápidos y eficientes.
+\subsection{Pandas}\label{subsec:pandas}
+Pandas es una de las herramientas más poderosas para la manipulación y análisis de datos en Python. Esta biblioteca se diseñó para hacer que la limpieza, transformación y análisis de datos sean rápidos y eficientes.
 
-Una de las razones por las que he elegido pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva.
-La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
+Una de las razones por las que he elegido pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva. La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
 
-En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Ademas, como se menciona en Python for Data Analysis, 3rd Edition, pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
+En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Además, como se menciona en *Python for Data Analysis*, 3rd Edition, pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
 
-\subsection{Dash}
-Añadir cuando empiece con las dashboard
+\subsection{Dash}\label{subsec:dash}
+Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla. 
+
+En este proyecto, lo he utilizado porque facilita la creación de gráficos atractivos e interactivos para visualizar los datos de la plataforma UNIBOTICS. Con Dash, puedo generar visualizaciones que permiten a los usuarios interactuar con los datos de manera intuitiva, como hacer filtros o explorar diferentes métricas. Esto es ideal para representar información compleja de forma clara y visualmente atractiva. Además, Dash se integra muy bien con otras bibliotecas de Python, lo que hace que sea fácil crear gráficos de todo tipo, desde barras hasta mapas interactivos.
+
+\subsection{Psycopg2}\label{subsec:psycopg2}
+Psycopg2 es una librería de Python que permite conectar aplicaciones Python con bases de datos PostgreSQL. Es ampliamente utilizada debido a su eficiencia y facilidad de uso para interactuar con bases de datos. 
+
+En este proyecto, he utilizado Psycopg2 para ejecutar consultas SQL directamente desde Python, lo que permite extraer, insertar y modificar datos de manera eficiente. Esta librería ofrece una interfaz sencilla y rápida para gestionar la conexión con la base de datos y ejecutar comandos SQL de forma segura, evitando vulnerabilidades como la inyección de SQL. Además, su integración con otras bibliotecas de Python, como Pandas \ref{subsec:pandas}, facilita la manipulación y análisis de los datos obtenidos desde la base de datos, lo que hace que sea más fácil la integración con Dash \ref{subsec:dash}.
+
 
 \section{PostgreSQL}
 \label{sec:PostgreSQL}
-Añadir cuando tenga acceso a la base de datos
+PostgreSQL es un sistema de base de datos muy seguro y popular que se utiliza para guardar y organizar grandes cantidades de datos. Es de código abierto, lo que significa que cualquiera puede usarlo y adaptarlo según sus necesidades. 
+
+Una de las razones por las que es tan utilizado es que permite hacer consultas complejas de manera rápida y segura, asegurando que los datos se mantengan intactos y bien organizados. En el caso de Unibotics, toda la información relacionada con los usuarios y sus interacciones en la plataforma se almacena en una base de datos PostgreSQL. Aunque se hablará más adelante sobre cómo está estructurada esta base de datos \ref{sec:arquitectura}, lo importante es que PostgreSQL ofrece una forma eficiente y segura de gestionar toda esa información.
 
 \section{Entorno de desarrollo: PyCharm}
 \label{sec:entorno_de_desarrollo}
@@ -627,8 +635,27 @@ Además de Django, emplea Nginx y Gunicorn, herramientas que mejoran la eficienc
   \caption{Estructura de Unibotics.}\label{fig:arquitectura}
 \end{figure}
 
-Si utilizas una base de datos, no te olvides de incluir también un diagrama de entidad-relación.
-(lo añadire cuando tenga acceso a esa base de datos)
+La base de datos de Unibotics está organizada para almacenar toda la información necesaria para el funcionamiento de la plataforma, desde los datos de los usuarios hasta los resultados de las simulaciones. Aunque toda esta información se encuentra en una única base de datos, está organizada en diferentes tablas que cubren varias áreas clave de la plataforma.
+
+Por ejemplo, la información relacionada con los ejercicios y los universos de simulación está almacenada en tablas como exercises y exercise\_universes, las cuales permiten asociar ejercicios a los distintos entornos de simulación disponibles. Esto asegura que un mismo ejercicio pueda ejecutarse en varios universos, proporcionando flexibilidad en las simulaciones.
+
+También está la información sobre los robots y los mundos de simulación, que se guarda en tablas como robots y worlds. Estas tablas contienen detalles sobre la configuración de los robots y los mundos de simulación, lo que permite a la plataforma gestionar los recursos necesarios para ejecutar los ejercicios en el entorno correcto.
+
+Por otro lado, las tablas de logs, como log\_session y log\_exercises, almacenan los registros más importantes sobre la actividad de los usuarios. Estos logs incluyen información detallada sobre la duración de las sesiones de los usuarios, los ejercicios realizados y las fechas en las que se realizaron. Estos datos son fundamentales para generar los dashboards y análisis sobre el comportamiento de los usuarios en la plataforma.
+
+Además, la base de datos gestiona también los datos clave sobre los usuarios, los permisos de acceso y las máquinas de granja (contenedores Docker) que ejecutan los ejercicios. Aquí se guardan los detalles de los usuarios y cómo se relacionan con los ejercicios a los que tienen acceso, así como el estado de las máquinas que se utilizan para ejecutar los ejercicios.
+
+En la Figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que ilustra cómo todas estas tablas están conectadas entre sí y cómo se organiza la información en la base de datos. Este diagrama es esencial para comprender cómo fluye la información dentro del sistema y cómo se gestionan las relaciones entre los diferentes elementos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio]{img/ER.png}
+    \caption{Diagrama entidad-relación.}
+    \label{fig:ER}
+\end{figure}
+
+
+Finalmente, en el Apéndice A, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
 
 \cleardoublepage
 
@@ -647,15 +674,42 @@ Cada dashboard se centra en distintas características del comportamiento del us
 
 En los siguientes apartados expondré de forma individual cada uno de los dashboard desarrollados, explicando su propósito, los datos que representa, el porqué ese tipo de visualización y las diferentes conclusiones que pueden obtenerse sobre el comportamiento de los usuarios.
 
+A continuación, se presentan las tablas SQL de las que se extrae la información utilizada en los dashboards.
+
+\begin{table}[H]
+\centering
+\caption*{\textbf{Tabla 4.1} \\
+\textit{Tablas SQL utilizadas de la base de datos de Unibotics.}}
+\begin{tabular}{lp{10cm}}
+\toprule
+\textbf{Tabla} & \textbf{Descripción} \\
+\midrule
+Log\_session & Contiene información sobre las sesiones iniciadas por los usuarios. Entre los campos más relevantes se encuentran el nombre del usuario, la fecha y hora de inicio de la sesión, la duración total en segundos y el país desde el cual se conecta el usuario. \\
+Log\_exercises & Contiene información sobre los accesos de los usuarios a los distintos ejercicios disponibles. Entre los campos más relevantes se encuentran el nombre del usuario, el nombre del ejercicio al que accede, la duración de la interacción, la fecha y hora de inicio, así como otros datos relacionados con la actividad. \\
+Common\_user & Reúne información general sobre los usuarios registrados en la plataforma. Aunque cuenta con múltiples campos, el más relevante para este trabajo es el género del usuario. \\
+Exercises & Contiene un listado con los distintos ejercicios disponibles en la plataforma \\
+\bottomrule
+\end{tabular}
+\vspace{1ex}
+
+\begin{flushleft}
+\textit{Nota.} La base de datos de Unibotics contiene mas tablas como vimos en el punto 2, pero estas son las que uso para realizar los Dashboards.
+\end{flushleft}
+\end{table}
+
+
+
+
 \section{DASHBOARD 1A}
 
 El Dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
 
 Para poder obtener la información de duración por ejercicio, el dashboard se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente.
 Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el input.
-La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log_session ya que tabla almacena información sobre cada sesión iniciada por los usuarios, incluyendo la duración de dicha sesión en segundos. La consulta tiene esta forma:
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log\_session. La consulta tiene esta forma:
+
+aqui pego codigo sigp sin ser capaz no se porque no lo veo
 
 De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula GROUP BY agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada SUM() para sumar los datos de cada grupo.
 En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un DataFrame de Pandas para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
@@ -676,14 +730,11 @@ Detección de patrones de esfuerzo o dificultad: Una duración total muy elevada
 
 Distribución del tiempo de aprendizaje: El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
 
-\section{DASHBOARD 1B}
 \section{DASHBOARD 1C}
 
 Este dashboard tiene como objetivo mostrar la duración promedio de las sesiones de los usuarios de Unibotics, agrupadas por país. A través de un mapa mundial interactivo, se representa gráficamente qué países presentan una mayor o menor media de tiempo por sesión, permitiendo identificar patrones geográficos en el uso de la plataforma.
 
-La información utilizada en este dashboard se obtiene desde la tabla log session de la base de datos PostgreSQL de la plataforma. Esta tabla almacena información sobre cada sesión iniciada por los usuarios, incluyendo el país de origen (si está disponible) y la duración de dicha sesión en segundos.
-
-La consulta SQL utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país, y posteriormente se calcula en Python la duración promedio dividiendo ambos valores. La consulta tiene esta forma:
+La información utilizada en este dashboard se obtiene desde la tabla log\_session,la consulta SQL utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país, y posteriormente se calcula en Python la duración promedio dividiendo ambos valores. La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
 
@@ -703,12 +754,7 @@ Desde el punto de vista de la administración de Unibotics, este dashboard puede
 
 Este dashboard tiene como objetivo mostrar la duración total acumulada de todas las sesiones de usuarios de Unibotics, agrupadas por país. A través de un mapa interactivo, permite observar en qué regiones geográficas se ha registrado un mayor tiempo de uso en conjunto, proporcionando una visión global de la distribución de la actividad en la plataforma.
 
-La información utilizada en este dashboard se obtiene desde la tabla log session de la
-base de datos PostgreSQL de la plataforma. Esta tabla almacena información sobre cada
-sesión iniciada por los usuarios, incluyendo el país de origen (si está disponible) y la du-
-ración de dicha sesión en segundos
-
-La consulta SQL que se utiliza agrupa los datos por país y calcula la suma total de la duración de todas las sesiones correspondientes a cada país. La consulta tiene esta forma:
+La información utilizada en este dashboard se obtiene desde la tabla log\_session, la consulta SQL que se utiliza agrupa los datos por país y calcula la suma total de la duración de todas las sesiones correspondientes a cada país. La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
 
@@ -735,14 +781,11 @@ Tambien se observan diferencias geográficas claras, algunos continentes como Á
 
 Desde el punto de vista de la gestión de Unibotics, este dashboard ayuda a ver en qué países la plataforma tiene más presencia. Esta información permite decidir mejor dónde hacer campañas, traducir contenidos o invertir en mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas
 
-\section{DASHBOARD 2B}
 \section{DASHBOARD 2C}
 
 Este dashboard muestra la evolución mensual del número de sesiones iniciadas en Unibotics a lo largo del año 2024, diferenciando también entre usuarios masculinos y femeninos. El objetivo es analizar cómo varía el uso de la plataforma mes a mes y si existen diferencias significativas por género.
 
-Los datos provienen de las tablas log session y common user de la base de datos PostgreSQL. En log session se almacena la fecha de inicio de cada sesión, y en common user se guarda la información personal de los usuarios, incluido su género.
-
-La consulta SQL utilizada realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
+Los datos provienen de las tablas log\_session y common\_user,la consulta SQL utilizada realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
 La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
@@ -768,7 +811,7 @@ Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada n
 
 Este dashboard analiza cómo se distribuyen los usuarios de Unibotics según el tiempo total que han dedicado a un ejercicio específico. Utiliza una escala logarítmica para poder representar mejor las diferencias en las duraciones, que pueden ser muy grandes entre unos usuarios y otros.
 
-Los datos provienen de las tablas log exercises y exercises de la base de datos PostgreSQL.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta una consulta SQL que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
+Los datos provienen de las tablas log\_exercises y exercises.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta una consulta SQL que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
 La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
@@ -793,7 +836,7 @@ Para los profesores, ofrece una forma de detectar si el ejercicio está bien equ
 
 Este dashboard muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja (boxplots) aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
 
-Los datos se obtienen de la tabla log exercises de la base de datos PostgreSQL. Se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
+Los datos se obtienen de la tabla log\_exercises. Se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
 La consulta tiene esta forma:
 
 Aqui pego el codigo (pero nose como hacerlo bien)
