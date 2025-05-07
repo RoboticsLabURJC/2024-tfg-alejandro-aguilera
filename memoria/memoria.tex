@@ -655,7 +655,7 @@ En la Figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que 
 \end{figure}
 
 
-Finalmente, en el Apéndice A, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
+Finalmente, en el apendice A \ref{chap:apendiceA}, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
 
 \cleardoublepage
 
@@ -693,7 +693,7 @@ Exercises & Contiene un listado con los distintos ejercicios disponibles en la p
 \vspace{1ex}
 
 \begin{flushleft}
-\textit{Nota.} La base de datos de Unibotics contiene mas tablas como vimos en el punto 2, pero estas son las que uso para realizar los Dashboards.
+\textit{Nota.} La base de datos de Unibotics contiene mas tablas como vimos en \ref{sec:arquitectura}, pero estas son las que uso para realizar los Dashboards.
 \end{flushleft}
 \end{table}
 
@@ -714,7 +714,11 @@ aqui pego codigo sigp sin ser capaz no se porque no lo veo
 De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula GROUP BY agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada SUM() para sumar los datos de cada grupo.
 En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un DataFrame de Pandas para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/1a.png}
+  \caption{Dash 1a.}\label{fig:1a}
+\end{figure}
 
 Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de texto donde poder escribir el nombre del usuario que deseas visualizar su duración total por ejercicio, una vez escrito un nombre de usuario carga el dashboard con la información de ese usuario.
 
@@ -740,7 +744,11 @@ Aqui pego el codigo (pero nose como hacerlo bien)
 
 A partir de esta consulta se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico. Este cálculo permite representar una métrica más equilibrada que la duración total (que podría estar sesgada por la cantidad de usuarios en un país), y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/1c.png}
+  \caption{Dash 1c.}\label{fig:1c}
+\end{figure}
 
 El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
 
@@ -762,7 +770,12 @@ A diferencia de otros dashboards que analizan promedios, en este caso se calcula
 
 Una vez obtenidos los resultados, se cargan en un DataFrame de Pandas con el pais y su respectiva duración total de sesiones y se utilizan como base para la representación gráfica en el mapa.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/2a.png}
+  \caption{Dash 2a.}\label{fig:2a}
+\end{figure}
+
 
 El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly
 Express, en el que cada país se colorea en función de la duración total de sesión. Cuan-
@@ -792,8 +805,12 @@ Aqui pego el codigo (pero nose como hacerlo bien)
 
 Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los meses estén correctamente ordenados de enero a diciembre, y se formatea el nombre de los meses.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
 
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/2c.png}
+  \caption{Dash 2c.}\label{fig:2c}
+\end{figure}
 El dashboard utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año. Se incluyen tres líneas:
 
     Total de sesiones (en azul).
@@ -818,7 +835,11 @@ Aqui pego el codigo (pero nose como hacerlo bien)
 
 Después de obtener los datos, se aplica una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/3a.png}
+  \caption{Dash 3a.}\label{fig:3a}
+\end{figure}
 
 El dashboard muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
 
@@ -843,7 +864,11 @@ Aqui pego el codigo (pero nose como hacerlo bien)
 
 Una vez extraídos los datos, se calcula el logaritmo de la duración total para cada usuario. Esto se hace para normalizar los valores, ya que algunos usuarios pueden tener tiempos muy pequeños y otros muy grandes, y la escala logarítmica ayuda a visualizar mejor esa variabilidad.
 
-aqui pego la foto con un ejemplo (estoy esperando a la version final)
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/3bb.png}
+  \caption{Dash 3b.}\label{fig:3b}
+\end{figure}
 
 Cada ejercicio se representa en el eje horizontal, mientras que en el eje vertical se muestra el logaritmo del tiempo total invertido por los usuarios. Para cada ejercicio, el boxplot muestra:
 
@@ -864,6 +889,12 @@ Mientras que en el 3B (esto lo cambiare cuando esten todos) sumábamos todas las
 Para obtener estos datos se utiliza una consulta SQL sencilla que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración de esa sesión concreta:
 
 aqui pongo el codigo
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/3c.png}
+  \caption{Dash 3c.}\label{fig:3c}
+\end{figure}
 
 El objetivo de este dashboard es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el Dashboard 3B, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
 
@@ -1028,4 +1059,48 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 % https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex
 \raggedright\printbibliography[heading=bibintoc,title={Referencias}]
 
+\chapter{Apendice A}
+\label{chap:apendiceA}
+
+
+En este apéndice se presentan ejemplos de las consultas SQL utilizadas para extraer datos de las tablas que conforman la base de datos de Unibotics. A continuación, se describe cómo se organizan los datos en las tablas de la base de datos y se presentan ejemplos visuales para ayudar a comprender la estructura de la información.
+
+Una base de datos está organizada en tablas, donde cada fila representa un registro (por ejemplo, un ejercicio o un usuario), y cada columna representa un campo de ese registro (por ejemplo, el nombre de un usuario o la duración de un ejercicio). A continuación, se detallan algunas de las tablas más relevantes para este proyecto.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/tablalogejercicios.png}
+  \caption{Tabla log\_exercises.}\label{fig:tablalogejercicios}
+\end{figure}
+
+La tabla \ref{fig:tablalogejercicios} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/tablasesiones.png}
+  \caption{Tabla log\_session.}\label{fig:tablasesiones}
+\end{figure}
+
+La tabla \ref{fig:tablasesiones} contiene información sobre los registros de visitas de los usuarios, incluyendo detalles como el usuario, la fecha de inicio y finalización de la visita, y el navegador y país desde donde se accedió.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/tablaexercises.png}
+  \caption{Tabla exercises.}\label{fig:tablaexercises}
+\end{figure}
+
+La tabla \ref{fig:tablaexercises} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{TFG/2024-tfg-alejandro-aguilera/memoria/img/tablausuarios.png}
+  \caption{Tabla common\_user.}\label{fig:tablausuarios}
+\end{figure}
+
+La tabla \ref{fig:tablausuarios} contiene información sobre los usuarios registrados en la plataforma, incluyendo su nombre de usuario, nombre real, género, y la última fecha de inicio de sesión. También se almacena si el usuario tiene privilegios de superusuario.
+
+A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
+
+y aqui cuando sepa poner codigo pongo querys y explico.
 \end{document}
+
