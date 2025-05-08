@@ -40,5 +40,4 @@ Los avances diarios/semanales están en `docs/progreso/`.
 
 ## Documentación y recursos
 - **Memoria completa (PDF):** [memoria/memoria.pdf](memoria/memoria.pdf)  
-- **Imágenes del proyecto:** [memoria/img/](memoria/img/)  
 - **Memoria LaTeX:** [memoria/memoria.tex](memoria/memoria.tex)
