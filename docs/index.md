@@ -35,7 +35,7 @@ Los avances diarios/semanales están en `docs/progreso/`.
 
 | Fecha | Resumen | Enlace |
 |-------|---------|--------|
-| 08-05-2025 | Añado github pages y comento como va el proyecto hasta ahora  | [Leer](progreso/2025-08-02.md) |
+| 08-05-2025 | Añado github pages y comento como va el proyecto hasta ahora  | [Leer](progreso/2025-05-08.md) |
 
 
 ## Documentación y recursos
