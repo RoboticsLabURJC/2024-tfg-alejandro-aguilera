@@ -7,8 +7,38 @@ description: "Seguimiento y documentación del proyecto 2024-TFG. RoboticsLab UR
 ### ANÁLISIS DE PATRONES DE ACTIVIDAD DE USUARIOS EN UNA PLATAFORMA WEB PARA DESARROLLO DE PROYECTOS DE ROBÓTICA
 
 > **Autor:** Alejandro Aguilera  
-> **Tutor:** Felipe Ortega 
+> **Tutor:** Felipe Ortega  
 > **Universidad:** Universidad Rey Juan Carlos  
-> **Curso:** 2024 / 2025
+> **Curso:** 2024 / 2025  
 
 ---
+
+## Tabla de contenidos
+1. [Descripción general](#descripción-general)
+2. [Estado actual](#estado-actual)
+3. [Progreso](#entradas-de-progreso)
+
+---
+
+## Descripción general
+
+Mi Trabajo Fin de Grado consiste en crear de una herramienta que permita extraer datos de la plataforma web UNIBOTICS y crear unos dashboards interactivos para representar esa información
+
+
+## Estado actual
+- **Última revision de Felipe:**   
+- **Progreso más reciente:**   
+- **Tareas pendientes:** 
+
+## Entradas de progreso
+Los avances diarios/semanales están en `docs/progreso/`.
+
+| Fecha | Resumen | Enlace |
+|-------|---------|--------|
+| 08-05-2025 | Añado github pages y comento como va el proyecto hasta ahora  | [Leer](progreso/2025-08-02.md) |
+
+
+## Documentación y recursos
+- **Memoria completa (PDF):** [memoria/memoria.pdf](memoria/memoria.pdf)  
+- **Imágenes del proyecto:** [memoria/img/](memoria/img/)  
+- **Memoria LaTeX:** [memoria/memoria.tex](memoria/memoria.tex)
