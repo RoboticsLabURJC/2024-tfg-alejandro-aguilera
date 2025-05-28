@@ -27,7 +27,7 @@ Mi Trabajo Fin de Grado consiste en crear de una herramienta que permita extraer
 
 ## Estado actual
 - **Última revision de Felipe:**   
-- **Progreso más reciente:**   
+- **Progreso más reciente:**28-05-2025   
 - **Tareas pendientes:** 
 
 ## Entradas de progreso
@@ -36,7 +36,7 @@ Los avances diarios/semanales están en `docs/progreso/`.
 | Fecha | Resumen | Enlace |
 |-------|---------|--------|
 | 08-05-2025 | Añado github pages y comento como va el proyecto hasta ahora  | [Leer](progreso/2025-05-08.md) |
-
+| 28-05-2025 | Añado documentación despliegue D1 y tecnologías Docker  | [Leer](progreso/2025-05-28.md) |
 
 ## Documentación y recursos
 - **Memoria completa (PDF):** [memoria/memoria.pdf](memoria/memoria.pdf)  
