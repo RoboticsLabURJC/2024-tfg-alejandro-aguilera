@@ -121,6 +121,7 @@
 \usepackage{booktabs}                   % Already loads package xcolor
 \usepackage{multicol}                   % multiple column layout facilities
 \usepackage{colortbl}                   % For coloured tables
+\usepackage{pdflscape}						% Landscape (horizontal) page mode
 
 %%-- Bibliografía con Biblatex y Biber
 % Más info:
@@ -457,6 +458,8 @@ As it is the translation of the ``Resumen'', which is supposed to be written at 
 
 Debido al avance de las tecnologías, la robótica se encuentra en constante evolución, lo que hace que cada vez la podamos ver en más sectores, desde el mundo laboral hasta en nuestro día a día. Sin embargo, el aprendizaje de la robótica es un terreno complejo, ya que para poder empezar en este campo se requiere la instalación y configuración de distintas herramientas y entornos de programación, los cuales pueden resultar bastante enrevesados, en especial a nuevos usuarios que quiere empezar en el mundo de la robótica.
 
+ROS 2.0 \cite{rico2025concise}.
+
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el cual ir probando nuestros códigos, ya que a diferencia de otras materias la robótica es un campo que su aprendizaje es a base de prueba y error.
 
 Este trabajo de fin de grado gira entorno a UNIBOTICS una plataforma web, que nace como solución a estos problemas. UNIBOTICS permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
@@ -544,7 +547,8 @@ En este capitulo describiré las tecnologías utilizadas para este proyecto.
 \section{Python}
 \label{sec:python}
 
-Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y la programación imperativa.
+Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y
+la programación imperativa \cite{intropython}.
 
 El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma UNIBOTICS está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto. A continuación se enumeran y se detallan el funcionamiento de cada una:
 
@@ -639,7 +643,7 @@ Además de Django, emplea Nginx y Gunicorn, herramientas que mejoran la eficienc
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/arquitectura.png}
+  \includegraphics[width=0.8\textwidth, keepaspectratio]{img/arquitectura.png}
   \caption{Estructura de Unibotics.}\label{fig:arquitectura}
 \end{figure}
 
@@ -655,15 +659,18 @@ Además, la base de datos gestiona también los datos clave sobre los usuarios, 
 
 En la Figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que ilustra cómo todas estas tablas están conectadas entre sí y cómo se organiza la información en la base de datos. Este diagrama es esencial para comprender cómo fluye la información dentro del sistema y cómo se gestionan las relaciones entre los diferentes elementos.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[angle=90, width=\textwidth, height=\textheight, keepaspectratio]{img/ER.png}
-    \caption{Diagrama entidad-relación.}
-    \label{fig:ER}
-\end{figure}
+\begin{landscape}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.9\textheight, keepaspectratio]{img/ER.png}
+        \caption{Diagrama entidad-relación.}
+        \label{fig:ER}
+    \end{figure}
+\end{landscape}
+    
 
 
-Finalmente, en el apendice A \ref{chap:apendiceA}, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
+Finalmente, en el apéndice A \ref{chap:apendiceA}, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
 
 \section{Despliegue Local en Linux}
 
@@ -693,27 +700,24 @@ Cada dashboard se centra en distintas características del comportamiento del us
 
 En los siguientes apartados expondré de forma individual cada uno de los dashboard desarrollados, explicando su propósito, los datos que representa, el porqué ese tipo de visualización y las diferentes conclusiones que pueden obtenerse sobre el comportamiento de los usuarios.
 
-A continuación, se presentan las tablas SQL de las que se extrae la información utilizada en los dashboards.
+La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la información utilizada en los dashboards~\footnote{La base de datos de Unibotics contiene mas tablas como vimos en \ref{sec:arquitectura}, pero estas son las que uso para realizar los Dashboards.}.
 
-\begin{table}[H]
+\begin{table}[!htb]
 \centering
-\caption*{\textbf{Tabla 4.1} \\
-\textit{Tablas SQL utilizadas de la base de datos de Unibotics.}}
-\begin{tabular}{lp{10cm}}
+\caption{Tablas SQL utilizadas de la base de datos de Unibotics.}
+\label{tbl:sql-tables}
+\begin{tabular}{lp{0.75\linewidth}}
 \toprule
 \textbf{Tabla} & \textbf{Descripción} \\
 \midrule
-Log\_session & Contiene información sobre las sesiones iniciadas por los usuarios. Entre los campos más relevantes se encuentran el nombre del usuario, la fecha y hora de inicio de la sesión, la duración total en segundos y el país desde el cual se conecta el usuario. \\
-Log\_exercises & Contiene información sobre los accesos de los usuarios a los distintos ejercicios disponibles. Entre los campos más relevantes se encuentran el nombre del usuario, el nombre del ejercicio al que accede, la duración de la interacción, la fecha y hora de inicio, así como otros datos relacionados con la actividad. \\
-Common\_user & Reúne información general sobre los usuarios registrados en la plataforma. Aunque cuenta con múltiples campos, el más relevante para este trabajo es el género del usuario. \\
-Exercises & Contiene un listado con los distintos ejercicios disponibles en la plataforma \\
+\texttt{Log\_session} & Contiene información sobre las sesiones iniciadas por los usuarios. Entre los campos más relevantes se encuentran el nombre del usuario, la fecha y hora de inicio de la sesión, la duración total en segundos y el país desde el cual se conecta el usuario. \\
+\texttt{Log\_exercises} & Contiene información sobre los accesos de los usuarios a los distintos ejercicios disponibles. Entre los campos más relevantes se encuentran el nombre del usuario, el nombre del ejercicio al que accede, la duración de la interacción, la fecha y hora de inicio, así como otros datos relacionados con la actividad. \\
+\texttt{Common\_user} & Reúne información general sobre los usuarios registrados en la plataforma. Aunque cuenta con múltiples campos, el más relevante para este trabajo es el género del usuario. \\
+\texttt{Exercises} & Contiene un listado con los distintos ejercicios disponibles en la plataforma \\
 \bottomrule
 \end{tabular}
 \vspace{1ex}
 
-\begin{flushleft}
-\textit{Nota.} La base de datos de Unibotics contiene mas tablas como vimos en \ref{sec:arquitectura}, pero estas son las que uso para realizar los Dashboards.
-\end{flushleft}
 \end{table}
 
 
@@ -937,10 +941,10 @@ Para incluir fragmentos de código en un documento \LaTeX se pueden combinar var
 herramientas:
 
 \begin{itemize}
-    \item El entorno \mintinline{latex}{\begin{listing}[]...\end{listing}} permite crear
-    un marco en el que situar el fragmento de código (parecido al generado cuando insertamos
-    una tabla o una figura). Podemos insertar también una descripción (\textit{caption})
-    y una etiqueta para referenciarlo luego en el texto.
+%    \item El entorno \mintinline{latex}{\begin{listing}[]...\end{listing}} permite crear
+%    un marco en el que situar el fragmento de código (parecido al generado cuando insertamos
+%    una tabla o una figura). Podemos insertar también una descripción (\textit{caption})
+%    y una etiqueta para referenciarlo luego en el texto.
     
     \item Dentro de este entorno, se puede utilizar el paquete 
     \mintinline{latex}{minted}~\footnote{\url{https://es.overleaf.com/learn/latex/Code_Highlighting_with_minted}},
@@ -1057,10 +1061,51 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 % APÉNDICE(S) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\cleardoublepage
-%\appendix
-%\chapter{Manual de usuario}
-%\label{app:manual}
+\cleardoublepage
+\appendix
+\chapter{Título}
+\label{sec:appA}
+
+
+En este apéndice se presentan ejemplos de las consultas SQL utilizadas para extraer datos de las tablas que conforman la base de datos de Unibotics. A continuación, se describe cómo se organizan los datos en las tablas de la base de datos y se presentan ejemplos visuales para ayudar a comprender la estructura de la información.
+
+Una base de datos está organizada en tablas, donde cada fila representa un registro (por ejemplo, un ejercicio o un usuario), y cada columna representa un campo de ese registro (por ejemplo, el nombre de un usuario o la duración de un ejercicio). A continuación, se detallan algunas de las tablas más relevantes para este proyecto.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{img/tablalogejercicios.png}
+    \caption{Tabla log\_exercises.}\label{fig:tablalogejercicios}
+\end{figure}
+
+La tabla \ref{fig:tablalogejercicios} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{img/tablasesiones.png}
+    \caption{Tabla log\_session.}\label{fig:tablasesiones}
+\end{figure}
+
+La tabla \ref{fig:tablasesiones} contiene información sobre los registros de visitas de los usuarios, incluyendo detalles como el usuario, la fecha de inicio y finalización de la visita, y el navegador y país desde donde se accedió.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{img/tablaexercises.png}
+    \caption{Tabla exercises.}\label{fig:tablaexercises}
+\end{figure}
+
+La tabla \ref{fig:tablaexercises} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{img/tablausuarios.png}
+    \caption{Tabla common\_user.}\label{fig:tablausuarios}
+\end{figure}
+
+La tabla \ref{fig:tablausuarios} contiene información sobre los usuarios registrados en la plataforma, incluyendo su nombre de usuario, nombre real, género, y la última fecha de inicio de sesión. También se almacena si el usuario tiene privilegios de superusuario.
+
+A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
+
+y aqui cuando sepa poner codigo pongo querys y explico.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1078,48 +1123,6 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 % https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex
 \raggedright\printbibliography[heading=bibintoc,title={Referencias}]
 
-\chapter{Apendice A}
-\label{chap:apendiceA}
 
-
-En este apéndice se presentan ejemplos de las consultas SQL utilizadas para extraer datos de las tablas que conforman la base de datos de Unibotics. A continuación, se describe cómo se organizan los datos en las tablas de la base de datos y se presentan ejemplos visuales para ayudar a comprender la estructura de la información.
-
-Una base de datos está organizada en tablas, donde cada fila representa un registro (por ejemplo, un ejercicio o un usuario), y cada columna representa un campo de ese registro (por ejemplo, el nombre de un usuario o la duración de un ejercicio). A continuación, se detallan algunas de las tablas más relevantes para este proyecto.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/tablalogejercicios.png}
-  \caption{Tabla log\_exercises.}\label{fig:tablalogejercicios}
-\end{figure}
-
-La tabla \ref{fig:tablalogejercicios} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/tablasesiones.png}
-  \caption{Tabla log\_session.}\label{fig:tablasesiones}
-\end{figure}
-
-La tabla \ref{fig:tablasesiones} contiene información sobre los registros de visitas de los usuarios, incluyendo detalles como el usuario, la fecha de inicio y finalización de la visita, y el navegador y país desde donde se accedió.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/tablaexercises.png}
-  \caption{Tabla exercises.}\label{fig:tablaexercises}
-\end{figure}
-
-La tabla \ref{fig:tablaexercises} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/tablausuarios.png}
-  \caption{Tabla common\_user.}\label{fig:tablausuarios}
-\end{figure}
-
-La tabla \ref{fig:tablausuarios} contiene información sobre los usuarios registrados en la plataforma, incluyendo su nombre de usuario, nombre real, género, y la última fecha de inicio de sesión. También se almacena si el usuario tiene privilegios de superusuario.
-
-A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
-
-y aqui cuando sepa poner codigo pongo querys y explico.
 \end{document}
 
