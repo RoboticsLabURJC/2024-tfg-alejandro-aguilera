@@ -458,13 +458,15 @@ As it is the translation of the ``Resumen'', which is supposed to be written at 
 
 Debido al avance de las tecnologías, la robótica se encuentra en constante evolución, lo que hace que cada vez la podamos ver en más sectores, desde el mundo laboral hasta en nuestro día a día. Sin embargo, el aprendizaje de la robótica es un terreno complejo, ya que para poder empezar en este campo se requiere la instalación y configuración de distintas herramientas y entornos de programación, los cuales pueden resultar bastante enrevesados, en especial a nuevos usuarios que quiere empezar en el mundo de la robótica.
 
-ROS 2.0 \cite{rico2025concise}.
+Por ejemplo, la instalación de entornos como ROS 2 y Gazebo \cite{rico2025concise} pueden convertirse en un verdadero desafío para quienes empiezan. En ROS 2 hay que asimilar de golpe conceptos como nodos y tópicos, lidiar con dependencias y versiones al instalar paquetes, y acostumbrarse a gestionar todo mediante línea de comandos. En Gazebo, por su parte, definir mundos de simulación implica escribir ficheros SDF o URDF desde cero, ajustar físicas y colisiones sin apenas ayuda gráfica y estar pendiente de la compatibilidad de los plugins. Estas tareas, lejos de facilitar el aprendizaje por prueba y error, pueden dispersar la atención del usuario y convertir sus primeros pasos en un laberinto de configuración y depuración.
 
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el cual ir probando nuestros códigos, ya que a diferencia de otras materias la robótica es un campo que su aprendizaje es a base de prueba y error.
 
-Este trabajo de fin de grado gira entorno a UNIBOTICS una plataforma web, que nace como solución a estos problemas. UNIBOTICS permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
+Este trabajo de fin de grado gira entorno a Unibotics una plataforma web, que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
 
-Sin embargo, a pesar de sus ventajas, aún existen áreas de UNIBOTICS que podrían mejorarse. Actualmente, todos los datos de  usuarios desde los códigos de programación, tiempo de actividad, tiempo de resolución de actividades y muchos otros datos más, se recogen en una base de datos del tipo PostgreSQL, pero estos datos únicamente se almacenan y no se les saca todo el potencial que podrían tener.
+Sin embargo, a pesar de sus ventajas, aún existen áreas de Unibotics que podrían mejorarse. Plataformas de enseñanza online como Moodle \cite{einhardt2016moodle} llevan años aprovechando los datos de interacción de sus usuarios como acceso a recursos, participación en foros, tiempo dedicado a cada unidad para generar informes que ayudan a los docentes a identificar dónde se quedan atascados los alumnos y adaptar el contenido en consecuencia. 
+
+En Unibotics sucede algo similar: todos los códigos de programación, tiempos de actividad y de resolución de ejercicios ya se recogen en PostgreSQL, pero por ahora esos registros sólo se almacenan, sin extraerles ningún valor añadido. Si aplicáramos a Unibotics las mismas técnicas de analítica de comportamiento que utiliza Moodle, podríamos conocer en detalle cómo afrontan los retos los estudiantes, detectar automáticamente los puntos de bloqueo y ofrecer pistas o ejercicios de refuerzo personalizados. De este modo, la plataforma dejaría de ser solo un simulador interactivo y se convertiría en una herramienta inteligente capaz de guiar el aprendizaje de la robótica de forma dinámica y adaptada a cada usuario.
 
 Dada esta situación, este proyecto quiere proporcionar una API que permita extraer y procesar estos datos. Además, se diseñarán unas Dashboards interactivas, donde se podrán ver de forma clara y detallada toda la información obtenida a través de la API.
 
@@ -473,37 +475,26 @@ Con la implementación de estas Dashboards se busca que los profesores puedan ve
 \section{Objetivos}
 \label{sec:seccion}
 
-Esto es una sección, que es una estructura menor que un capítulo. 
-
-Por cierto, a veces me comentáis que no os compila por las tildes.
-Eso es un problema de codificación.
-Al guardar el archivo, guardad la codificación de ``ISO-Latin-1'' a ``UTF-8'' (o viceversa) y funcionará.
-
 \subsection{Objetivo general} % título de subsección (se muestra)
 \label{sec:objetivo-general} % identificador de subsección (no se muestra, es para poder referenciarla)
 
-
-Mi Trabajo Fin de Grado consiste en crear de una herramienta que permita extraer datos de la plataforma web UNIBOTICS y crear unos dashboards interactivos para representar esa información
-
+Este Trabajo de Fin de Grado consiste en crear una herramienta que permita extraer, analizar y visualizar los registros que contienen información sobre la actividad y el comportamiento de los usuarios en la plataforma.
 
 \subsection{Objetivos específicos}
 \label{sec:objetivos-especificos}
 
-Los objetivos específicos se pueden entender como las tareas en las que se ha desglosado el objetivo general. Y, sí, también vienen en infinitivo.
-
-Lo mejor suele ser utilizar una lista no numerada, como sigue:
+Dado el objetivo general, se presentan los siguientes objetivos especificicos:
 
 \begin{itemize}
-	\item Un objetivo específico.
-	\item Otro objetivo específico.
-	\item Tercer objetivo específico.
-	\item \ldots
+	\item Extracción de datos.
+	\item Análisis de estadísticas básicas de comportamiento de usuarios.
+	\item Representación gráfica de la información.
 \end{itemize}
 
 \section{Planificacion}
 \label{sec:objetivos}
 
-Rellenar alfinal
+crear gant 
 
 \section{Estructura del documento}
 \label{sec:planificacion-temporal}
@@ -522,12 +513,9 @@ y qué contenidos se van a encontrar en cada capítulo.
 
     \begin{itemize}
       \item En el primer capítulo se hace una breve introducción al proyecto, se describen los objetivos del mismo y se refleja la planificación temporal.
-      \item En el siguiente capítulo se describen las tecnologías utilizadas en el desarrollo de este TFM/TFG (Capítulo~\ref{chap:tecnologias}).
-      \item En el capítulo~\ref{chap:diseño} Se describe el proceso de desarrollo
-      de la herramienta \ldots
-      \item En el capítulo~\ref{chap:experimentos} Se presentan las principales pruebas realizadas
-      para validación de la plataforma/herramienta\ldots (o resultados de los experimentos
-      efectuados).
+      \item En el siguiente capítulo se describen las tecnologías utilizadas en el desarrollo de este TFG (Capítulo~\ref{chap:tecnologias}).
+      \item En el capítulo~\ref{chap:diseño} se describe la arquitectura de la plataforma de Unibotics.
+      \item En el capítulo~\ref{chap:experimentos} se presentan las dashboard y se realiza un análisis de la información que se extrae de ellas.
       \item Por último, se presentan las conclusiones del proyecto así como los trabajos futuros que podrían derivarse de éste (Capítulo~\ref{chap:conclusiones}).
     \end{itemize}
 
@@ -550,36 +538,36 @@ En este capitulo describiré las tecnologías utilizadas para este proyecto.
 Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y
 la programación imperativa \cite{intropython}.
 
-El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma UNIBOTICS está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto. A continuación se enumeran y se detallan el funcionamiento de cada una:
+El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma Unibotics está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto. A continuación se enumeran y se detallan el funcionamiento de cada una:
 
 \subsection{Pandas}\label{subsec:pandas}
 Pandas es una de las herramientas más poderosas para la manipulación y análisis de datos en Python. Esta biblioteca se diseñó para hacer que la limpieza, transformación y análisis de datos sean rápidos y eficientes.
 
 Una de las razones por las que he elegido pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva. La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
 
-En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Además, como se menciona en *Python for Data Analysis*, 3rd Edition, pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
+En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Además, como se menciona en \cite{mckinney2022python} pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
 
 \subsection{Dash}\label{subsec:dash}
-Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla. 
+Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla. \cite{schroeder2022book}\cite{dashPlotlyDocumentation}
 
-En este proyecto, lo he utilizado porque facilita la creación de gráficos atractivos e interactivos para visualizar los datos de la plataforma UNIBOTICS. Con Dash, puedo generar visualizaciones que permiten a los usuarios interactuar con los datos de manera intuitiva, como hacer filtros o explorar diferentes métricas. Esto es ideal para representar información compleja de forma clara y visualmente atractiva. Además, Dash se integra muy bien con otras bibliotecas de Python, lo que hace que sea fácil crear gráficos de todo tipo, desde barras hasta mapas interactivos.
+En este proyecto, lo he utilizado porque facilita la creación de gráficos atractivos e interactivos para visualizar los datos de la plataforma Unibotics. Con Dash, puedo generar visualizaciones que permiten a los usuarios interactuar con los datos de manera intuitiva, como hacer filtros o explorar diferentes métricas. Esto es ideal para representar información compleja de forma clara y visualmente atractiva. Además, Dash se integra muy bien con otras bibliotecas de Python, lo que hace que sea fácil crear gráficos de todo tipo, desde barras hasta mapas interactivos.
 
 \subsection{Psycopg2}\label{subsec:psycopg2}
-Psycopg2 es una librería de Python que permite conectar aplicaciones Python con bases de datos PostgreSQL. Es ampliamente utilizada debido a su eficiencia y facilidad de uso para interactuar con bases de datos. 
+Psycopg2 es una librería de Python que permite conectar aplicaciones Python con bases de datos PostgreSQL. Es ampliamente utilizada debido a su eficiencia y facilidad de uso para interactuar con bases de datos.\cite{psycopgDocumentation}
 
 En este proyecto, he utilizado Psycopg2 para ejecutar consultas SQL directamente desde Python, lo que permite extraer, insertar y modificar datos de manera eficiente. Esta librería ofrece una interfaz sencilla y rápida para gestionar la conexión con la base de datos y ejecutar comandos SQL de forma segura, evitando vulnerabilidades como la inyección de SQL. Además, su integración con otras bibliotecas de Python, como Pandas \ref{subsec:pandas}, facilita la manipulación y análisis de los datos obtenidos desde la base de datos, lo que hace que sea más fácil la integración con Dash \ref{subsec:dash}.
 
 
 \section{PostgreSQL}
 \label{sec:PostgreSQL}
-PostgreSQL es un sistema de base de datos muy seguro y popular que se utiliza para guardar y organizar grandes cantidades de datos. Es de código abierto, lo que significa que cualquiera puede usarlo y adaptarlo según sus necesidades. 
+PostgreSQL es un sistema de base de datos muy seguro y popular que se utiliza para guardar y organizar grandes cantidades de datos. Es de código abierto, lo que significa que cualquiera puede usarlo y adaptarlo según sus necesidades.\cite{obe2017postgresql} 
 
 Una de las razones por las que es tan utilizado es que permite hacer consultas complejas de manera rápida y segura, asegurando que los datos se mantengan intactos y bien organizados. En el caso de Unibotics, toda la información relacionada con los usuarios y sus interacciones en la plataforma se almacena en una base de datos PostgreSQL. Aunque se hablará más adelante sobre cómo está estructurada esta base de datos \ref{sec:arquitectura}, lo importante es que PostgreSQL ofrece una forma eficiente y segura de gestionar toda esa información.
 
 \section{Docker}
 \label{sec:docker}
 
-Docker es una plataforma de virtualización ligera basada en contenedores que permite empaquetar una aplicación junto con todas sus dependencias en una única unidad portátil. Cada contenedor comparte el núcleo del sistema operativo, pero se ejecuta de forma aislada, lo que garantiza que el entorno interno sea siempre el mismo, independientemente de la máquina donde se despliegue.
+Docker es una plataforma de virtualización ligera basada en contenedores que permite empaquetar una aplicación junto con todas sus dependencias en una única unidad portátil. Cada contenedor comparte el núcleo del sistema operativo, pero se ejecuta de forma aislada, lo que garantiza que el entorno interno sea siempre el mismo, independientemente de la máquina donde se despliegue.\cite{nickoloff2019docker} 
 
 En este proyecto hemos utilizado Docker principalmente para levantar la base de datos PostgreSQL de Unibotics en un contenedor independiente. De esta manera, pude iniciar, detener o reiniciar la base de datos con un solo comando, sin necesidad de instalar PostgreSQL en el sistema anfitrión ni preocuparme por posibles conflictos con otras versiones de la base de datos. Además, al usar Docker, tengo la garantía de que el entorno de ejecución es idéntico en mi máquina local y en cualquier otro entorno de pruebas o producción donde se despliegue la plataforma.
 
@@ -594,6 +582,20 @@ PyCharm es un \gls{ide} dedicado concretamente a la programación en Python y de
 
 Proporciona análisis de código, un depurador gráfico, una consola de Python integrada, control de versiones y, además, soporta desarrollo web con Django. Todas estas características lo convierten en un entorno completo e intuitivo, idóneo para el desarrollo de proyectos académicos como el que nos ocupa.
 
+
+\section{Entorno de desarrollo: Visual Studio Code}
+\label{sec:entorno_de_desarrollo_vscode}
+
+Visual Studio Code es un \gls{ide} ligero y altamente extensible, desarrollado por Microsoft y disponible de forma gratuita bajo licencia MIT. Gracias a su amplio ecosistema de extensiones entre las que destaca la extensión oficial de Python ofrece resaltado de sintaxis, completado inteligente (IntelliSense), análisis estático (linting), formateo automático y refactorización de código. Dispone además de un depurador integrado, una terminal embebida y soporte nativo para control de versiones con Git. Su interfaz modular, configuraciones basadas en JSON y catálogo de extensiones lo convierten en un entorno flexible y adaptable a proyectos académicos y profesionales en Python y otros lenguajes de programación.  
+
+\section{Plataformas de ejecución}
+\label{sec:plataformas_de_ejecucion}
+
+Este proyecto  se ha probado en entornos locales tanto bajo Windows como bajo Linux.  
+En Windows se utilizó \ref{sec:entorno_de_desarrollo_vscode} como entorno de desarrollo, mientras que en Linux se empleó \ref{sec:entorno_de_desarrollo}.
+
+Asimismo, las dashboards desarrolladas han sido verificadas en ambos sistemas operativos, comprobando su correcto funcionamiento y compatibilidad.  
+De este modo, se garantiza que tanto Unibotics en local como las dashboard implementadas operan sin incidencias en las principales plataformas de ejecución.  
 
 \section{Redacción de la memoria: LaTeX/Overleaf}
 \label{sec:redaccion_de_la_memoria}
@@ -623,7 +625,7 @@ Eso sí, normalmente aconsejo no poner código, sino diagramas.
 \section{Arquitectura general} 
 \label{sec:arquitectura}
 
-Como ya dije antes, UNIBOTICS es una plataforma web diseñada con el fin de facilitar el aprendizaje práctico de la robótica, proporcionando a los estudiantes un entorno en el que pueden encontrar ejercicios y escenarios interactivos sin la necesidad de instalar o configurar entornos complejos de software.
+Como ya dije antes, Unibotics es una plataforma web diseñada con el fin de facilitar el aprendizaje práctico de la robótica, proporcionando a los estudiantes un entorno en el que pueden encontrar ejercicios y escenarios interactivos sin la necesidad de instalar o configurar entornos complejos de software.
 
 Esta plataforma proporciona diferentes herramientas para trabajar con robots. La herramienta que gestiona el software robótico requerido, es RADI (Robotics Academy Docker Image). Se trata de unos contenedores Docker especiales en los que se llevan a cabo la ejecución de ejercicios y las simulaciones robóticas.
 
@@ -637,7 +639,7 @@ Para almacenar toda esta cantidad de datos que ofrece cada simulación, además 
 
 Respecto a la parte del usuario, la interacción con esta plataforma se realiza a través de un navegador web, mediante el cual el usuario accede a una interfaz construida con React, donde se encuentran los ejercicios y escenarios interactivos.
 
-Para implementar todas estas herramientas, UNIBOTICS se apoya en Django, un framework de alto nivel orientado al desarrollo web en Python, especialmente a la creación de aplicaciones web complejas. Gracias a Django, es posible estructurar de forma clara la lógica interna de la plataforma, lo que permite relacionar usuarios con ejercicios y almacenar información sobre las sesiones de trabajo.
+Para implementar todas estas herramientas, Unibotics se apoya en Django, un framework de alto nivel orientado al desarrollo web en Python, especialmente a la creación de aplicaciones web complejas. Gracias a Django, es posible estructurar de forma clara la lógica interna de la plataforma, lo que permite relacionar usuarios con ejercicios y almacenar información sobre las sesiones de trabajo.
 
 Además de Django, emplea Nginx y Gunicorn, herramientas que mejoran la eficiencia de la plataforma. Estas permiten gestionar un gran volumen de usuarios de manera simultánea, asegurando que el sistema opere sin interrupciones.
 
@@ -674,7 +676,7 @@ Finalmente, en el apéndice A \ref{chap:apendiceA}, encontrarás ejemplos de con
 
 \section{Despliegue Local en Linux}
 
-Para poder probar y depurar todos los componentes de Unibotics de forma sencilla, instalé un entorno completo en mi máquina Linux (despliegue “D1”). En primer lugar, creé un entorno virtual de Python 3.8 para aislar las dependencias del proyecto sin afectar al sistema. A continuación, cloné el repositorio de \texttt{unibotics-webserver} junto con sus submódulos y ejecuté la instalación de los paquetes necesarios desde el fichero \texttt{utils/requirements.txt}.  
+Para poder probar y depurar todos los componentes de Unibotics de forma sencilla, instalé un entorno completo en mi máquina Linux (despliegue “D1”). En primer lugar, creé un entorno virtual de Python 3.8 para aislar las dependencias del proyecto sin afectar al sistema. A continuación, cloné el repositorio de \texttt{Unibotics-webserver} junto con sus submódulos y ejecuté la instalación de los paquetes necesarios desde el fichero \texttt{utils/requirements.txt}.  
 
 Dado que Unibotics utiliza PostgreSQL como base de datos, levanté un contenedor Docker con esa imagen. Esto me permitió iniciar, detener o reiniciar la base de datos con total comodidad y sin instalar nada en el sistema. Tras arrancar el contenedor, apliqué los dumps de Robotics Infrastructure y Robotics Academy para cargar los universos y ejercicios, ejecuté las migraciones de Django para crear el resto de tablas y, finalmente, importé datos de prueba de cursos pasados para disponer de una muestra amplia sobre la que trabajar.
 
@@ -1063,7 +1065,7 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 
 \cleardoublepage
 \appendix
-\chapter{Título}
+\chapter{Ejemplos base de datos Unibotics}
 \label{sec:appA}
 
 
@@ -1071,37 +1073,108 @@ En este apéndice se presentan ejemplos de las consultas SQL utilizadas para ext
 
 Una base de datos está organizada en tablas, donde cada fila representa un registro (por ejemplo, un ejercicio o un usuario), y cada columna representa un campo de ese registro (por ejemplo, el nombre de un usuario o la duración de un ejercicio). A continuación, se detallan algunas de las tablas más relevantes para este proyecto.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=9cm, keepaspectratio]{img/tablalogejercicios.png}
-    \caption{Tabla log\_exercises.}\label{fig:tablalogejercicios}
-\end{figure}
+\begin{table}[!htb]
+\centering
+\caption{Muestra de registros de \texttt{Log\_exercises}.}
+\label{tbl:log_exercises_sample}
+\begin{tabular}{r l l l r l}
+\toprule
+\textbf{id} & \textbf{username} & \textbf{start\_date} & \textbf{end\_date} & \textbf{duration} & \textbf{exercise} \\
+\midrule
+298 & amgurjc     & 2021-12-01 17:24:08.512187 & 2021-12-01 17:25:52.618119 & 104.105932  & obstacle\_avoidance \\
+299 & mariamh     & 2021-12-01 17:23:49.164972 & 2021-12-01 17:25:59.414500 & 130.249528 & rescue\_people      \\
+300 & mariamh     & 2021-12-01 17:26:04.868734 & 2021-12-01 17:28:15.071450 & 130.202716 & rescue\_people      \\
+301 & fgomezl     & 2021-12-01 17:28:33.600277 & 2021-12-01 17:30:53.251092 & 139.650815 & obstacle\_avoidance \\
+302 & mariamh     & 2021-12-01 17:28:23.518706 & 2021-12-01 17:31:45.124709 & 201.606003 & rescue\_people      \\
+303 & amgurjc     & 2021-12-01 17:28:07.886411 & 2021-12-01 17:32:38.985946 & 271.099535 & obstacle\_avoidance \\
+304 & amgurjc     & 2021-12-01 17:32:39.026606 & 2021-12-01 17:39:19.107978 & 400.081374 & obstacle\_avoidance \\
+305 & amgurjc     & 2021-12-01 17:39:19.174050 & 2021-12-01 17:41:18.162209 & 118.988159 & obstacle\_avoidance \\
+306 & carlosip    & 2021-12-01 17:22:12.768520 & 2021-12-01 17:42:07.383919 & 1194.615399 & obstacle\_avoidance \\
+307 & chuismiguel & 2021-12-01 16:44:58.295889 & 2021-12-01 17:46:26.431287 & 3688.135398 & obstacle\_avoidance \\
+308 & mariamh     & 2021-12-01 17:32:19.370519 & 2021-12-01 17:46:46.955035 & 867.584516 & rescue\_people      \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-La tabla \ref{fig:tablalogejercicios} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=9cm, keepaspectratio]{img/tablasesiones.png}
-    \caption{Tabla log\_session.}\label{fig:tablasesiones}
-\end{figure}
+La tabla \ref{tbl:log_exercises_sample} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
 
-La tabla \ref{fig:tablasesiones} contiene información sobre los registros de visitas de los usuarios, incluyendo detalles como el usuario, la fecha de inicio y finalización de la visita, y el navegador y país desde donde se accedió.
+\begin{table}[!htb]
+\centering
+\caption{Muestra de registros de \texttt{Log\_session}.}
+\label{tbl:log_session_sample}
+\begin{tabular}{r l l l r l l l l}
+\toprule
+\textbf{id} & \textbf{username} & \textbf{start\_date} & \textbf{end\_date} & \textbf{duration} & \textbf{client\_ip} & \textbf{browser} & \textbf{country} & \textbf{alpha\_2} \\
+\midrule
+377 & superManuel & 2021-06-07 10:05:04.455056 & 2021-06-07 10:50:31.317011 & 2726.861955 & 83.32.26.250 & Mozilla/5.0 (X11; Linux x86\_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36               & Spain & ES \\
+378 & superManuel & 2021-06-04 14:18:34.770146 & 2021-06-04 18:34:38.774011 & 15244.003865 & 83.32.26.250 & Mozilla/5.0 (X11; Ubuntu; Linux x86\_64; rv:89.0) Gecko/20100101 Firefox/89.0                                   & Spain & ES \\
+379 & davidrol    & 2021-06-07 11:55:21.250197 & 2021-06-07 11:55:21.250203 &    0.000006 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
+380 & Civantos    & 2021-06-06 00:32:46.037435 & 2021-06-06 00:32:46.037439 &    0.000004 & 83.56.241.36 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
+381 & civantos    & 2021-06-09 14:29:13.635510 & 2021-06-09 14:29:13.635518 &    0.000008 & 176.87.44.2  & Mozilla/5.0 (iPhone; CPU iPhone OS 14\_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1 & Spain & ES \\
+382 & paulam09    & 2021-06-09 14:33:13.324971 & 2021-06-09 14:33:13.324975 &    0.000004 & 176.83.221.178 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
+383 & davidrol    & 2021-06-09 15:59:18.707238 & 2021-06-09 15:59:18.707242 &    0.000004 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
+384 & davidrol    & 2021-06-09 18:02:36.714896 & 2021-06-09 18:33:13.979659 & 1837.264763 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
+385 & davidrol    & 2021-06-10 12:08:24.930763 & 2021-06-10 13:36:08.206773 & 5263.276010 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
+386 & davidrol    & 2021-06-10 13:36:13.849895 & 2021-06-10 13:36:13.849901 &    0.000006 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=9cm, keepaspectratio]{img/tablaexercises.png}
-    \caption{Tabla exercises.}\label{fig:tablaexercises}
-\end{figure}
 
-La tabla \ref{fig:tablaexercises} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=9cm, keepaspectratio]{img/tablausuarios.png}
-    \caption{Tabla common\_user.}\label{fig:tablausuarios}
-\end{figure}
+La tabla \ref{tbl:log_session_sample} contiene información sobre los registros de visitas de los usuarios, incluyendo detalles como el usuario, la fecha de inicio y finalización de la visita, y el navegador y país desde donde se accedió.
 
-La tabla \ref{fig:tablausuarios} contiene información sobre los usuarios registrados en la plataforma, incluyendo su nombre de usuario, nombre real, género, y la última fecha de inicio de sesión. También se almacena si el usuario tiene privilegios de superusuario.
+\begin{table}[!htb]
+\centering
+\caption{Muestra de registros de \texttt{Exercises}.}
+\label{tbl:exercises_sample}
+\begin{tabular}{r l l l l l l}
+\toprule
+\textbf{id} & \textbf{exercise\_id}       & \textbf{name}              & \textbf{description}                                                                                                 & \textbf{tags}                                                         & \textbf{status} & \textbf{template}                                                               \\
+\midrule
+1  & follow\_line           & Follow Line            & The goal of this exercise is to perform a PID reactive control capable of following the line painted on the racing circuit. & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/exercises/static/exercises/follow\_line.html           \\
+2  & vacuum\_cleaner        & Vacuum Cleaner         & Vacuum Cleaner exercise using React and RAM                                                                                    & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/vacuum\_cleaner.html        \\
+3  & autoparking            & Autoparking            & Autoparking exercise testing                                                                                                    & \{\texttt{"tags"}:[\texttt{"AUTONOMOUS DRIVING"},\texttt{"SERVICE ROBOTS"},\texttt{"ROS2"}]\} & ACTIVE         & RoboticsAcademy/exercises/static/exercises/autoparking.html           \\
+4  & follow\_person         & Follow Person          & Follow a person with kobuki robot                                                                                               & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/follow\_person.html        \\
+5  & vacuum\_cleaner\_loc   & Localized Vacuum Cleaner & Localized vacuum cleaner                                                                                                        & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"MOBILE ROBOTS"},\texttt{"SERVICE ROBOTS"}]\}     & ACTIVE         & RoboticsAcademy/exercises/static/exercises/vacuum\_cleaner\_loc.html \\
+6  & global\_navigation     & Global Navigation      & Global navigation exercise using REACT and RAM                                                                                  & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/global\_navigation.html    \\
+7  & rescue\_people         & Rescue People          & Rescue People exercise                                                                                                          & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/rescue\_people.html        \\
+8  & obstacle\_avoidance    & Obstacle Avoidance     & Obstacle Avoidance exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/exercises/static/exercises/obstacle\_avoidance.html   \\
+9  & 3d\_reconstruction     & 3D Reconstruction      & 3D Reconstruction exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"COMPUTER VISION"}]\}       & ACTIVE         & RoboticsAcademy/exercises/static/exercises/3d\_reconstruction.html    \\
+10 & amazon\_warehouse      & Amazon Warehouse       & Control an amazon-like robot to organize a warehouse                                                                            & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/amazon\_warehouse.html     \\
+11 & montecarlo\_laser\_loc & Montecarlo Laser Loc   & Calculate the position of the robot based on the                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/montecarlo\_laser\_loc.html \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La tabla \ref{tbl:exercises_sample} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
+
+\begin{table}[!htb]
+\centering
+\caption{Muestra de registros de \texttt{Common\_user}.}
+\label{tbl:common_user_sample}
+\begin{tabular}{r l l l l l}
+\toprule
+\textbf{id} & \textbf{last\_login}            & \textbf{is\_superuser} & \textbf{username}     & \textbf{first\_name}      & \textbf{gender} \\
+\midrule
+275 & 2024-04-02 09:56:01.352868+00 & false         & i.linares    & Ismael               & M \\
+276 & 2023-04-12 15:09:51.994983+00 & false         & jdpul\_       & Jorge                & M \\
+277 & 2022-04-19 10:26:08.507501+00 & false         & enrique      & Enrique              & M \\
+278 & 2022-04-26 08:45:27.213432+00 & false         & v.gilabert.2021 & VICENTE              & M \\
+280 & 2022-04-19 15:29:00.179681+00 & false         & hurta2       & Sergio               & M \\
+281 & 2022-04-19 15:28:43.646237+00 & false         & nacho9gs     & Ignacio              & M \\
+282 & 2022-04-19 23:38:44.874175+00 & false         & alonsocn     & Alonso               & M \\
+283 & 2022-04-19 22:17:17.513394+00 & false         & kcoutinho    & Katherine            & F \\
+284 & 2022-03-20 18:04:25.378575+00 & false         & cv.lungu     & Costin Valentin      & M \\
+285 & \texttt{NULL}                & false         & PaulaST      & Paula                & F \\
+286 & 2022-12-12 01:08:10.920153+00 & false         & PaulaS       & Paula                & F \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+La tabla \ref{tbl:common_user_sample} contiene información sobre los usuarios registrados en la plataforma, incluyendo su nombre de usuario, nombre real, género, y la última fecha de inicio de sesión. También se almacena si el usuario tiene privilegios de superusuario.
 
 A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
 
