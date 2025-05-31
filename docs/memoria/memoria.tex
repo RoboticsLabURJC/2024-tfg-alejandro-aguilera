@@ -468,9 +468,9 @@ Sin embargo, a pesar de sus ventajas, aún existen áreas de Unibotics que podr�
 
 En Unibotics sucede algo similar: todos los códigos de programación, tiempos de actividad y de resolución de ejercicios ya se recogen en PostgreSQL, pero por ahora esos registros sólo se almacenan, sin extraerles ningún valor añadido. Si aplicáramos a Unibotics las mismas técnicas de analítica de comportamiento que utiliza Moodle, podríamos conocer en detalle cómo afrontan los retos los estudiantes, detectar automáticamente los puntos de bloqueo y ofrecer pistas o ejercicios de refuerzo personalizados. De este modo, la plataforma dejaría de ser solo un simulador interactivo y se convertiría en una herramienta inteligente capaz de guiar el aprendizaje de la robótica de forma dinámica y adaptada a cada usuario.
 
-Dada esta situación, este proyecto quiere proporcionar una API que permita extraer y procesar estos datos. Además, se diseñarán unas Dashboards interactivas, donde se podrán ver de forma clara y detallada toda la información obtenida a través de la API.
+Dada esta situación, este proyecto quiere proporcionar una API que permita extraer y procesar estos datos. Además, se diseñarán unas dashboards interactivas, donde se podrán ver de forma clara y detallada toda la información obtenida a través de la API.
 
-Con la implementación de estas Dashboards se busca que los profesores puedan ver de forma rápida y sencilla el trabajo realizado por sus alumnos, lo cual les podrá facilitar la enseñanza a los alumnos de robótica.
+Con la implementación de estas dashboards se busca que los profesores puedan ver de forma rápida y sencilla el trabajo realizado por sus alumnos, lo cual les podrá facilitar la enseñanza a los alumnos de robótica.
 
 \section{Objetivos}
 \label{sec:seccion}
@@ -702,7 +702,7 @@ Cada dashboard se centra en distintas características del comportamiento del us
 
 En los siguientes apartados expondré de forma individual cada uno de los dashboard desarrollados, explicando su propósito, los datos que representa, el porqué ese tipo de visualización y las diferentes conclusiones que pueden obtenerse sobre el comportamiento de los usuarios.
 
-La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la información utilizada en los dashboards~\footnote{La base de datos de Unibotics contiene mas tablas como vimos en \ref{sec:arquitectura}, pero estas son las que uso para realizar los Dashboards.}.
+La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la información utilizada en los dashboards~\footnote{La base de datos de Unibotics contiene mas tablas como vimos en \ref{sec:arquitectura}, pero estas son las que uso para realizar los dashboards.}.
 
 \begin{table}[!htb]
 \centering
@@ -725,16 +725,28 @@ La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la in
 
 
 
-\section{DASHBOARD 1A}
+\section{dashboard 1A}
 
-El Dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
+El dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
 
 Para poder obtener la información de duración por ejercicio, el dashboard se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente.
 Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el input.
 
-La consulta SQL aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log\_session. La consulta tiene esta forma:
+La consulta SQL \ref{lst:sql_total_duration_per_exercise} aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log\_session.
 
-aqui pego codigo sigp sin ser capaz no se porque no lo veo
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener la duración total por ejercicio de un usuario.}{}
+    \label{lst:sql_total_duration_per_exercise}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT exercise, SUM(duration) as total_duration
+FROM public.log_exercises
+WHERE username = %s
+GROUP BY exercise
+HAVING SUM(duration) > 0  
+ORDER BY total_duration DESC;
+    \end{minted}
+\end{listing}
+
 
 De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula GROUP BY agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada SUM() para sumar los datos de cada grupo.
 En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un DataFrame de Pandas para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
@@ -745,29 +757,45 @@ En otras palabras, si el usuario ha realizado varias sesiones o intentos en un m
   \caption{Dash 1a.}\label{fig:1a}
 \end{figure}
 
-Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de texto donde poder escribir el nombre del usuario que deseas visualizar su duración total por ejercicio, una vez escrito un nombre de usuario carga el dashboard con la información de ese usuario.
+Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de texto \ref{fig:1a} donde poder escribir el nombre del usuario que deseas visualizar su duración total por ejercicio, una vez escrito un nombre de usuario carga el dashboard con la información de ese usuario.
 
-El dashboard presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo lollipop. Este tipo de visualización es una variación de un diagrama de barras: la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
+El dashboard \ref{fig:1a} presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo lollipop. Este tipo de visualización es una variación de un diagrama de barras: la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
 
-Explicar porque elegimos este tipo de gráfico (tambien importante que lo ordenamos de arriba a abajo porque era mejor visualmente)
+Aqui tengo que explicar porque elegimos este tipo de gráfico (tambien importante que lo ordenamos de arriba a abajo porque era mejor visualmente)
 
-La información presentada en el Dashboard 1A permite una rápida interpretación comparativa de la dedicación del usuario a los distintos ejercicios, gracias a ello podemos obtener varias conclusiones.
+La información presentada en el dashboard 1A permite una rápida interpretación comparativa de la dedicación del usuario a los distintos ejercicios, gracias a ello podemos obtener varias conclusiones.
 
-Identificación de ejercicios más y menos trabajados: Las longitudes de las líneas revelan de un vistazo cuáles son los ejercicios en los que el usuario ha invertido más tiempo y cuáles menos.
+\begin{itemize}
+  \item \textbf{Identificación de ejercicios más y menos trabajados:} Las longitudes de las líneas revelan de un vistazo cuáles son los ejercicios en los que el usuario ha invertido más tiempo y cuáles menos.
 
-Detección de patrones de esfuerzo o dificultad: Una duración total muy elevada en cierto ejercicio podría indicar que el usuario tuvo dificultades significativas con ese ejercicio o que requirió múltiples intentos prolongados para completarlo,también podría significar que el ejercicio era muy extenso o el usuario dedicó tiempo extra explorando más allá de lo mínimo requerido. Por el contrario, ejercicios con duraciones muy bajas pueden sugerir que el usuario los completó rápidamente (quizá por ser sencillos o ya conocidos) o incluso que los abandonó pronto. En cualquier caso, los extremos en la distribución de tiempos señalan ejercicios que merecen una atención particular al evaluar el progreso del usuario.
+  \item \textbf{Detección de patrones de esfuerzo o dificultad:} Una duración total muy elevada en cierto ejercicio podría indicar que el usuario tuvo dificultades significativas con ese ejercicio o que requirió múltiples intentos prolongados para completarlo, también podría significar que el ejercicio era muy extenso o el usuario dedicó tiempo extra explorando más allá de lo mínimo requerido. Por el contrario, ejercicios con duraciones muy bajas pueden sugerir que el usuario los completó rápidamente (quizá por ser sencillos o ya conocidos) o incluso que los abandonó pronto. En cualquier caso, los extremos en la distribución de tiempos señalan ejercicios que merecen una atención particular al evaluar el progreso del usuario.
 
-Distribución del tiempo de aprendizaje: El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
+  \item \textbf{Distribución del tiempo de aprendizaje:} El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
+\end{itemize}
 
-\section{DASHBOARD 1C}
+
+\section{dashboard 1C}
 
 Este dashboard tiene como objetivo mostrar la duración promedio de las sesiones de los usuarios de Unibotics, agrupadas por país. A través de un mapa mundial interactivo, se representa gráficamente qué países presentan una mayor o menor media de tiempo por sesión, permitiendo identificar patrones geográficos en el uso de la plataforma.
 
-La información utilizada en este dashboard se obtiene desde la tabla log\_session,la consulta SQL utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país, y posteriormente se calcula en Python la duración promedio dividiendo ambos valores. La consulta tiene esta forma:
+La información utilizada en este dashboard se obtiene desde la tabla log\_session, la consulta SQL \ref{lst:sql_duration_sessions_per_country} utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país, y posteriormente se calcula en Python la duración promedio dividiendo ambos valores.
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener duración total y número de sesiones por país.}{}
+    \label{lst:sql_duration_sessions_per_country}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT country, 
+SUM(duration) AS total_duration, COUNT(*) AS session_count 
+FROM public.log_session
+WHERE country IS NOT NULL AND duration > 0
+GROUP BY country
+HAVING COUNT(*) > 0  
+ORDER BY total_duration DESC;
+    \end{minted}
+\end{listing}
 
-A partir de esta consulta se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico. Este cálculo permite representar una métrica más equilibrada que la duración total (que podría estar sesgada por la cantidad de usuarios en un país), y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
+
+A partir de la consulta \ref{lst:sql_duration_sessions_per_country} se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico \ref{fig:1c}. Este cálculo permite representar una métrica más equilibrada que la duración total (que podría estar sesgada por la cantidad de usuarios en un país), y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
 
 \begin{figure}
   \centering
@@ -775,21 +803,41 @@ A partir de esta consulta se genera un DataFrame de Pandas con el país y su res
   \caption{Dash 1c.}\label{fig:1c}
 \end{figure}
 
-El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
+El dashboard \ref{fig:1c} utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
 
 Explicar porque elegimos este tipo de gráfico
 
-El dashboard ofrece información útil tanto a nivel técnico como estratégico.España aparece con una alta duración promedio, lo que sugiere un uso intensivo y posiblemente más prolongado por sesión, frente a países donde el uso puede ser más breve o esporádico.Sin embargo, países con bajas duraciones promedio pueden estar reflejando una adopción más reciente, una menor familiaridad con la plataforma o simplemente menor disponibilidad de tiempo por parte de los usuarios.
+El dashboard proporciona datos relevantes que aportan valor tanto a nivel técnico como estratégico. A partir de esta información, se pueden destacar los siguientes puntos clave:
 
-Desde el punto de vista de la administración de Unibotics, este dashboard puede ayudar a identificar mercados donde la plataforma tiene un mayor impacto o uso sostenido, lo cual puede influir en decisiones de soporte, localización de contenidos o expansión. Por el contrario, tambien puede ayudar a detectar regiones con bajo uso relativo, lo que puede motivar estrategias de difusión, colaboración educativa o mejora del acceso.
+\begin{itemize}
+  \item \textbf{Alta duración promedio en España:} Esto sugiere un uso intensivo y sesiones posiblemente más prolongadas en comparación con otros países, donde el uso puede ser más breve o esporádico.
 
-\section{DASHBOARD 2A}
+  \item \textbf{Bajas duraciones promedio en ciertos países:} Podrían indicar una adopción más reciente, menor familiaridad con la plataforma o simplemente menos disponibilidad de tiempo por parte de los usuarios.
+
+  \item \textbf{Utilidad para la administración de Unibotics:} El dashboard ayuda a identificar mercados con mayor impacto y uso sostenido, facilitando decisiones sobre soporte, localización de contenidos y planes de expansión.
+
+  \item \textbf{Detección de regiones con bajo uso relativo:} Esta información puede motivar estrategias específicas de difusión, colaboración educativa o mejoras en el acceso a la plataforma.
+\end{itemize}
+
+
+\section{dashboard 2A}
 
 Este dashboard tiene como objetivo mostrar la duración total acumulada de todas las sesiones de usuarios de Unibotics, agrupadas por país. A través de un mapa interactivo, permite observar en qué regiones geográficas se ha registrado un mayor tiempo de uso en conjunto, proporcionando una visión global de la distribución de la actividad en la plataforma.
 
-La información utilizada en este dashboard se obtiene desde la tabla log\_session, la consulta SQL que se utiliza agrupa los datos por país y calcula la suma total de la duración de todas las sesiones correspondientes a cada país. La consulta tiene esta forma:
+La información utilizada en este dashboard se obtiene desde la tabla log\_session, la consulta SQL \ref{lst:sql_total_duration_per_country} que se utiliza agrupa los datos por país y calcula la suma total de la duración de todas las sesiones correspondientes a cada país.
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener la duración total por país en sesiones.}{}
+    \label{lst:sql_total_duration_per_country}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT country, SUM(duration) as total_duration
+FROM public.log_session
+WHERE country IS NOT NULL
+GROUP BY country
+HAVING SUM(duration) > 0
+ORDER BY total_duration DESC;
+    \end{minted}
+\end{listing}
 
 A diferencia de otros dashboards que analizan promedios, en este caso se calcula simplemente la acumulación del tiempo total de uso de la plataforma por país. Esto permite identificar los países donde el uso absoluto de Unibotics ha sido más intenso.
 
@@ -802,7 +850,7 @@ Una vez obtenidos los resultados, se cargan en un DataFrame de Pandas con el pai
 \end{figure}
 
 
-El dashboard utiliza un mapa coroplético (choropleth map), generado mediante Plotly
+El dashboard \ref{fig:2a} utiliza un mapa coroplético (choropleth map), generado mediante Plotly
 Express, en el que cada país se colorea en función de la duración total de sesión. Cuan-
 to mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática
 progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto
@@ -811,22 +859,39 @@ para resaltar visualmente los valores extremos.
 
 Explicar porque elegimos este tipo de gráfico
 
-Del análisis del mapa (ver figura), se pueden obtener conclusiones como:
+Del análisis del mapa \ref{fig:2a}, se obtienen las siguientes conclusiones:
 
-España destaca con el mayor volumen de tiempo total de sesiones, lo que refleja su fuerte implantación y uso intensivo de la plataforma, probablemente por ser el país de origen o principal mercado de Unibotics mientras que otros países europeos o latinoamericanos presentan niveles más bajos de duración acumulada, lo que puede interpretarse como una menor penetración o un uso más reciente de la plataforma en esas regiones.
+\begin{itemize}
+  \item \textbf{España destaca con el mayor volumen de tiempo total de sesiones:} Esto refleja su fuerte implantación y uso intensivo de la plataforma, probablemente por ser el país de origen o principal mercado de Unibotics. Otros países europeos y latinoamericanos presentan niveles más bajos, lo que puede interpretarse como una menor penetración o un uso más reciente de la plataforma en esas regiones.
 
-Tambien se observan diferencias geográficas claras, algunos continentes como África o Asia presentan en general un uso más bajo, salvo excepciones, lo que podría señalar oportunidades de expansión o barreras de adopción actuales.
+  \item \textbf{Diferencias geográficas claras:} Algunos continentes como África o Asia presentan en general un uso más bajo, salvo excepciones, lo que podría señalar oportunidades de expansión o barreras de adopción actuales.
 
-Desde el punto de vista de la gestión de Unibotics, este dashboard ayuda a ver en qué países la plataforma tiene más presencia. Esta información permite decidir mejor dónde hacer campañas, traducir contenidos o invertir en mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas
+  \item \textbf{Utilidad para la gestión de Unibotics:} Este dashboard ayuda a visualizar en qué países la plataforma tiene mayor presencia, facilitando decisiones sobre campañas, traducción de contenidos o inversiones para mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas.
+\end{itemize}
 
-\section{DASHBOARD 2C}
+
+\section{dashboard 2C}
 
 Este dashboard muestra la evolución mensual del número de sesiones iniciadas en Unibotics a lo largo del año 2024, diferenciando también entre usuarios masculinos y femeninos. El objetivo es analizar cómo varía el uso de la plataforma mes a mes y si existen diferencias significativas por género.
 
-Los datos provienen de las tablas log\_session y common\_user,la consulta SQL utilizada realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
-La consulta tiene esta forma:
+Los datos provienen de las tablas log\_session y common\_user,la consulta SQL \ref{lst:sql_monthly_sessions_gender_2024} realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener sesiones mensuales totales y por género en 2024.}{}
+    \label{lst:sql_monthly_sessions_gender_2024}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT 
+    DATE_TRUNC('month', s.start_date) AS month,
+    COUNT(*) AS total_sessions,
+    COUNT(CASE WHEN u.gender = 'F' THEN 1 END) AS female_sessions,
+    COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
+FROM public.log_session s
+JOIN public.common_user u ON s.username = u.username
+WHERE EXTRACT(YEAR FROM s.start_date) = 2024
+GROUP BY month
+ORDER BY month;
+    \end{minted}
+\end{listing}
 
 Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los meses estén correctamente ordenados de enero a diciembre, y se formatea el nombre de los meses.
 
@@ -836,11 +901,15 @@ Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los m
   \includegraphics[width=9cm, keepaspectratio]{img/2c.png}
   \caption{Dash 2c.}\label{fig:2c}
 \end{figure}
-El dashboard utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año. Se incluyen tres líneas:
 
-    Total de sesiones (en azul).
-    Sesiones femeninas (en rojo).
-    Sesiones masculinas (en verde).
+El dashboard \ref{fig:2c} utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año. Se incluyen tres líneas:
+
+\begin{itemize}
+  \item Total de sesiones (en azul).
+  \item Sesiones femeninas (en rojo).
+  \item Sesiones masculinas (en verde).
+\end{itemize}
+
 
 Cada punto en el gráfico representa el número de sesiones registradas en ese mes para cada categoría.
 
@@ -849,14 +918,24 @@ Explicar porque elegimos este tipo de gráfico
 Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada no se que mas decir.
 
 
-\section{DASHBOARD 3A}
+\section{dashboard 3A}
 
 Este dashboard analiza cómo se distribuyen los usuarios de Unibotics según el tiempo total que han dedicado a un ejercicio específico. Utiliza una escala logarítmica para poder representar mejor las diferencias en las duraciones, que pueden ser muy grandes entre unos usuarios y otros.
 
-Los datos provienen de las tablas log\_exercises y exercises.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta una consulta SQL que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
-La consulta tiene esta forma:
+Los datos provienen de las tablas log\_exercises y exercises.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta la consulta SQL \ref{lst:sql_total_duration_per_user_exercise} que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener la duración total por usuario en un ejercicio específico.}{}
+    \label{lst:sql_total_duration_per_user_exercise}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT username, SUM(duration) as total_duration
+FROM public.log_exercises
+WHERE exercise = %s
+GROUP BY username
+HAVING SUM(duration) > 0
+ORDER BY total_duration;
+    \end{minted}
+\end{listing}
 
 Después de obtener los datos, se aplica una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada.
 
@@ -866,26 +945,43 @@ Después de obtener los datos, se aplica una transformación logarítmica al val
   \caption{Dash 3a.}\label{fig:3a}
 \end{figure}
 
-El dashboard muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
+El dashboard \ref{fig:3a} muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
 
 Cada barra del histograma muestra cuántos usuarios cayeron en ese rango de duraciones. La escala logarítmica en el eje X permite visualizar mejor los datos, ya que de otra manera la mayoría de los usuarios quedarían agrupados en duraciones bajas y sería difícil distinguir diferencias.
 
 Explicar porque elegimos este tipo de gráfico
 
-El análisis del histograma permite entender cómo se comportan los usuarios al realizar un determinado ejercicio. Al observar la distribución de los tiempos, podemos ver si la mayoría de los usuarios completan el ejercicio en un tiempo parecido o si existen grandes diferencias entre ellos. 
+El análisis del histograma permite comprender mejor el comportamiento de los usuarios al realizar un ejercicio determinado. A partir de esta información, se pueden destacar los siguientes aspectos:
 
-Cuando los tiempos se agrupan principalmente en valores bajos, suele indicar que el ejercicio es sencillo o que muchos usuarios no llegaron a dedicarle demasiado tiempo, quizás porque lo abandonaron pronto. En cambio, cuando hay una gran variedad de tiempos, podemos interpretar que el ejercicio tiene un nivel de dificultad más variable o que, por su diseño, permite a los usuarios dedicarle más tiempo explorando distintas soluciones. 
+\begin{itemize}
+  \item \textbf{Distribución de los tiempos:} Permite observar si la mayoría de los usuarios completan el ejercicio en tiempos similares o si existen grandes diferencias entre ellos.
 
-Para los profesores, ofrece una forma de detectar si el ejercicio está bien equilibrado en cuanto a dificultad, o si sería necesario ajustarlo para mejorar la experiencia de aprendizaje.
+  \item \textbf{Tiempos agrupados en valores bajos:} Indican que el ejercicio puede ser sencillo o que muchos usuarios dedicaron poco tiempo, posiblemente porque lo abandonaron pronto.
 
-\section{DASHBOARD 3B}
+  \item \textbf{Gran variedad de tiempos:} Sugiere que el ejercicio tiene un nivel de dificultad variable o que permite explorar distintas soluciones, lo que implica más tiempo dedicado por los usuarios.
+
+  \item \textbf{Utilidad para los profesores:} Facilita detectar si el ejercicio está bien equilibrado en dificultad o si requiere ajustes para mejorar la experiencia de aprendizaje.
+\end{itemize}
+
+
+\section{dashboard 3B}
 
 Este dashboard muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja (boxplots) aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
 
-Los datos se obtienen de la tabla log\_exercises. Se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
-La consulta tiene esta forma:
+Los datos se obtienen de la tabla log\_exercises, con la consulta \ref{lst:sql_total_duration_per_exercise_user} se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
 
-Aqui pego el codigo (pero nose como hacerlo bien)
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener duración total por ejercicio y usuario.}{}
+    \label{lst:sql_total_duration_per_exercise_user}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT exercise, username, SUM(duration) as total_duration
+FROM public.log_exercises
+WHERE duration > 0
+GROUP BY exercise, username
+HAVING SUM(duration) > 0
+ORDER BY exercise;
+    \end{minted}
+\end{listing}
 
 Una vez extraídos los datos, se calcula el logaritmo de la duración total para cada usuario. Esto se hace para normalizar los valores, ya que algunos usuarios pueden tener tiempos muy pequeños y otros muy grandes, y la escala logarítmica ayuda a visualizar mejor esa variabilidad.
 
@@ -895,7 +991,7 @@ Una vez extraídos los datos, se calcula el logaritmo de la duración total para
   \caption{Dash 3b.}\label{fig:3b}
 \end{figure}
 
-Cada ejercicio se representa en el eje horizontal, mientras que en el eje vertical se muestra el logaritmo del tiempo total invertido por los usuarios. Para cada ejercicio, el boxplot muestra:
+En este dashboard \ref{fig:3b} cada ejercicio se representa en el eje horizontal, mientras que en el eje vertical se muestra el logaritmo del tiempo total invertido por los usuarios. Para cada ejercicio, el boxplot muestra:
 
 La mediana de las duraciones (línea central del rectángulo).
 El rango intercuartílico (el ancho de la caja), que representa la mayoría de los usuarios.
@@ -903,17 +999,38 @@ Los valores extremos o atípicos (puntos dispersos fuera de la caja).
 
 Gracias a este tipo de gráfico es posible visualizar de forma clara cómo varía la dedicación de los usuarios en cada ejercicio, y detectar si hay muchos usuarios que dedican tiempos muy distintos o si la mayoría se concentra en valores similares. Además, se muestran todos los puntos individuales sobre los diagramas, lo que permite ver mejor la dispersión real de los datos.
 
-Este dashboard permite comparar de manera rápida cómo se comportan los usuarios en cada ejercicio. Se puede ver si la mayoría de los alumnos dedican un tiempo similar o si hay mucha diferencia entre unos y otros. También ayuda a detectar ejercicios en los que algunos usuarios invierten mucho más tiempo, lo que podría significar que son más complicados o que resultan especialmente interesantes. Además, permite identificar actividades donde hay muchos casos extremos, lo que podría indicar que el ejercicio no está bien planteado o que su dificultad varía demasiado entre estudiantes. Para los profesores, esta información es útil para saber qué ejercicios podrían necesitar cambios o mejoras, y para entender mejor cómo se enfrentan los alumnos a las tareas. Para quienes diseñan los contenidos, el análisis sirve para ver si los ejercicios provocan el tipo de trabajo esperado o si sería buena idea añadir ayudas o dividir las actividades.
+Este dashboard permite comparar rápidamente el comportamiento de los usuarios en cada ejercicio. A partir de los datos, se pueden destacar los siguientes puntos importantes:
 
-\section{DASHBOARD 3C}
+\begin{itemize}
+  \item \textbf{Uniformidad en el tiempo dedicado:} Permite observar si la mayoría de los alumnos invierten un tiempo similar o si existen grandes diferencias entre ellos.
 
-Este dashboard es muy similar al anterior (Dashboard 3B), ya que también utiliza diagramas de caja (boxplots) para representar los datos, pero con una diferencia importante: en lugar de analizar el tiempo total que cada usuario dedica a un ejercicio, aquí se analiza la duración de cada sesión individual.
+  \item \textbf{Ejercicios con tiempos elevados:} Identifica aquellos en los que algunos usuarios dedican mucho más tiempo, lo que podría indicar mayor dificultad o especial interés.
+
+  \item \textbf{Casos extremos:} Detecta actividades con muchas diferencias marcadas en los tiempos, lo que puede señalar problemas en el planteamiento o una dificultad muy variable entre estudiantes.
+
+  \item \textbf{Información para los profesores:} Ayuda a identificar ejercicios que podrían requerir cambios o mejoras para optimizar la experiencia de aprendizaje.
+
+  \item \textbf{Orientación para diseñadores de contenidos:} Facilita evaluar si los ejercicios generan el trabajo esperado o si convendría añadir ayudas o dividir las actividades en partes más manejables.
+\end{itemize}
+
+\section{dashboard 3C}
+
+El dashboard \ref{fig:3c} es muy similar al \ref{fig:3b}, ya que también utiliza diagramas de caja (boxplots) para representar los datos, pero con una diferencia importante: en lugar de analizar el tiempo total que cada usuario dedica a un ejercicio, aquí se analiza la duración de cada sesión individual.
 
 Mientras que en el 3B (esto lo cambiare cuando esten todos) sumábamos todas las sesiones de un usuario para un ejercicio determinado, en este dashboard se estudia cada sesión por separado, sin agruparlas. Además, también se aplica una escala logarítmica para representar mejor las diferencias en los tiempos, ya que algunas sesiones pueden durar solo unos pocos segundos y otras mucho más.
 
-Para obtener estos datos se utiliza una consulta SQL sencilla que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración de esa sesión concreta:
+Para obtener estos datos se utiliza la consulta SQL \ref{lst:sql_duration_ordered_by_exercise} que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración de esa sesión concreta.
 
-aqui pongo el codigo
+\begin{listing}[h!]
+    \caption{Consulta SQL para obtener duración y ejercicio ordenados por ejercicio.}{}
+    \label{lst:sql_duration_ordered_by_exercise}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT exercise, duration
+FROM public.log_exercises
+WHERE duration > 0
+ORDER BY exercise;
+    \end{minted}
+\end{listing}
 
 \begin{figure}
   \centering
@@ -921,76 +1038,10 @@ aqui pongo el codigo
   \caption{Dash 3c.}\label{fig:3c}
 \end{figure}
 
-El objetivo de este dashboard es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el Dashboard 3B, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
+El objetivo del dashboard \ref{fig:3c} es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el dashboard 3B, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
 
 Esta representación es útil para entender mejor el comportamiento real dentro de cada ejercicio: permite ver si los estudiantes tienden a resolver los ejercicios de forma rápida o si, por el contrario, dedican mucho tiempo en intentos sucesivos. Además, puede ayudar a detectar ejercicios que generan más dispersión en el tiempo por sesión, lo que puede ser una pista sobre su dificultad o sobre la necesidad de mejorar su planteamiento o las instrucciones dadas.
 
-\section{como poner codigo}
-
-
-Es bastante habitual que se reproduzcan fragmentos de código en la memoria de un TFG/TFM.
-Esto permite explicar detalladamente partes del desarrollo que se ha realizado que se consideren
-de especial interés. No obstante, tampoco es conveniente pasarse e incluir demasiado código en
-la memoria, puesto que se puede alargar mucho el documento. Un recurso muy habitual es subir
-todo el código a un repositorio de un servicio de control de versiones como GitHub o GitLab,
-y luego incluir en la memoria la URL que enlace a dicho repositorio.
-
-
-
-
-
-Para incluir fragmentos de código en un documento \LaTeX se pueden combinar varias
-herramientas:
-
-\begin{itemize}
-%    \item El entorno \mintinline{latex}{\begin{listing}[]...\end{listing}} permite crear
-%    un marco en el que situar el fragmento de código (parecido al generado cuando insertamos
-%    una tabla o una figura). Podemos insertar también una descripción (\textit{caption})
-%    y una etiqueta para referenciarlo luego en el texto.
-    
-    \item Dentro de este entorno, se puede utilizar el paquete 
-    \mintinline{latex}{minted}~\footnote{\url{https://es.overleaf.com/learn/latex/Code_Highlighting_with_minted}},
-    que utiliza el paquete Python Pygments para resaltado de sintaxis (coloreando el
-    código). Como se puede ver en el siguiente ejemplo, hay muchas opciones de configuración
-    que permiten controlar cómo se va a mostrar el código (incluir números de línea, saltos
-    de línea, tamaño y tipo de fuente, espaciado, código de colores para resaltado, etc.).
-\end{itemize}
-
-\begin{listing}[h!]
-    \caption{Lectura de un fichero *.csv y tipado de datos.}{}
-    \label{lst:1}
-    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
-# A dictionary is built to define the data type contained by each column
-dtype_scheme ={'budget': np.int64, 'genres': np.object, 'homepage': np.str, 'id': np.int64, 'keywords': np.object, 'original_language': np.str, 'original_title': np.str, 'overview': np.str, 'popularity': np.float64, 'production_companies': np.object, 'production_countries': np.object, 'release_date': np.object, 'revenue': np.int64, 'runtime': np.float64, 'spoken_languages': np.object,  'status': np.object, 'tagline': np.str, 'title': np.str, 'vote_average': np.float64, 'vote_count': np.int64}
-
-# When loading the data from the .csv file, we provide the scheme to be followed for data typing
-df1 = dd.read_csv('tmdb_5000_movies.csv', dtype=dtype_scheme)
-    \end{minted}
-\end{listing}
-
-Otra ventaja del entorno \verb|listing| es que se puede generar automáticamente un índice
-(con entradas hiperenlazadas) de fragmentos de código, para incluirlo al comienzo del 
-documento junto con los índices de figuras, tablas, etc.
-
-\subsection{Fuentes monoespaciadas}
-
-A veces se incluyen nombres de archivos, paquetes, etc. como texto monoespaciado, utilizando
-el comando \LaTeX \mintinline{latex}{\texttt{}}. Sin embargo, esto puede generar un problema
-cuando las palabras en fuente monoespaciada alcanzan el final de una línea. En ese caso,
-el compilador rehusa muchas veces romper la palabra y deja la línea demasiado larga respecto
-al resto.
-
-Para evitar esto, especialmente en párrafos más cortos de lo habitual (como en una lista
-no numerada), se puede utilizar el comando \mintinline{latex}{\begin{sloppypar}...\end{sloppypar}},
-como se muestra a continuación con un ejemplo real.
-    
-\begin{itemize}
-    
-    \begin{sloppypar} % Arregla longitud de línea en párrafos con fuente monoespaciada
-    \item Los valores contenidos en las columnas \texttt{genres}, \texttt{spoken\_languages}, \texttt{production\_companies} y \texttt{production\_countries}, clasificados originalmente como \texttt{np.objects}, se corresponden en realidad con listas de objetos \gls{json} que han sido almacenadas como cadenas de caracteres. A través de la función \texttt{get\_values(obj, key)} definida específicamente para ello, se transformará dicha cadena de caracteres en una lista de diccionarios a través de la función \texttt{json.loads(obj)} y se devolverá una  tupla que recopile los valores de los mismos para la clave indicada, un objeto de Python mucho más manejable de cara a realizar consultas sobre el \textit{dataset}.
-    \end{sloppypar}
-    
-\end{itemize}
 
 \cleardoublepage
 
