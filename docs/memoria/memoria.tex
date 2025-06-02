@@ -807,7 +807,7 @@ El dashboard \ref{fig:1c} utiliza un mapa coroplético (choropleth map), generad
 
 Explicar porque elegimos este tipo de gráfico
 
-El dashboard proporciona datos relevantes que aportan valor tanto a nivel técnico como estratégico. A partir de esta información, se pueden destacar los siguientes puntos clave:
+Del análisis del mapa \ref{fig:1c}, se obtienen las siguientes conclusiones:
 
 \begin{itemize}
   \item \textbf{Alta duración promedio en España:} Esto sugiere un uso intensivo y sesiones posiblemente más prolongadas en comparación con otros países, donde el uso puede ser más breve o esporádico.
@@ -881,10 +881,10 @@ Los datos provienen de las tablas log\_session y common\_user,la consulta SQL \r
     \label{lst:sql_monthly_sessions_gender_2024}
     \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
 SELECT 
-    DATE_TRUNC('month', s.start_date) AS month,
-    COUNT(*) AS total_sessions,
-    COUNT(CASE WHEN u.gender = 'F' THEN 1 END) AS female_sessions,
-    COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
+DATE_TRUNC('month', s.start_date) AS month,
+COUNT(*) AS total_sessions,
+COUNT(CASE WHEN u.gender = 'F' THEN 1 END) AS female_sessions,
+COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
 FROM public.log_session s
 JOIN public.common_user u ON s.username = u.username
 WHERE EXTRACT(YEAR FROM s.start_date) = 2024
@@ -1017,7 +1017,7 @@ Este dashboard permite comparar rápidamente el comportamiento de los usuarios e
 
 El dashboard \ref{fig:3c} es muy similar al \ref{fig:3b}, ya que también utiliza diagramas de caja (boxplots) para representar los datos, pero con una diferencia importante: en lugar de analizar el tiempo total que cada usuario dedica a un ejercicio, aquí se analiza la duración de cada sesión individual.
 
-Mientras que en el 3B (esto lo cambiare cuando esten todos) sumábamos todas las sesiones de un usuario para un ejercicio determinado, en este dashboard se estudia cada sesión por separado, sin agruparlas. Además, también se aplica una escala logarítmica para representar mejor las diferencias en los tiempos, ya que algunas sesiones pueden durar solo unos pocos segundos y otras mucho más.
+Mientras que en \ref{fig:3b} sumábamos todas las sesiones de un usuario para un ejercicio determinado, en este dashboard se estudia cada sesión por separado, sin agruparlas. Además, también se aplica una escala logarítmica para representar mejor las diferencias en los tiempos, ya que algunas sesiones pueden durar solo unos pocos segundos y otras mucho más.
 
 Para obtener estos datos se utiliza la consulta SQL \ref{lst:sql_duration_ordered_by_exercise} que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración de esa sesión concreta.
 
@@ -1229,7 +1229,134 @@ La tabla \ref{tbl:common_user_sample} contiene información sobre los usuarios r
 
 A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
 
-y aqui cuando sepa poner codigo pongo querys y explico.
+\section{Ejemplo 1: Listado de usuarios que han realizado un ejercicio concreto}
+
+Si queremos saber todos los usuarios que han ejecutado un ejercicio concreto como puede ser \texttt{rescue\_people}, basta con:
+
+\begin{enumerate}
+    \item Seleccionar el campo \texttt{username} de la tabla \texttt{Log\_exercises}.
+    \item Filtrar por \texttt{exercise = 'rescue\_people'}.
+    \item Eliminar duplicados con \texttt{DISTINCT}.
+    \item Ordenar los resultados alfabéticamente.
+\end{enumerate}
+
+\begin{listing}[h!]
+\caption{Consulta SQL para listar usuarios que han ejecutado \texttt{rescue\_people}.}{}
+\label{lst:sql_users_rescue_simple}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT DISTINCT username
+FROM public.Log_exercises
+WHERE exercise = 'rescue_people'
+ORDER BY username;
+\end{minted}
+\end{listing}
+
+Con la consulta \ref{lst:sql_users_rescue_simple} obtenemos exactamente la lista de usuarios que han ejecutado el ejercicio \texttt{rescue\_people}. A continuación se detalla su funcionamiento:
+
+\begin{enumerate}
+    \item \texttt{SELECT DISTINCT username}: toma cada nombre de usuario sin repetirlo.
+    \item \texttt{FROM public.Log\_exercises}: indica la tabla donde se buscan los registros de ejercicios.
+    \item \texttt{WHERE exercise = 'rescue\_people'}: filtra sólo las filas que correspondan a ese ejercicio.
+    \item \texttt{ORDER BY username}: muestra los nombres de usuario ordenados de la A a la Z.
+\end{enumerate}
+
+\section{Ejemplo 2: Duración media por ejercicio y usuario}
+
+Para calcular el tiempo promedio (en segundos) que cada usuario invierte en cada ejercicio:
+
+\begin{enumerate}
+    \item Agrupamos los registros de la tabla \texttt{Log\_exercises} por \texttt{username} y por \texttt{exercise}.
+    \item Aplicamos \texttt{AVG(duration)} para obtener la media de la duración.
+    \item Redondeamos el resultado a dos decimales con \texttt{ROUND(..., 2)}.
+\end{enumerate}
+
+\begin{listing}[h!]
+\caption{Consulta SQL para calcular la duración media de cada ejercicio por usuario.}{}
+\label{lst:sql_avg_duration_simple}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT
+username,
+exercise,
+ROUND(AVG(duration)::numeric, 2) AS avg_duration_seconds
+FROM public.Log_exercises
+GROUP BY username, exercise
+ORDER BY username, exercise;
+\end{minted}
+\end{listing}
+
+Con la consulta \ref{lst:sql_avg_duration_simple} conseguimos calcular, para cada usuario y cada ejercicio, el tiempo medio que han invertido en segundos. A continuación se explica su funcionamiento:
+
+\begin{enumerate}
+    \item \texttt{AVG(duration)}: calcula la media de la columna \texttt{duration} (en segundos).
+    \item \texttt{ROUND(..., 2)}: redondea esa media a dos decimales para mayor claridad.
+    \item \texttt{GROUP BY username, exercise}: agrupa los registros por usuario y ejercicio, de modo que la función \texttt{AVG} opere en cada grupo.
+    \item \texttt{ORDER BY username, exercise}: ordena primero por usuario y, dentro de cada usuario, por ejercicio.
+    
+\end{enumerate}
+
+\section{Ejemplo 3: Número total de sesiones de ejercicio por usuario}
+
+Para obtener cuántas sesiones de ejercicio ha iniciado cada usuario (sin distinguir tipo de ejercicio):
+
+\begin{enumerate}
+    \item Contamos todas las filas de \texttt{Log\_exercises} para cada \texttt{username}.
+    \item Agrupamos por \texttt{username}.
+    \item Ordenamos de mayor a menor número de sesiones.
+\end{enumerate}
+
+\begin{listing}[h!]
+\caption{Consulta SQL para contar el total de sesiones de ejercicio por usuario.}
+\label{lst:sql_total_sessions_simple}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT
+username,
+COUNT(*) AS total_sessions
+FROM public.Log_exercises
+GROUP BY username
+ORDER BY total_sessions DESC, username;
+\end{minted}
+\end{listing}
+
+Con la consulta \ref{lst:sql_total_sessions_simple} conseguimos obtener el número total de sesiones de ejercicio iniciadas por cada usuario. A continuación se explica su funcionamiento:
+
+\begin{enumerate}
+    \item \texttt{COUNT(*)}: cuenta todas las filas (sesiones) de cada usuario.
+    \item \texttt{GROUP BY username}: agrupa los registros por nombre de usuario.
+    \item \texttt{ORDER BY total\_sessions DESC, username}: muestra primero a quien más sesiones tiene; si hay empate, ordena por nombre.
+\end{enumerate}
+
+\section{Ejemplo 4: Obtener la última fecha de sesión de cada usuario}
+
+Para saber cuándo fue la última vez que cada usuario accedió a la plataforma (tabla \texttt{Log\_session}), podemos usar una consulta muy sencilla que agrupe por \texttt{username} y obtenga el valor máximo de \texttt{end\_date}:
+
+\begin{enumerate}
+    \item Seleccionamos \texttt{username} y la fecha máxima de \texttt{end\_date} de \texttt{Log\_session}.
+    \item Agrupamos por \texttt{username} para que la función \texttt{MAX} se aplique a cada usuario.
+    \item Ordenamos el resultado de más reciente a más antiguo.
+\end{enumerate}
+
+\begin{listing}[h!]
+\caption{Consulta SQL para obtener la última fecha de sesión de cada usuario.}{}
+\label{lst:sql_last_session_simpler}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT
+username,
+MAX(end_date) AS last_end_date
+FROM public.Log_session
+GROUP BY username
+ORDER BY last_end_date DESC;
+\end{minted}
+\end{listing}
+
+Con la consulta \ref{lst:sql_last_session_simpler} conseguimos obtener, para cada usuario, la fecha más reciente en que finalizó una sesión. A continuación se explica su funcionamiento:
+
+\begin{enumerate}
+    \item \texttt{SELECT username, MAX(end\_date) AS last\_end\_date}: elige el campo \texttt{username} y calcula la fecha más reciente de \texttt{end\_date} para cada uno.
+    \item \texttt{FROM public.Log\_session}: indica que trabajamos sobre la tabla de registros de visitas.
+    \item \texttt{GROUP BY username}: agrupa todos los registros por usuario, de modo que \texttt{MAX(end\_date)} devuelva la última fecha de cada grupo.
+    \item \texttt{ORDER BY last\_end\_date DESC}: ordena los usuarios de quien accedió más recientemente a quien lo hizo hace más tiempo.
+\end{enumerate}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
