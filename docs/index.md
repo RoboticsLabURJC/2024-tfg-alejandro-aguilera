@@ -22,13 +22,12 @@ description: "Seguimiento y documentación del proyecto 2024-TFG. RoboticsLab UR
 
 ## Descripción general
 
-Mi Trabajo Fin de Grado consiste en crear de una herramienta que permita extraer datos de la plataforma web UNIBOTICS y crear unos dashboards interactivos para representar esa información
-
+Este Trabajo de Fin de Grado consiste en crear una herramienta que permita extraer, analizar y visualizar los registros que contienen información sobre la actividad y el comportamiento de los usuarios en la plataforma.
 
 ## Estado actual
 - **Última revision de Felipe:**28-05-2025   
-- **Progreso más reciente:**30-05-2025   
-- **Tareas pendientes:** 
+- **Progreso más reciente:**02-06-2025   
+- **Tareas pendientes:** [Leer](progreso/tareaspendientes.md) 
 
 ## Entradas de progreso
 Los avances diarios/semanales están en `docs/progreso/`.
@@ -39,6 +38,7 @@ Los avances diarios/semanales están en `docs/progreso/`.
 | 28-05-2025 | Añado documentación despliegue D1 y tecnologías Docker  | [Leer](progreso/2025-05-28.md) |
 | 30-05-2025 | Cambios grandes en la memoria  | [Leer](progreso/2025-05-30.md) |
 | 31-05-2025 | Cambios punto 3 de la memoria  | [Leer](progreso/2025-05-31.md) |
+| 02-06-2025 | Cambios Apendice A | [Leer](progreso/2025-06-02.md) |
 
 ## Documentación y recursos
 - **Memoria completa (PDF):** [memoria/memoria.pdf](memoria/memoria.pdf)  
