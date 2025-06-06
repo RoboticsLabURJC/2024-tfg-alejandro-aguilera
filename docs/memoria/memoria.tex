@@ -462,7 +462,7 @@ Por ejemplo, la instalación de entornos como ROS 2 y Gazebo \cite{rico2025conci
 
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el cual ir probando nuestros códigos, ya que a diferencia de otras materias la robótica es un campo que su aprendizaje es a base de prueba y error.
 
-Este trabajo de fin de grado gira entorno a Unibotics una plataforma web, que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
+Este trabajo de fin de grado gira entorno a Unibotics \cite{uniboticsWebsite} una plataforma web, que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y poder simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
 
 Sin embargo, a pesar de sus ventajas, aún existen áreas de Unibotics que podrían mejorarse. Plataformas de enseñanza online como Moodle \cite{einhardt2016moodle} llevan años aprovechando los datos de interacción de sus usuarios como acceso a recursos, participación en foros, tiempo dedicado a cada unidad para generar informes que ayudan a los docentes a identificar dónde se quedan atascados los alumnos y adaptar el contenido en consecuencia. 
 
@@ -486,24 +486,16 @@ Este Trabajo de Fin de Grado consiste en crear una herramienta que permita extra
 Dado el objetivo general, se presentan los siguientes objetivos especificicos:
 
 \begin{itemize}
-	\item Extracción de datos.
-	\item Análisis de estadísticas básicas de comportamiento de usuarios.
-	\item Representación gráfica de la información.
+    \item \textbf{Extracción de datos.} Recopilar y estructurar la información relevante de la base de datos de Unibotics, asegurando su calidad y consistencia para su análisis posterior.
+    \item \textbf{Análisis de estadísticas básicas de comportamiento de usuarios.} Calcular métricas como número de sesiones, tiempo de uso por ejercicio y frecuencia de acceso, con el fin de identificar patrones generales en la actividad de los usuarios.
+    \item \textbf{Representación gráfica de la información.} Diseñar visualizaciones claras (gráficos, tablas y dashboards) que permitan interpretar de forma rápida y precisa las conclusiones extraídas sobre el comportamiento de los usuarios.
 \end{itemize}
+
 
 \section{Planificacion}
 \label{sec:objetivos}
 
 crear gant 
-
-\section{Estructura del documento}
-\label{sec:planificacion-temporal}
-
-Es conveniente que incluyas una descripción de lo que te ha llevado realizar el trabajo.
-Hay gente que añade un diagrama de GANTT.
-Lo importante es que quede claro cuánto tiempo has consumido en realizar el TFG/TFM 
-(tiempo natural, p.ej., 6 meses) y a qué nivel de esfuerzo (p.ej., principalmente los 
-fines de semana).
 
 \section{Estructura de la memoria}
 \label{sec:estructura}
@@ -513,10 +505,10 @@ y qué contenidos se van a encontrar en cada capítulo.
 
     \begin{itemize}
       \item En el primer capítulo se hace una breve introducción al proyecto, se describen los objetivos del mismo y se refleja la planificación temporal.
-      \item En el siguiente capítulo se describen las tecnologías utilizadas en el desarrollo de este TFG (Capítulo~\ref{chap:tecnologias}).
+      \item En el siguiente capítulo se describen las tecnologías utilizadas en el desarrollo de este TFG (capítulo~\ref{chap:tecnologias}).
       \item En el capítulo~\ref{chap:diseño} se describe la arquitectura de la plataforma de Unibotics.
       \item En el capítulo~\ref{chap:experimentos} se presentan las dashboard y se realiza un análisis de la información que se extrae de ellas.
-      \item Por último, se presentan las conclusiones del proyecto así como los trabajos futuros que podrían derivarse de éste (Capítulo~\ref{chap:conclusiones}).
+      \item Por último, se presentan las conclusiones del proyecto así como los trabajos futuros que podrían derivarse de éste (capítulo~\ref{chap:conclusiones}).
     \end{itemize}
 
 \cleardoublepage
@@ -534,40 +526,42 @@ En este capitulo describiré las tecnologías utilizadas para este proyecto.
 
 \section{Python}
 \label{sec:python}
-
+Sobra el 1.3
 Python es un lenguaje de programación de alto nivel, interpretado, dinámico y fuertemente tipado. Python es un lenguaje multiparadigma, lo que quiere decir que permite desarrollar software utilizando distintos enfoques como la programación orientada a objetos, la programación funcional y
 la programación imperativa \cite{intropython}.
 
 El principal motivo por el cual he elegido Python como lenguaje de programación para este trabajo es que la plataforma Unibotics está desarrollada en este lenguaje, por lo que usar otro sería ineficiente y una complicación innecesaria. Además, Python destaca por su simplicidad y legibilidad, lo que facilita el desarrollo y mantenimiento del código, su gran comunidad que ofrece soporte constante y su gran variedad de bibliotecas en las cuales se apoya este proyecto. A continuación se enumeran y se detallan el funcionamiento de cada una:
 
-\subsection{Pandas}\label{subsec:pandas}
+\subsection{Pandas}\label{subsec:Pandas}
 Pandas es una de las herramientas más poderosas para la manipulación y análisis de datos en Python. Esta biblioteca se diseñó para hacer que la limpieza, transformación y análisis de datos sean rápidos y eficientes.
 
-Una de las razones por las que he elegido pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva. La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
+Una de las razones por las que he elegido Pandas en este proyecto es su capacidad para manipular datos de manera flexible y eficiente. Sus estructuras principales, Series y DataFrame, facilitan la organización y el acceso a la información de manera intuitiva. La Series actúa como un array unidimensional con etiquetas asociadas, mientras que el DataFrame es una tabla bidimensional que permite realizar operaciones similares a las de bases de datos o herramientas como Excel.
 
-En el contexto de este proyecto, pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Además, como se menciona en \cite{mckinney2022python} pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
+En el contexto de este proyecto, Pandas es la mejor opción porque la plataforma en la que se desarrollará ya está basada en Python y requiere una gestión eficiente de datos tabulares. Además, como se menciona en \cite{mckinney2022python} Pandas no solo facilita la manipulación de datos, sino que también nos permite enfocarnos en la interpretación y visualización de la información, en lugar de perder tiempo en tareas repetitivas de procesamiento.
 
 \subsection{Dash}\label{subsec:dash}
-Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla. \cite{schroeder2022book}\cite{dashPlotlyDocumentation}
+Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla \cite{schroeder2022book,dashPlotlyDocumentation}.
 
 En este proyecto, lo he utilizado porque facilita la creación de gráficos atractivos e interactivos para visualizar los datos de la plataforma Unibotics. Con Dash, puedo generar visualizaciones que permiten a los usuarios interactuar con los datos de manera intuitiva, como hacer filtros o explorar diferentes métricas. Esto es ideal para representar información compleja de forma clara y visualmente atractiva. Además, Dash se integra muy bien con otras bibliotecas de Python, lo que hace que sea fácil crear gráficos de todo tipo, desde barras hasta mapas interactivos.
 
 \subsection{Psycopg2}\label{subsec:psycopg2}
-Psycopg2 es una librería de Python que permite conectar aplicaciones Python con bases de datos PostgreSQL. Es ampliamente utilizada debido a su eficiencia y facilidad de uso para interactuar con bases de datos.\cite{psycopgDocumentation}
+Psycopg2 es una librería de Python que permite conectar aplicaciones Python con bases de datos PostgreSQL. Es ampliamente utilizada debido a su eficiencia y facilidad de uso para interactuar con bases de datos \cite{psycopgDocumentation}.
 
-En este proyecto, he utilizado Psycopg2 para ejecutar consultas SQL directamente desde Python, lo que permite extraer, insertar y modificar datos de manera eficiente. Esta librería ofrece una interfaz sencilla y rápida para gestionar la conexión con la base de datos y ejecutar comandos SQL de forma segura, evitando vulnerabilidades como la inyección de SQL. Además, su integración con otras bibliotecas de Python, como Pandas \ref{subsec:pandas}, facilita la manipulación y análisis de los datos obtenidos desde la base de datos, lo que hace que sea más fácil la integración con Dash \ref{subsec:dash}.
+En este proyecto, he utilizado Psycopg2 para ejecutar consultas SQL directamente desde Python, lo que permite extraer, insertar y modificar datos de manera eficiente. Esta librería ofrece una interfaz sencilla y rápida para gestionar la conexión con la base de datos y ejecutar comandos SQL de forma segura, evitando vulnerabilidades como la inyección de SQL. Además, su integración con otras bibliotecas de Python, como Pandas \ref{subsec:Pandas}, facilita la manipulación y análisis de los datos obtenidos desde la base de datos, lo que hace que sea más fácil la integración con Dash \ref{subsec:dash}.
 
 
-\section{PostgreSQL}
-\label{sec:PostgreSQL}
-PostgreSQL es un sistema de base de datos muy seguro y popular que se utiliza para guardar y organizar grandes cantidades de datos. Es de código abierto, lo que significa que cualquiera puede usarlo y adaptarlo según sus necesidades.\cite{obe2017postgresql} 
+\section{Flask}
+\label{sec:Flask}
 
-Una de las razones por las que es tan utilizado es que permite hacer consultas complejas de manera rápida y segura, asegurando que los datos se mantengan intactos y bien organizados. En el caso de Unibotics, toda la información relacionada con los usuarios y sus interacciones en la plataforma se almacena en una base de datos PostgreSQL. Aunque se hablará más adelante sobre cómo está estructurada esta base de datos \ref{sec:arquitectura}, lo importante es que PostgreSQL ofrece una forma eficiente y segura de gestionar toda esa información.
+Flask es un framework web ligero y flexible para Python que permite desarrollar aplicaciones web de manera rápida y sencilla. Es de código abierto y tiene una amplia comunidad de usuarios y desarrolladores que contribuyen constantemente a su evolución. Flask es popular por su simplicidad, lo que lo hace adecuado tanto para aplicaciones pequeñas como grandes\cite{grinbergflask}.
+
+En este proyecto, utilicé Flask para crear una aplicación simple que sirviera como entorno de prueba e integrara los dashboards, con el fin de realizar las pruebas necesarias antes de la integración final.
+
 
 \section{Docker}
 \label{sec:docker}
 
-Docker es una plataforma de virtualización ligera basada en contenedores que permite empaquetar una aplicación junto con todas sus dependencias en una única unidad portátil. Cada contenedor comparte el núcleo del sistema operativo, pero se ejecuta de forma aislada, lo que garantiza que el entorno interno sea siempre el mismo, independientemente de la máquina donde se despliegue.\cite{nickoloff2019docker} 
+Docker es una plataforma de virtualización ligera basada en contenedores que permite empaquetar una aplicación junto con todas sus dependencias en una única unidad portátil. Cada contenedor comparte el núcleo del sistema operativo, pero se ejecuta de forma aislada, lo que garantiza que el entorno interno sea siempre el mismo, independientemente de la máquina donde se despliegue \cite{nickoloff2019docker}.
 
 En este proyecto hemos utilizado Docker principalmente para levantar la base de datos PostgreSQL de Unibotics en un contenedor independiente. De esta manera, pude iniciar, detener o reiniciar la base de datos con un solo comando, sin necesidad de instalar PostgreSQL en el sistema anfitrión ni preocuparme por posibles conflictos con otras versiones de la base de datos. Además, al usar Docker, tengo la garantía de que el entorno de ejecución es idéntico en mi máquina local y en cualquier otro entorno de pruebas o producción donde se despliegue la plataforma.
 
@@ -575,12 +569,16 @@ En este proyecto hemos utilizado Docker principalmente para levantar la base de 
 \section{Entorno de desarrollo: PyCharm}
 \label{sec:entorno_de_desarrollo}
 
-%%-- El comando \gls{} permite incluir términos en el glosario, para luego reunirlos todos
-%%-- en una tabla al comienzo o al final del documento, junto con sus definiciones.
-
 PyCharm es un \gls{ide} dedicado concretamente a la programación en Python y desarrollado por la compañía checa JetBrains.
 
-Proporciona análisis de código, un depurador gráfico, una consola de Python integrada, control de versiones y, además, soporta desarrollo web con Django. Todas estas características lo convierten en un entorno completo e intuitivo, idóneo para el desarrollo de proyectos académicos como el que nos ocupa.
+Proporciona análisis de código, un depurador gráfico, una consola de Python integrada, control de versiones y, además, soporta desarrollo web con Django. Todas estas características lo convierten en un entorno completo e intuitivo, idóneo para el desarrollo de proyectos académicos como el que nos ocupa. En la figura~\ref{fig:pycharm_project} se muestra la estructura de nuestro proyecto dentro de PyCharm, donde puede apreciarse cómo está organizada la carpeta \texttt{app} cambiar mas adelante con nombres definitivos y explicar que es cada cosa
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{img/pycharm.png}
+    \caption{Estructura del proyecto en PyCharm}
+    \label{fig:pycharm_project}
+\end{figure}
 
 
 \section{Entorno de desarrollo: Visual Studio Code}
@@ -617,10 +615,7 @@ Además de por su perfil colaborativo, Overleaf destaca porque, pese a que en La
 \label{chap:diseño}
 
 
-Aquí viene todo lo que has hecho tú (tecnológicamente). 
-Puedes entrar hasta el detalle. 
-Es la parte más importante de la memoria, porque describe lo que has hecho tú.
-Eso sí, normalmente aconsejo no poner código, sino diagramas.
+En este capítulo se describe la arquitectura general de Unibotics y sus componentes, así como la estructura de la base de datos PostgreSQL y los diferentes datos que gestiona. A continuación, se expone como se ha realizado el despliegue local en el entorno “D1”, incluyendo la configuración de contenedores Docker y la puesta en marcha de los servicios. Seguidamente, se muestra cómo se construyeron los dashboards de análisis paso a paso, desde la extracción y tratamiento de datos hasta la generación de gráficas interactivas. Por último, se explica el desarrollo de un script para estimar el género de los usuarios a partir de sus nombres y su integración en la base de datos.
 
 \section{Arquitectura general} 
 \label{sec:arquitectura}
@@ -633,7 +628,7 @@ Estos contenedores integran ROS2 y Gazebo, además de otras dependencias necesar
 
 Para comunicar el contenedor RADI con el navegador, se utiliza otra herramienta llamada RAM (Robot Application Manager), que actúa como puente entre el navegador y el contenedor. De esta forma, cuando el usuario modifica o ejecuta código, RAM lo recibe, lo ejecuta en el contenedor y devuelve los resultados correspondientes. Estos resultados pueden ser desde imágenes del entorno y la posición del robot hasta cualquier dato relevante para el ejercicio.
 
-La Figura \ref{fig:arquitectura} ilustra esta arquitectura, mostrando la relación entre los distintos componentes de la plataforma, desde la interacción del usuario a través del navegador hasta la gestión de simulaciones y datos en los servidores.
+La figura \ref{fig:arquitectura} ilustra esta arquitectura, mostrando la relación entre los distintos componentes de la plataforma, desde la interacción del usuario a través del navegador hasta la gestión de simulaciones y datos en los servidores.
 
 Para almacenar toda esta cantidad de datos que ofrece cada simulación, además de otros datos de Unibotics como los usuarios, datos estadísticos de ejercicios y datos del desempeño del usuario, se emplea una base de datos relacional del tipo PostgreSQL, lo que facilita la gestión y el análisis futuro de la información, de la cual obtendremos los datos a través de nuestra API para así poder representarlos en los dashboards.
 
@@ -651,15 +646,15 @@ Además de Django, emplea Nginx y Gunicorn, herramientas que mejoran la eficienc
 
 La base de datos de Unibotics está organizada para almacenar toda la información necesaria para el funcionamiento de la plataforma, desde los datos de los usuarios hasta los resultados de las simulaciones. Aunque toda esta información se encuentra en una única base de datos, está organizada en diferentes tablas que cubren varias áreas clave de la plataforma.
 
-Por ejemplo, la información relacionada con los ejercicios y los universos de simulación está almacenada en tablas como exercises y exercise\_universes, las cuales permiten asociar ejercicios a los distintos entornos de simulación disponibles. Esto asegura que un mismo ejercicio pueda ejecutarse en varios universos, proporcionando flexibilidad en las simulaciones.
+Por ejemplo, la información relacionada con los ejercicios y los universos de simulación está almacenada en tablas como exercises y exercise\_universes, las cuales permiten asociar ejercicios a los distintos entornos de simulación disponibles. Esto asegura que un mismo ejercicio pueda ejecutarse en varios universos, proporcionando flexibilidad en las simulaciones. Actualmente, existen 15 tipos diferentes de ejercicios activos en la plataforma.
 
 También está la información sobre los robots y los mundos de simulación, que se guarda en tablas como robots y worlds. Estas tablas contienen detalles sobre la configuración de los robots y los mundos de simulación, lo que permite a la plataforma gestionar los recursos necesarios para ejecutar los ejercicios en el entorno correcto.
 
-Por otro lado, las tablas de logs, como log\_session y log\_exercises, almacenan los registros más importantes sobre la actividad de los usuarios. Estos logs incluyen información detallada sobre la duración de las sesiones de los usuarios, los ejercicios realizados y las fechas en las que se realizaron. Estos datos son fundamentales para generar los dashboards y análisis sobre el comportamiento de los usuarios en la plataforma.
+Por otro lado, las tablas de logs, como log\_session y log\_exercises, almacenan los registros más importantes sobre la actividad de los usuarios. Actualmente, existen 30,270 logs de sesión y 115,254 logs de ejercicios. Estos logs incluyen información detallada sobre la duración de las sesiones de los usuarios, los ejercicios realizados y las fechas en las que se realizaron. Además, los registros contienen información sobre la duración total en segundos, el navegador desde el cual los usuarios iniciaron sesión y el país desde el cual se conectaron. Los registros de sesión cubren un periodo que va desde 2021 hasta febrero de 2025, lo que proporciona un amplio conjunto de datos para el análisis.
 
-Además, la base de datos gestiona también los datos clave sobre los usuarios, los permisos de acceso y las máquinas de granja (contenedores Docker) que ejecutan los ejercicios. Aquí se guardan los detalles de los usuarios y cómo se relacionan con los ejercicios a los que tienen acceso, así como el estado de las máquinas que se utilizan para ejecutar los ejercicios.
+Además, la base de datos gestiona también los datos clave sobre los 1,382 usuarios únicos, los permisos de acceso y las máquinas de granja (contenedores Docker) que ejecutan los ejercicios. Aquí se guardan los detalles de los usuarios y cómo se relacionan con los ejercicios a los que tienen acceso, así como el estado de las máquinas que se utilizan para ejecutar los ejercicios.
 
-En la Figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que ilustra cómo todas estas tablas están conectadas entre sí y cómo se organiza la información en la base de datos. Este diagrama es esencial para comprender cómo fluye la información dentro del sistema y cómo se gestionan las relaciones entre los diferentes elementos.
+En la figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que ilustra cómo todas estas tablas están conectadas entre sí y cómo se organiza la información en la base de datos. Este diagrama es esencial para comprender cómo fluye la información dentro del sistema y cómo se gestionan las relaciones entre los diferentes elementos.
 
 \begin{landscape}
     \begin{figure}[H]
@@ -672,7 +667,7 @@ En la Figura \ref{fig:ER}, se muestra el diagrama de entidad-relación (ER) que 
     
 
 
-Finalmente, en el apéndice A \ref{chap:apendiceA}, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
+Finalmente, en el apéndice A \ref{sec:appA}, encontrarás ejemplos de consultas SQL que te permitirán obtener información directamente de las tablas de logs y realizar análisis sobre la actividad de los usuarios y su interacción con los ejercicios.
 
 \section{Despliegue Local en Linux}
 
@@ -683,6 +678,214 @@ Dado que Unibotics utiliza PostgreSQL como base de datos, levanté un contenedor
 En la parte de frontend, configuré los enlaces simbólicos que Webpack necesita para localizar los componentes de RoboticsAcademy, instalé las dependencias de Node y arrancé el modo desarrollo de Webpack. Con ello, cualquier cambio en el código React se recompila al vuelo y se refleja en el navegador.
 
 Con este entorno ya puedo levantar la plataforma completa en local, probar cada cambio y comprobar al instante cómo funciona sin miedo a romper nada en producción. Esto me proporciona una zona de pruebas segura donde experimentar libremente y acelerar el ciclo de desarrollo y depuración.
+
+\section{Construcción de gráficas}
+
+En esta sección se explica cómo se ha llevado a cabo el proceso de creación de los distintos dashboards utilizados en este trabajo. El objetivo es mostrar paso a paso cómo se ha ido construyendo cada gráfica, desde las consultas a la base de datos hasta su visualización final en una aplicación web.
+
+Aunque estos dashboards están pensados para integrarse en la plataforma Unibotics, por el momento no se han podido incorporar en el entorno de preproducción debido a que se tienen que resolver algunos bugs que afectan a la integración de gráficas desarrolladas con Dash que utiliza la plataforma. Por este motivo, durante el desarrollo se optó por utilizar Flask \ref{sec:Flask} como entorno alternativo, lo que ha permitido probar y visualizar las gráficas sin depender del entorno principal.
+
+Para desarrollar estos dashboard, el proceso de construcción sigue una estructura común. En primer lugar, se extraen los datos necesarios desde la base de datos PostgreSQL mediante consultas SQL, adaptadas a cada caso. Estas consultas se lanzan desde Python utilizando la biblioteca \texttt{Psycopg2} \ref{subsec:psycopg2}, lo que permite traer los datos directamente al entorno de trabajo.
+
+A modo de ejemplo, en el codigo \ref{lst:ejemploquery} se puede ver una consulta SQL que obtiene la duración total de sesiones por país.
+
+\begin{listing}[h!]
+\caption{Consulta SQL para obtener duración total y número de sesiones por país.}{}
+\label{lst:ejemploquery}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
+SELECT country,
+SUM(duration) AS total_duration, COUNT() AS session_count
+FROM public.log_session
+WHERE country IS NOT NULL AND duration > 0
+GROUP BY country
+HAVING COUNT() > 0ORDER BY total_duration DESC;
+\end{minted}
+\end{listing}
+
+Una vez obtenemos los datos, estos se procesan utilizando la biblioteca \texttt{Pandas} \ref{subsec:Pandas}. Esto permite dejar los datos bien preparados antes de mostrarlos en una gráfica, permitiendo agruparlos, ordenarlos o filtrarlos fácilmente para que la visualización sea clara y ordenada.
+
+Como se muestra en el código \ref{lst:pandas_processing}, este procesamiento puede manejar los datos de diferentes maneras.
+
+\begin{listing}[h!]
+    \caption{Ejemplo ampliado de procesamiento de datos con Pandas.}
+    \label{lst:pandas_processing}
+    \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+    
+# Cálculo de duración promedio por país
+df["avg_duration"] = df["total_duration"] / df["session_count"]
+
+# Eliminación de valores nulos
+df = df.dropna(subset=["avg_duration"])
+
+# Conversión de nombre de países a formato categórico ordenado
+df["country"] = pd.Categorical(df["country"], categories=df["country"].unique(), ordered=True)
+
+# Orden descendente por duración promedio
+df = df.sort_values("avg_duration", ascending=False)
+
+# Formateo a dos decimales 
+df["avg_duration"] = df["avg_duration"].round(2)
+
+    \end{minted}
+\end{listing}
+
+Una vez agrupados y ordenados los datos, la parte más relevante del proceso ha sido el diseño de las visualizaciones usando \texttt{Dash} \ref{subsec:dash}, que ha permitido construir dashboards interactivos adaptados a los distintos análisis planteados. A lo largo del desarrollo, se ha aprovechado las múltiples opciones que ofrece la biblioteca Dash para mostrar los datos con distintos tipos de gráficos (mapas, líneas, barras, histogramas, boxplot), eligiendo en cada caso la representación más adecuada según la naturaleza de los datos \cite{rGraphGallery}.
+
+Cada dashboard está compuesto por una serie de componentes visuales que se combinan para construir la interfaz interactiva. Estos componentes se definen utilizando elementos de tipo HTML (como títulos, contenedores o enlaces) y controles dinámicos proporcionados por Dash, como \texttt{dcc.Input} (para introducir texto) o \texttt{dcc.Dropdown} (para seleccionar opciones). Estos elementos permiten al usuario interactuar con la aplicación, por ejemplo, en el dashboard \ref{sec:dash1a}, el código \ref{lst:dcc_input_example} permite escribir un nombre de usuario para filtrar los datos.
+
+\begin{listing}[h!]
+\caption{Ejemplo de componente interactivo con dcc.Input.}{}
+\label{lst:dcc_input_example}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+dcc.Input(
+id="username-input",
+type="text",
+placeholder="Introduce el nombre de usuario...",
+debounce=True,
+className="input-box"
+)
+\end{minted}
+\end{listing}
+
+Todos estos elementos se organizan dentro del layout, que es el bloque central donde se define la estructura del dashboard. Este layout actúa como un esquema visual en el que se indica qué elementos aparecen, en qué orden y cómo están distribuidos en la página.
+
+Una vez definidos los elementos visuales, se programan los callbacks, que son funciones que reaccionan a los cambios en los controles de la interfaz. Por ejemplo, si el usuario introduce un nombre de usuario o selecciona un ejercicio, el callback recoge ese valor y genera automáticamente la gráfica correspondiente. Esto es lo que permite que los dashboards sean interactivos permitiendo que se actualicen al instante sin necesidad de recargar la página.
+
+El código \ref{lst:callback_example} se muestra un ejemplo de un callback sencillo que actualiza una gráfica a partir de un valor introducido.
+
+\begin{listing}[h!]
+\caption{Ejemplo de callback que actualiza una gráfica.}{}
+\label{lst:callback_example}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+@dash_app.callback(
+Output("exercise-duration-graph", "figure"),
+Input("username-input", "value")
+)
+def update_graph(username):
+return fig
+\end{minted}
+\end{listing}
+
+Durante la creación de los dashboards, también se ha tenido en cuenta el diseño visual, asegurando que las gráficas sean claras y fáciles de leer. Para lograr esto, se han ajustado manualmente varios elementos, como los colores, el tamaño de los puntos o líneas, los títulos de los ejes, el orden de las categorías e incluso la altura total del gráfico. Estas configuraciones se realizan directamente en el código de Dash, utilizando funciones como \texttt{update\_layout()} o parámetros de estilo específicos para cada tipo de gráfico.
+
+El código \ref{lst:update_layout_example} se puede ver cómo se personaliza un gráfico ajustando la estética general.
+
+\begin{listing}[h!]
+\caption{Ejemplo de configuración visual con update\_layout}
+\label{lst:update_layout_example}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+fig.update_layout(
+title="Duración Total por Ejercicio",
+xaxis_title="Duración Total (segundos)",
+yaxis_title="Ejercicio",
+plot_bgcolor="white",
+height=800,
+margin=dict(l=0, r=0, t=30, b=0)
+)
+\end{minted}
+\end{listing}
+
+En algunas ocasiones, se han incorporado detalles adicionales como líneas auxiliares, leyendas o etiquetas para facilitar la interpretación de los datos. Cuando los valores variaban considerablemente entre los usuarios, se aplicó una escala logarítmica en el eje para poder visualizar mejor las diferencias.
+
+Como ejemplo, la Listing \ref{lst:leyenda_auxiliar} muestra cómo se añaden leyendas y formas al gráfico.
+
+\begin{listing}[h!]
+\caption{Ejemplo de elementos adicionales como leyendas y líneas.}{}
+\label{lst:leyenda_auxiliar}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+fig.add_trace(go.Scatter(
+x=df["total_duration"],
+y=df["exercise"],
+mode="markers",
+marker=dict(size=12, color="red"),
+name="Duración"
+))
+\end{minted}
+\end{listing}
+
+Todo ello se integra en un app creada por flask de la que hablaré más cuando tenga le versión final.
+
+Además del diseño de cada gráfica, se ha implementado una hoja de estilos CSS que determina la apariencia general de la aplicación.
+
+\section{Discriminación de genero de usuarios}
+
+La base de datos actual de Unibotics dispone de multitud de variables como vimos en \ref{sec:arquitectura}, sin embargo, no hay un registro que clasifique el género de los usuarios. Este aspecto no se consideró en el diseño inicial del programa, pero la idea es implementarlo en futuras etapas para que los nuevos usuarios sean capaces de proporcionar dicha información de manera voluntaria.
+
+Esta modernización, además de ser necesaria para poder realizar un mejor análisis del comportamiento de los datos, consigue aportar una metodología más inclusiva que refuerza la imagen de Unibotics.
+
+Gracias a estos ajustes, podemos identificar y cambiar con mayor facilidad las desigualdades que se dan entre hombres y mujeres, llegando así a analizar las diferencias y necesidades de cada grupo sin caer en sesgos ni estereotipos.
+
+Por otro lado, contar con más información ayudaría a evitar errores de interpretación como la “paradoja de Simpson”\cite{simpsonParadoxWikipedia}, un fenómeno estadístico que ocurre cuando los datos agrupados por una categoría, en este caso el género, alteran la relación entre otras variables, lo que puede llevar a conclusiones equivocadas si no se examina el contexto completo de los datos.
+
+Para disponer de la variable género, he desarrollado un script que utiliza una aproximación automática para inferir el género de los usuarios a partir de su primer nombre, lo que permitió completar el análisis en un formato provisional. Este método no es perfecto y tiene limitaciones, ya que está basado en patrones de nombres que no reflejan con precisión la identidad de género de todos los usuarios, pero sí nos resulta útil, pues nos proporciona una muestra lo suficientemente grande para trabajar.
+
+\begin{listing}[h!]
+\caption{Script para estimar el género de los usuarios.}
+\label{lst:genero_estimado}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+
+import psycopg2
+import pandas as pd
+import gender_guesser.detector as gender
+
+conn = psycopg2.connect(**DB_CONFIG)
+
+with conn.cursor() as cur:
+    cur.execute("""
+        DO $$
+        BEGIN
+            IF NOT EXISTS (
+                SELECT 1 FROM information_schema.columns 
+                WHERE table_name='common_user' AND column_name='gender'
+            ) THEN
+                ALTER TABLE common_user ADD COLUMN gender VARCHAR(10);
+            END IF;
+        END $$;
+    """)
+    conn.commit()
+
+df = pd.read_sql("""
+    SELECT id, first_name FROM common_user 
+    WHERE gender IS NULL OR gender = 'unknown';
+""", conn, dtype={"first_name": str})
+
+detector = gender.Detector()
+
+def estimate_gender(name):
+    if not name or not name.strip():
+        return 'unknown'
+    first = name.strip().split()[0].capitalize()  # Corrige mayúsculas
+    g = detector.get_gender(first)
+    if g in ['male', 'mostly_male']:
+        return 'M'
+    elif g in ['female', 'mostly_female']:
+        return 'F'
+    else:
+        return 'unknown'
+
+df['gender'] = df['first_name'].apply(estimate_gender)
+
+cursor = conn.cursor()
+for _, row in df.iterrows():
+    cursor.execute(
+        "UPDATE common_user SET gender = %s WHERE id = %s;",
+        (row['gender'], row['id'])
+    )
+
+\end{minted}
+\end{listing}
+
+El script \ref{lst:genero_estimado} utiliza las siguientes bibliotecas:
+
+\begin{itemize}
+    \item \texttt{Psycopg2 \ref{subsec:psycopg2}} : Para conectarse a la base de datos PostgreSQL y realizar consultas SQL.
+    \item \texttt{Pandas \ref{subsec:Pandas}} : Para manejar y procesar los datos extraídos de la base de datos.
+    \item \texttt{Gender\_guesser\cite{genderGuesserDocumentation}} : Esta biblioteca nos permite estimar el género basado en el nombre de un persona, usando un detector preentrenado.
+\end{itemize}
+
+
+El script \ref{lst:genero_estimado} comienza conectándose a la base de datos PostgreSQL utilizando la biblioteca psycopg2. Luego, crea una nueva columna llamada gender en la tabla common\_user, pero solo la primera vez que se ejecuta, ya que en ejecuciones posteriores, este paso es omitido si la columna ya existe. A continuación, se extraen los usuarios cuyos géneros aún no están definidos, es decir, aquellos que tienen el valor NULL o unknown en el campo de género. Utilizando la biblioteca gender\_guesser, el script estima el género de los usuarios basándose en su primer nombre. Además, se asegura de corregir posibles errores relacionados con las mayúsculas o minúsculas en los nombres, capitalizando correctamente la primera letra del primer nombre para evitar errores de detección. Finalmente, actualiza la base de datos con los géneros estimados para estos usuarios. De este modo, el dato de género ahora está disponible para futuros análisis, permitiendo incorporar esta variable en los estudios de comportamiento de los usuarios.
+
 
 
 \cleardoublepage
@@ -722,17 +925,25 @@ La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la in
 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+\includegraphics[height=0.65\textheight]{img/resumen_dashboards.png}
+    \caption{Resumen visual de los dashboards}
+    \label{fig:resumen_dashboards}
+\end{figure}
 
 
 
 \section{dashboard 1A}
+    \label{sec:dash1a}
+
 
 El dashboard 1A nos permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
 
 Para poder obtener la información de duración por ejercicio, el dashboard se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente.
 Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el input.
 
-La consulta SQL \ref{lst:sql_total_duration_per_exercise} aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la informacion se obtiene de la tabla log\_session.
+La consulta SQL \ref{lst:sql_total_duration_per_exercise} aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador de ejercicio, calculando la suma de todos los tiempos asociados,la información se obtiene de la tabla log\_session.
 
 \begin{listing}[h!]
     \caption{Consulta SQL para obtener la duración total por ejercicio de un usuario.}{}
@@ -753,28 +964,30 @@ En otras palabras, si el usuario ha realizado varias sesiones o intentos en un m
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/1a.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/1a.png}
   \caption{Dash 1a.}\label{fig:1a}
 \end{figure}
 
 Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de texto \ref{fig:1a} donde poder escribir el nombre del usuario que deseas visualizar su duración total por ejercicio, una vez escrito un nombre de usuario carga el dashboard con la información de ese usuario.
 
-El dashboard \ref{fig:1a} presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo lollipop. Este tipo de visualización es una variación de un diagrama de barras: la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
+El dashboard \ref{fig:1a} presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo Lollipop . Este tipo de visualización es una variación de un diagrama de barras, la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
 
-Aqui tengo que explicar porque elegimos este tipo de gráfico (tambien importante que lo ordenamos de arriba a abajo porque era mejor visualmente)
+Elegí un gráfico del tipo Lollipop donde cada ejercicio aparece en función del tiempo total que el usuario le dedica, porque de esa manera es muy fácil ver de un vistazo en cuáles actividades pasa más tiempo. Al ordenar los ejercicios de mayor a menor duración, no estamos siguiendo el orden alfabético ni el listado original, sino que dejamos claro cuáles son realmente prioritarios para cada usuario. Esto hace que, nada más mirar el gráfico, se aprecie enseguida que, por ejemplo, el ejercicio “global\_navigation” ocupa la mayor parte de la sesión, mientras que el ejercicio “opticalflow\_teleop” apenas tiene unos minutos, sin necesidad de fijarse en cada número. De este modo, cuando hay varias tareas con duraciones muy distintas, facilita compararlas sin confusiones ni búsquedas innecesarias.
 
-La información presentada en el dashboard 1A permite una rápida interpretación comparativa de la dedicación del usuario a los distintos ejercicios, gracias a ello podemos obtener varias conclusiones.
+Gracias a ello podemos obtener varias conclusiones:
 
 \begin{itemize}
   \item \textbf{Identificación de ejercicios más y menos trabajados:} Las longitudes de las líneas revelan de un vistazo cuáles son los ejercicios en los que el usuario ha invertido más tiempo y cuáles menos.
 
-  \item \textbf{Detección de patrones de esfuerzo o dificultad:} Una duración total muy elevada en cierto ejercicio podría indicar que el usuario tuvo dificultades significativas con ese ejercicio o que requirió múltiples intentos prolongados para completarlo, también podría significar que el ejercicio era muy extenso o el usuario dedicó tiempo extra explorando más allá de lo mínimo requerido. Por el contrario, ejercicios con duraciones muy bajas pueden sugerir que el usuario los completó rápidamente (quizá por ser sencillos o ya conocidos) o incluso que los abandonó pronto. En cualquier caso, los extremos en la distribución de tiempos señalan ejercicios que merecen una atención particular al evaluar el progreso del usuario.
+  \item \textbf{Detección de patrones de esfuerzo o dificultad:} Una duración total muy elevada en cierto ejercicio podría indicar que el usuario tuvo dificultades significativas con ese ejercicio o que requirió múltiples intentos prolongados para completarlo, también podría significar que el ejercicio era muy extenso o el usuario dedicó tiempo extra explorando más allá de lo mínimo requerido. Por el contrario, ejercicios con duraciones muy bajas pueden sugerir que el usuario los completó rápidamente o incluso que los abandonó pronto. En ambos casos, los extremos en la distribución de tiempos señalan ejercicios que merecen una atención particular al evaluar el progreso del usuario.
 
-  \item \textbf{Distribución del tiempo de aprendizaje:} El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un perfil equilibrado mostraría barras (líneas) de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
+  \item \textbf{Distribución del tiempo de aprendizaje:} El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo de aprendizaje en la plataforma. Un alumno con un perfil equilibrado mostraría barras de duraciones relativamente similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
 \end{itemize}
 
 
 \section{dashboard 1C}
+    \label{sec:dash1c}
+
 
 Este dashboard tiene como objetivo mostrar la duración promedio de las sesiones de los usuarios de Unibotics, agrupadas por país. A través de un mapa mundial interactivo, se representa gráficamente qué países presentan una mayor o menor media de tiempo por sesión, permitiendo identificar patrones geográficos en el uso de la plataforma.
 
@@ -795,28 +1008,28 @@ ORDER BY total_duration DESC;
 \end{listing}
 
 
-A partir de la consulta \ref{lst:sql_duration_sessions_per_country} se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico \ref{fig:1c}. Este cálculo permite representar una métrica más equilibrada que la duración total (que podría estar sesgada por la cantidad de usuarios en un país), y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
+A partir de la consulta \ref{lst:sql_duration_sessions_per_country} se genera un DataFrame de Pandas con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear el gráfico \ref{fig:1c}. Este cálculo permite representar una métrica más equilibrada que la duración total y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/1c.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/1c.png}
   \caption{Dash 1c.}\label{fig:1c}
 \end{figure}
 
-El dashboard \ref{fig:1c} utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
+El dashboard \ref{fig:1c} utiliza un mapa coroplético, generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado \ref{fig:1c}, se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
 
-Explicar porque elegimos este tipo de gráfico
+Elegí un mapa coroplético porque este tipo de visualización muestra de forma muy clara cómo se distribuye la duración total de sesiones a lo largo del mundo. Al asignar un color a cada país según su valor de duración, se puede identificar al instante qué regiones concentran más actividad y cuáles menos, sin necesidad de leer tablas o listas. El degradado de colores refuerza la percepción de diferencias entre países y también facilita ver patrones globales.
 
 Del análisis del mapa \ref{fig:1c}, se obtienen las siguientes conclusiones:
 
 \begin{itemize}
-  \item \textbf{Alta duración promedio en España:} Esto sugiere un uso intensivo y sesiones posiblemente más prolongadas en comparación con otros países, donde el uso puede ser más breve o esporádico.
+
+  \item \textbf{Alta duración promedio en España:} Esto indica un uso intensivo y sesiones posiblemente más prolongadas en comparación con otros países, donde el uso puede ser más breve o esporádico.
 
   \item \textbf{Bajas duraciones promedio en ciertos países:} Podrían indicar una adopción más reciente, menor familiaridad con la plataforma o simplemente menos disponibilidad de tiempo por parte de los usuarios.
 
-  \item \textbf{Utilidad para la administración de Unibotics:} El dashboard ayuda a identificar mercados con mayor impacto y uso sostenido, facilitando decisiones sobre soporte, localización de contenidos y planes de expansión.
-
-  \item \textbf{Detección de regiones con bajo uso relativo:} Esta información puede motivar estrategias específicas de difusión, colaboración educativa o mejoras en el acceso a la plataforma.
+  \item \textbf{Utilidad para la administración de Unibotics:}  El dashboard permite identificar mercados con mayor impacto y uso sostenido, facilitando decisiones sobre soporte, localización de contenidos y planes de expansión, al tiempo que señala aquellas regiones donde el uso es bajo, lo que puede inspirar estrategias específicas de difusión, colaboración educativa o mejoras en el acceso a la plataforma.
+  
 \end{itemize}
 
 
@@ -845,19 +1058,14 @@ Una vez obtenidos los resultados, se cargan en un DataFrame de Pandas con el pai
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/2a.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/2a.png}
   \caption{Dash 2a.}\label{fig:2a}
 \end{figure}
 
 
-El dashboard \ref{fig:2a} utiliza un mapa coroplético (choropleth map), generado mediante Plotly
-Express, en el que cada país se colorea en función de la duración total de sesión. Cuan-
-to mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática
-progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado (foto
-anterior), se emplea una paleta de colores continua (aclarar que color dejo) personalizada
-para resaltar visualmente los valores extremos.
+El dashboard \ref{fig:2a} utiliza un mapa coroplético (choropleth map), generado mediante Plotly Express, en el que cada país se colorea en función de la duración total de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado \ref{fig:2a} , se emplea una paleta de colores continua (aclarar que color dejo) personalizada para resaltar visualmente los valores extremos.
 
-Explicar porque elegimos este tipo de gráfico
+Elegí un mapa coroplético porque, al igual que en el caso anterior \ref{sec:dash1c}, permite ver de un vistazo cómo se distribuye la duración total de sesiones por país: cada país se colorea según su valor, mostrando de forma inmediata qué regiones concentran más actividad y cuáles menos sin tener que depender de leer tablas o listas.
 
 Del análisis del mapa \ref{fig:2a}, se obtienen las siguientes conclusiones:
 
@@ -867,6 +1075,7 @@ Del análisis del mapa \ref{fig:2a}, se obtienen las siguientes conclusiones:
   \item \textbf{Diferencias geográficas claras:} Algunos continentes como África o Asia presentan en general un uso más bajo, salvo excepciones, lo que podría señalar oportunidades de expansión o barreras de adopción actuales.
 
   \item \textbf{Utilidad para la gestión de Unibotics:} Este dashboard ayuda a visualizar en qué países la plataforma tiene mayor presencia, facilitando decisiones sobre campañas, traducción de contenidos o inversiones para mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas.
+  
 \end{itemize}
 
 
@@ -898,7 +1107,7 @@ Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los m
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/2c.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/2c.png}
   \caption{Dash 2c.}\label{fig:2c}
 \end{figure}
 
@@ -913,7 +1122,7 @@ El dashboard \ref{fig:2c} utiliza un gráfico de líneas para representar la evo
 
 Cada punto en el gráfico representa el número de sesiones registradas en ese mes para cada categoría.
 
-Explicar porque elegimos este tipo de gráfico
+Escogí un gráfico de líneas con tres trazos (total de sesiones, sesiones femeninas y sesiones masculinas) porque así se puede ver mes a mes cómo crece o baja cada grupo al mismo tiempo. Al dibujar una línea distinta para mujeres y hombres, junto con la del total, es muy sencillo notar si, por ejemplo, en junio ambos géneros suben de forma paralela o si en octubre ellas repuntan mientras ellos se mantienen estables. Además, los colores ayudan a identificar rápidamente picos o caídas en cada categoría sin tener que mirar varios gráficos por separado, de modo que se aprecia de inmediato cómo se comporta la plataforma a lo largo de 2024.
 
 Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada no se que mas decir.
 
@@ -922,7 +1131,7 @@ Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada n
 
 Este dashboard analiza cómo se distribuyen los usuarios de Unibotics según el tiempo total que han dedicado a un ejercicio específico. Utiliza una escala logarítmica para poder representar mejor las diferencias en las duraciones, que pueden ser muy grandes entre unos usuarios y otros.
 
-Los datos provienen de las tablas log\_exercises y exercises.El usuario ve un desplagable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta la consulta SQL \ref{lst:sql_total_duration_per_user_exercise} que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
+Los datos provienen de las tablas log\_exercises y exercises. El usuario ve un desplegable de ejercicios que permite seleccionar un ejercicio concreto mediante un desplegable. Una vez seleccionado, se ejecuta la consulta SQL \ref{lst:sql_total_duration_per_user_exercise} que suma el tiempo total que cada usuario ha dedicado a ese ejercicio.
 
 \begin{listing}[h!]
     \caption{Consulta SQL para obtener la duración total por usuario en un ejercicio específico.}{}
@@ -941,17 +1150,19 @@ Después de obtener los datos, se aplica una transformación logarítmica al val
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/3a.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3a.png}
   \caption{Dash 3a.}\label{fig:3a}
 \end{figure}
 
 El dashboard \ref{fig:3a} muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
 
-Cada barra del histograma muestra cuántos usuarios cayeron en ese rango de duraciones. La escala logarítmica en el eje X permite visualizar mejor los datos, ya que de otra manera la mayoría de los usuarios quedarían agrupados en duraciones bajas y sería difícil distinguir diferencias.
+Cada barra del histograma muestra cuántos usuarios cayeron en ese rango de duraciones. Como las duraciones se extienden mucho, apliqué la función logaritmo en el eje X para comprimir la escala, de ese modo, en lugar de tener barras juntas en valores muy bajos y un algunos casos aislados en el extremo derecho, se obtienen intervalos más balanceados
 
-Explicar porque elegimos este tipo de gráfico
+Elegí que este gráfico fuera un histograma porque quería mostrar cómo se distribuyen las duraciones de todos los usuarios en un ejercicio concreto, y al agrupar esos tiempos en intervalos resulta muy fácil ver dónde se concentra la mayoría de la gente.
 
-El análisis del histograma permite comprender mejor el comportamiento de los usuarios al realizar un ejercicio determinado. A partir de esta información, se pueden destacar los siguientes aspectos:
+Al observar el histograma, podemos identificar de un vistazo si la mayoría de los usuarios se sitúa en un tiempo intermedio o, por el contrario, si hay grupos que destacan con duraciones muy largas o muy cortas, apreciándose de forma inmediata la forma de la distribución.
+
+Este análisis del histograma ayuda a comprender con mayor profundidad cómo se comportan los usuarios al realizar un ejercicio determinado. A partir de esta información, se pueden destacar los siguientes aspectos:
 
 \begin{itemize}
   \item \textbf{Distribución de los tiempos:} Permite observar si la mayoría de los usuarios completan el ejercicio en tiempos similares o si existen grandes diferencias entre ellos.
@@ -961,12 +1172,13 @@ El análisis del histograma permite comprender mejor el comportamiento de los us
   \item \textbf{Gran variedad de tiempos:} Sugiere que el ejercicio tiene un nivel de dificultad variable o que permite explorar distintas soluciones, lo que implica más tiempo dedicado por los usuarios.
 
   \item \textbf{Utilidad para los profesores:} Facilita detectar si el ejercicio está bien equilibrado en dificultad o si requiere ajustes para mejorar la experiencia de aprendizaje.
+  
 \end{itemize}
 
 
 \section{dashboard 3B}
 
-Este dashboard muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja (boxplots) aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
+Este dashboard muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja tambien llamado boxplots aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
 
 Los datos se obtienen de la tabla log\_exercises, con la consulta \ref{lst:sql_total_duration_per_exercise_user} se agrupa la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
 
@@ -987,7 +1199,7 @@ Una vez extraídos los datos, se calcula el logaritmo de la duración total para
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/3bb.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3bb.png}
   \caption{Dash 3b.}\label{fig:3b}
 \end{figure}
 
@@ -1034,13 +1246,13 @@ ORDER BY exercise;
 
 \begin{figure}
   \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/3c.png}
+  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3c.png}
   \caption{Dash 3c.}\label{fig:3c}
 \end{figure}
 
-El objetivo del dashboard \ref{fig:3c} es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el dashboard 3B, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
+El objetivo del dashboard \ref{fig:3c} es ofrecer una visión más detallada sobre cómo varía el tiempo de trabajo en cada intento o sesión concreta, algo que no era visible en el dashboard \ref{fig:3b}, donde sólo veíamos el esfuerzo acumulado de cada usuario. Aquí podemos detectar, por ejemplo, si un ejercicio tiene sesiones generalmente cortas o si hay mucha variación entre los intentos de los distintos usuarios.
 
-Esta representación es útil para entender mejor el comportamiento real dentro de cada ejercicio: permite ver si los estudiantes tienden a resolver los ejercicios de forma rápida o si, por el contrario, dedican mucho tiempo en intentos sucesivos. Además, puede ayudar a detectar ejercicios que generan más dispersión en el tiempo por sesión, lo que puede ser una pista sobre su dificultad o sobre la necesidad de mejorar su planteamiento o las instrucciones dadas.
+Esta representación es útil para entender mejor el comportamiento real dentro de cada ejercicio, permite ver si los estudiantes tienden a resolver los ejercicios de forma rápida o si, por el contrario, dedican mucho tiempo en intentos sucesivos. Además, puede ayudar a detectar ejercicios que generan más dispersión en el tiempo por sesión, lo que puede ser una pista sobre su dificultad o sobre la necesidad de mejorar su planteamiento o las instrucciones dadas.
 
 
 \cleardoublepage
