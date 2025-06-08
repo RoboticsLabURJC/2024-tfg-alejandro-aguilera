@@ -12,7 +12,7 @@ DB_CONFIG = {
     "port": "5432"
 }
 
-def get_sessions_per_month():
+def get_sessions_per_month(year):
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         query = """
@@ -23,11 +23,11 @@ def get_sessions_per_month():
                 COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
             FROM public.log_session s
             JOIN public.common_user u ON s.username = u.username
-            WHERE EXTRACT(YEAR FROM s.start_date) = 2024
+            WHERE EXTRACT(YEAR FROM s.start_date) = %s
             GROUP BY month
             ORDER BY month;
         """
-        df = pd.read_sql(query, conn)
+        df = pd.read_sql(query, conn, params=[year])
         conn.close()
 
         df["month"] = df["month"].dt.strftime("%B")
@@ -49,7 +49,15 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 2C: Sesiones por Mes en 2024", className="title-large"),
+        html.H1("Dashboard 2C: Sesiones por Mes", className="title-large"),
+
+        dcc.Dropdown(
+            id="year-selector",
+            options=[{"label": str(y), "value": y} for y in range(2021, 2026)],
+            value=2024,
+            clearable=False,
+            className="dropdown"
+        ),
 
         dcc.Graph(id="sessions-line-chart", className="responsive-graph"),
 
@@ -58,17 +66,16 @@ def init_dashboard(server):
 
     @dash_app.callback(
         Output("sessions-line-chart", "figure"),
-        Input("sessions-line-chart", "id")
+        Input("year-selector", "value")
     )
-    def update_line_chart(_):
-        df = get_sessions_per_month()
+    def update_line_chart(selected_year):
+        df = get_sessions_per_month(selected_year)
 
         if df.empty:
-            return go.Figure(layout={"title": "No hay datos disponibles para 2024"})
+            return go.Figure(layout={"title": f"No hay datos disponibles para {selected_year}"})
 
         fig = go.Figure()
 
-        # Línea de sesiones totales
         fig.add_trace(go.Scatter(
             x=df["month"],
             y=df["total_sessions"],
@@ -78,7 +85,6 @@ def init_dashboard(server):
             name="Total Sesiones",
         ))
 
-        # Línea de sesiones femeninas
         fig.add_trace(go.Scatter(
             x=df["month"],
             y=df["female_sessions"],
@@ -88,7 +94,6 @@ def init_dashboard(server):
             name="Sesiones Femeninas"
         ))
 
-        # Línea de sesiones masculinas
         fig.add_trace(go.Scatter(
             x=df["month"],
             y=df["male_sessions"],
@@ -99,7 +104,7 @@ def init_dashboard(server):
         ))
 
         fig.update_layout(
-            title="Número de Sesiones por Mes en 2024",
+            title=f"Número de Sesiones por Mes en {selected_year}",
             xaxis_title="Mes",
             yaxis_title="Número de Sesiones",
             plot_bgcolor="white",
