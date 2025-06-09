@@ -3,57 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Interactivo Avanzado</title>
+    <title>Galería de Dashboards</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li {% if active_page == 'dashboard' %}class="active"{% endif %}>
+                        <a href="{{ url_for('index') }}">Dashboard</a>
+                    </li>
+                    <li {% if active_page == 'documentacion' %}class="active"{% endif %}>
+                        <a href="{{ url_for('documentacion') }}">Documentación</a>
+                    </li>
+                    <li>
+                        <a href="https://unibotics.org" target="_blank">Unibotics</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>Dashboards</h2>
+        <div class="content">
+            <h1 class="gallery-title">DASHBOARDS</h1>
+            <main class="dashboard-gallery">
+                <div class="dashboard-grid">
+                    <a href="/1a/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/1a.png') }}" alt="Dashboard 1A">
+                        <span>Dashboard 1A</span>
+                    </a>
+                    <a href="/1c/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/1c.png') }}" alt="Dashboard 1C">
+                        <span>Dashboard 1C</span>
+                    </a>
+                    <a href="/2a/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/2a.png') }}" alt="Dashboard 2A">
+                        <span>Dashboard 2A</span>
+                    </a>
+                    <a href="/2c/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/2c.png') }}" alt="Dashboard 2C">
+                        <span>Dashboard 2C</span>
+                    </a>
+                    <a href="/3a/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/3a.png') }}" alt="Dashboard 3A">
+                        <span>Dashboard 3A</span>
+                    </a>
+                    <a href="/3b/" class="dashboard-card">
+                        <img src="{{ url_for('static', filename='../static/3bb.png') }}" alt="Dashboard 3B">
+                        <span>Dashboard 3B</span>
+                    </a>
+                    <a href="/3c/" class="dashboard-card center-last">
+                        <img src="{{ url_for('static', filename='../static/3c.png') }}" alt="Dashboard 3C">
+                        <span>Dashboard 3C</span>
+                    </a>
+                </div>
+            </main>
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="/1a/" class="menu-item">1A</a></li>
-            <li><a href="/1b/" class="menu-item">1B</a></li>
-            <li><a href="/1c/" class="menu-item">1C</a></li>
-            <li><a href="/2a/" class="menu-item">2A</a></li>
-            <li><a href="/2b/" class="menu-item">2B</a></li>
-            <li><a href="/2c/" class="menu-item">2C</a></li>
-            <li><a href="/3a/" class="menu-item">3A</a></li>
-            <li><a href="/3b/" class="menu-item">3B</a></li>
-            <li><a href="/3c/" class="menu-item">3C</a></li>
-        </ul>
     </div>
-
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <h1>Dash de pruebas 6 de mayo </h1>
-        <p> Alfinal hare el despliegue en D1 por problemas con unibotics.<br>
-        Cosas por hacer:<br>
-        - Nuevas dash que me diga Felipe<br>
-        - Poner ya las imagenes <span>&#x2714;</span> <br>
-        - Poner el codigo<br>
-                    - Añadir las nuevas técnologias postgrade y dash <span>&#x2714;</span> <br>
-
-        - Editar dash genero para que sean quitables <span>&#x2714;</span> <br>
-            - Documentar base de datos  <span>&#x2714;</span> (a falta de poner el codigo de sql) <br>
-        </p>
-    </div>
-
-    <div class="menu-toggle">
-        <span>&#9776;</span>
-    </div>
-
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-        mainContent.classList.toggle('shift');
-    });
-</script>
 </body>
 </html>
-

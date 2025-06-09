@@ -1,109 +1,164 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  overflow-x: hidden;
-}
-
-h1 {
-  font-size: 2.5rem;
-  color: #343a40;
-}
-
-.main-content {
-  margin-left: 260px;
-  padding: 2rem;
+.layout {
+    display: flex;
+    height: 100vh;
 }
 
 .sidebar {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: -250px; /* Inicialmente oculto */
-  background-color: #343a40;
-  color: white;
-  transition: 0.3s;
-  padding-top: 60px;
-}
-
-.sidebar-header h2 {
-  text-align: center;
-  color: #ffffff;
-}
-
-.sidebar-menu {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-menu li {
-  padding: 12px 16px;
-  text-align: center;
-}
-
-.sidebar-menu li a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 1.2rem;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidebar-menu li a:hover {
-  background-color: #007bff;
-  transform: scale(1.1);
-}
-
-.sidebar-menu li a:active {
-  background-color: #0056b3;
-}
-
-.menu-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 30px;
-  background-color: #343a40;
-  color: white;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.menu-toggle:hover {
-  background-color: #007bff;
-}
-
-.sidebar.open {
-  left: 0;
-}
-
-.main-content {
-  transition: margin-left 0.3s;
-}
-
-@media screen and (max-width: 768px) {
-  .sidebar {
-    width: 100%;
+    width: 220px;
+    background-color: #2d3142;
+    color: white;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
     height: 100%;
-    left: -100%;
-  }
-
-  .main-content {
-    margin-left: 0;
-  }
-
-  .sidebar.open {
+    top: 0;
     left: 0;
-  }
+}
 
-  .menu-toggle {
-    top: 15px;
-    left: 15px;
-  }
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 1rem;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.sidebar .active a {
+    color: #66fcf1;
+    font-weight: 700;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fb;
+}
+
+.gallery-title {
+    text-align: center;
+    color: #0a0a23;
+    margin-top: 1rem;
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+.dashboard-gallery {
+    padding: 2rem 0;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.dashboard-card span {
+    display: block;
+    padding: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.center-last {
+    grid-column: 2 / 3;
+}
+
+@media screen and (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .center-last {
+        grid-column: span 2;
+        justify-self: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .dashboard-gallery {
+        padding: 1rem;
+    }
+
+    .gallery-title {
+        font-size: 2.2rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card span {
+        font-size: 1.1rem;
+    }
+
+    .center-last {
+        grid-column: auto;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .layout {
+        flex-direction: column;
+    }
 }
