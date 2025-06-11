@@ -17,7 +17,17 @@ DB_CONFIG = {
 def get_exercise_list():
     try:
         conn = psycopg2.connect(**DB_CONFIG)
-        query = "SELECT DISTINCT exercise_id FROM public.exercises ORDER BY exercise_id;"
+        query = """
+            SELECT DISTINCT e.exercise_id
+            FROM public.exercises e
+            WHERE EXISTS (
+                SELECT 1
+                FROM public.log_exercises le
+                WHERE le.exercise = e.exercise_id
+                AND le.duration > 0
+            )
+            ORDER BY e.exercise_id;
+        """
         df = pd.read_sql(query, conn)
         conn.close()
         return sorted(df["exercise_id"].unique())
