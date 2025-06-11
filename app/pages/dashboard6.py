@@ -41,7 +41,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 3B: Boxplot (log) por Ejercicio", className="title-large"),
+        html.H1("Boxplot por Ejercicio", className="title-large"),
 
         dcc.Graph(id="boxplot-all-exercises", className="graph-boxplot"),
 
@@ -69,15 +69,32 @@ def init_dashboard(server):
         )
 
         fig.update_layout(
-            yaxis_title="log(Duración Total por Usuario)",
-            xaxis_title="Ejercicio",
+            title=dict(
+                text="Distribución log(Duración) por Usuario y Ejercicio",
+                font=dict(size=24)
+            ),
+            xaxis=dict(
+                title=dict(
+                    text="Ejercicio",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16),
+                tickangle=-30
+            ),
+            yaxis=dict(
+                title=dict(
+                    text="log(Duración Total por Usuario)",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16)
+            ),
+            legend=dict(
+                font=dict(size=14)
+            ),
             plot_bgcolor="white",
             autosize=True,
-            xaxis_tickangle=-30,
-            font=dict(size=14),
-        height = 800,
-        margin = dict(l=0, r=0, t=30, b=0)
-
+            height=800,
+            margin=dict(l=60, r=40, t=60, b=60)
         )
 
         return fig

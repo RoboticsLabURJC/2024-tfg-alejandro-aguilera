@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.graph_objects as go
 import psycopg2
 
-# Configuración de la base de datos
 DB_CONFIG = {
     "dbname": "academy_db",
     "user": "user-dev",
@@ -39,8 +38,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 1A: Análisis de Ejercicios por Usuario", className="title-large"),
-
+        html.H1("Análisis de Ejercicios por Usuario", className="title-large"),
         dcc.Input(
             id="username-input",
             type="text",
@@ -48,9 +46,7 @@ def init_dashboard(server):
             debounce=True,
             className="input-box"
         ),
-
         dcc.Graph(id="exercise-duration-graph", className="responsive-graph"),
-
         html.A("Volver al menú", href="/", className="back-link")
     ])
 
@@ -67,25 +63,9 @@ def init_dashboard(server):
         if df.empty:
             return go.Figure(layout={"title": f"No se encontraron datos para '{username}'"})
 
-        lines = go.Scatter(
-            x=df["total_duration"],
-            y=df["exercise"],
-            mode="lines",
-            line=dict(color="gray", width=1),
-            showlegend=False
-        )
-
-        circles = go.Scatter(
-            x=df["total_duration"],
-            y=df["exercise"],
-            mode="markers",
-            marker=dict(size=12, color="red"),
-            name="Duración"
-        )
-
         fig = go.Figure()
 
-        for i, row in df.iterrows():
+        for _, row in df.iterrows():
             fig.add_shape(
                 type="line",
                 x0=0, x1=row["total_duration"],
@@ -93,17 +73,39 @@ def init_dashboard(server):
                 line=dict(color="gray", width=1)
             )
 
-        fig.add_trace(circles)
+        fig.add_trace(go.Scatter(
+            x=df["total_duration"],
+            y=df["exercise"],
+            mode="markers",
+            marker=dict(size=12, color="red"),
+            name="Duración"
+        ))
 
         fig.update_layout(
-            title=f"Duración Total por Ejercicio - {username}",
+            title={
+                "text": f"Duración Total por Ejercicio - {username}",
+                "font": dict(size=28, family="Arial", color="black")
+            },
             xaxis_title="Duración Total (segundos)",
             yaxis_title="Ejercicio",
+            font=dict(
+                family="Arial",
+                size=18,
+                color="black"
+            ),
+            xaxis=dict(
+                title_font=dict(size=20, color="black"),
+                tickfont=dict(size=16)
+            ),
+            yaxis=dict(
+                title_font=dict(size=20, color="black"),
+                tickfont=dict(size=16),
+                categoryorder="total ascending"
+            ),
             plot_bgcolor="white",
-            yaxis=dict(categoryorder="total ascending"),
             autosize=True,
             height=800,
-            margin=dict(l=0, r=0, t=30, b=0)
+            margin=dict(l=50, r=50, t=60, b=50)
         )
 
         return fig

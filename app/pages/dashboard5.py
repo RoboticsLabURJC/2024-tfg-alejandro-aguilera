@@ -65,7 +65,7 @@ def init_dashboard(server):
     exercise_options = [{"label": ex, "value": ex} for ex in get_exercise_list()]
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 3A: Frecuencia (log) de Usuarios por Duración", className="title-large"),
+        html.H1("Frecuencia de Usuarios por Duración", className="title-large"),
 
         dcc.Dropdown(
             id="exercise-dropdown",
@@ -106,13 +106,32 @@ def init_dashboard(server):
         )
 
         fig.update_layout(
-            xaxis_title="log(Duración Total en segundos)",
-            yaxis_title="Número de Usuarios",
+            title=dict(
+                text=f"Distribución Logarítmica de Duraciones - {exercise_id}",
+                font=dict(size=24)
+            ),
+            xaxis=dict(
+                title=dict(
+                    text="log(Duración Total en segundos)",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16)
+            ),
+            yaxis=dict(
+                title=dict(
+                    text="Número de Usuarios",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16)
+            ),
+            legend=dict(
+                font=dict(size=14)
+            ),
             plot_bgcolor="white",
             bargap=0.1,
             autosize=True,
             height=800,
-            margin=dict(l=0, r=0, t=30, b=0)
+            margin=dict(l=60, r=40, t=60, b=60)
         )
 
         return fig

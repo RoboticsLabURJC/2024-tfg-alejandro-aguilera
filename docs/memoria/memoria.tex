@@ -193,6 +193,10 @@
 %%-- Se debe cargar aquí para evitar warnings
 \usepackage{csquotes}                   % Para traducciones con biblatex
 
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+
 %%-- Glosario de términos
 \usepackage[acronym]{glossaries}
 \makeglossaries
@@ -458,7 +462,7 @@ As it is the translation of the ``Resumen'', which is supposed to be written at 
 
 Debido al avance de las tecnologías, la robótica se encuentra en constante evolución, lo que hace que cada vez la podamos ver en más sectores, desde el mundo laboral hasta en nuestro día a día. Sin embargo, el aprendizaje de la robótica es un terreno complejo, ya que para poder empezar en este campo se requiere la instalación y configuración de distintas herramientas y entornos de programación, los cuales pueden resultar bastante enrevesados, en especial a nuevos usuarios que quiere empezar en el mundo de la robótica.
 
-Por ejemplo, la instalación de entornos como ROS 2 y Gazebo \cite{rico2025concise} pueden convertirse en un verdadero desafío para quienes empiezan. En ROS 2 hay que asimilar de golpe conceptos como nodos y tópicos, lidiar con dependencias y versiones al instalar paquetes, y acostumbrarse a gestionar todo mediante línea de comandos. En Gazebo, por su parte, definir mundos de simulación implica escribir ficheros SDF o URDF desde cero, ajustar físicas y colisiones sin apenas ayuda gráfica y estar pendiente de la compatibilidad de los plugins. Estas tareas, lejos de facilitar el aprendizaje por prueba y error, pueden dispersar la atención del usuario y convertir sus primeros pasos en un laberinto de configuración y depuración.
+Por ejemplo, la instalación de entornos como ROS2 y Gazebo \cite{rico2025concise} pueden convertirse en un verdadero desafío para quienes empiezan. En ROS2 hay que asimilar de golpe conceptos como nodos y tópicos, lidiar con dependencias y versiones al instalar paquetes, y acostumbrarse a gestionar todo mediante línea de comandos. En Gazebo, por su parte, definir mundos de simulación implica escribir ficheros SDF o URDF desde cero, ajustar físicas y colisiones sin apenas ayuda gráfica y estar pendiente de la compatibilidad de los plugins. Estas tareas, lejos de facilitar el aprendizaje por prueba y error, pueden dispersar la atención del usuario y convertir sus primeros pasos en un laberinto de configuración y depuración.
 
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el cual ir probando nuestros códigos, ya que a diferencia de otras materias la robótica es un campo que su aprendizaje es a base de prueba y error.
 
@@ -492,10 +496,27 @@ Dado el objetivo general, se presentan los siguientes objetivos especificicos:
 \end{itemize}
 
 
-\section{Planificacion}
+\section{Planificación}
 \label{sec:objetivos}
 
-crear gant 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/gant.png}
+    \caption{Planificación temporal del proyecto.}
+    \label{fig:planificacion}
+\end{figure}
+
+En la Figura~\ref{fig:planificacion} se presenta un diagrama de Gantt que ilustra la planificación temporal del proyecto. Este diagrama de gant se divide en cinco fases principales:
+
+\begin{itemize}
+    \item \textbf{Documentación técnica}: En esta etapa se realiza el estudio del material necesario para abordar adecuadamente el proyecto.
+    \item \textbf{Análisis de datos y dashboards}: Análisis y estudio de los datos existentes en la base de datos, la selección de los más relevantes y la construcción de dashboards que los representen visualmente.
+    \item \textbf{Evaluación y conclusiones} (abril): incluye la revisión de los dashboards desarrollados y la elaboración de conclusiones basadas en los resultados obtenidos.
+    \item \textbf{Redacción de la memoria}: Escritura formal de la memoria del proyecto, incluyendo su desarrollo y las conclusiones.
+    \item \textbf{Revisión y cierre final}: Corrección de errores, ajustes menores y una revisión global del trabajo antes de su entrega final.
+\end{itemize}
+
+
 
 \section{Estructura de la memoria}
 \label{sec:estructura}
@@ -571,11 +592,21 @@ En este proyecto hemos utilizado Docker principalmente para levantar la base de 
 
 PyCharm es un \gls{ide} dedicado concretamente a la programación en Python y desarrollado por la compañía checa JetBrains.
 
-Proporciona análisis de código, un depurador gráfico, una consola de Python integrada, control de versiones y, además, soporta desarrollo web con Django. Todas estas características lo convierten en un entorno completo e intuitivo, idóneo para el desarrollo de proyectos académicos como el que nos ocupa. En la figura~\ref{fig:pycharm_project} se muestra la estructura de nuestro proyecto dentro de PyCharm, donde puede apreciarse cómo está organizada la carpeta \texttt{app} cambiar mas adelante con nombres definitivos y explicar que es cada cosa
+Proporciona análisis de código, un depurador gráfico, una consola de Python integrada, control de versiones y, además, soporta desarrollo web con Django. Todas estas características lo convierten en un entorno completo e intuitivo, idóneo para el desarrollo de proyectos académicos como el que nos ocupa. En la figura~\ref{fig:pycharm_project} se muestra la estructura de nuestro proyecto dentro de PyCharm, donde puede apreciarse cómo está organizada la carpeta app.
+
+Dentro de esta estructura, la carpeta templates contiene las diferentes páginas HTML del sistema. El archivo index.html representa la pantalla inicial, donde se muestran varios gráficos interactivos a modo de resumen. Al hacer clic sobre cualquiera de estos gráficos, el usuario es redirigido a páginas más específicas de análisis, cada una ubicada en la carpeta pages, en esta carpeta cada archivo contiene una dashboard diferente.
+
+El archivo documentacion.html es una sección dedicada a mostrar el documento PDF del Trabajo de Fin de Grado, permitiendo al usuario visualizar la memoria del proyecto directamente desde la interfaz web.
+
+La carpeta static almacena los recursos estáticos del sitio web, como hojas de estilo CSS, imágenes y en este caso el pdf con el tfg.
+
+El archivo \texttt{app.py} es el corazón de la aplicación Flask. Es el encargado de decirle a la web qué hacer cuando el usuario entra en una dirección concreta. Por ejemplo, cuando alguien abre la página principal (\texttt{/}), \texttt{app.py} le indica al navegador que debe mostrar el archivo \texttt{index.html}. También se encarga de conectar cada una de las páginas del proyecto con su parte lógica, como las funciones que están en \texttt{dashboard.py}, que generan los gráficos o datos que se muestran.
+
+Por último, el apartado \texttt{External Libraries} contiene las librerías externas y extensiones que necesita el proyecto para funcionar correctamente. Estas incluyen los paquetes instalados, como Flask, pandas o cualquier otra dependencia utilizada en el desarrollo.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{img/pycharm.png}
+    \includegraphics[width=1.1\textwidth]{img/pycharm.png}
     \caption{Estructura del proyecto en PyCharm}
     \label{fig:pycharm_project}
 \end{figure}
@@ -707,7 +738,7 @@ Una vez obtenemos los datos, estos se procesan utilizando la biblioteca \texttt{
 Como se muestra en el código \ref{lst:pandas_processing}, este procesamiento puede manejar los datos de diferentes maneras.
 
 \begin{listing}[h!]
-    \caption{Ejemplo ampliado de procesamiento de datos con Pandas.}
+    \caption{Ejemplo de procesamiento de datos con Pandas.}
     \label{lst:pandas_processing}
     \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
     
@@ -803,9 +834,69 @@ name="Duración"
 \end{minted}
 \end{listing}
 
-Todo ello se integra en un app creada por flask de la que hablaré más cuando tenga le versión final.
-
+Una vez desarrollados todos los dashboards de manera individual, se integraron en una aplicación web utilizando el microframework Flask \ref{sec:Flask}. Esta aplicación actúa como contenedor principal y permite al usuario navegar fácilmente entre los distintos dashboards desde una interfaz centralizada y visualmente clara.
 Además del diseño de cada gráfica, se ha implementado una hoja de estilos CSS que determina la apariencia general de la aplicación.
+
+En la figura \ref{fig:menu} se muestra la página principal de la aplicación, donde se presenta una galería con miniaturas de cada uno de los dashboards disponibles. Al hacer clic sobre cualquiera de ellas, el usuario accede directamente al dashboard correspondiente, cargado de forma dinámica dentro del entorno Flask.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{img/menu.png}
+\caption{Menú principal de la aplicación.}
+\label{fig:menu}
+\end{figure}
+
+La estructura principal de la aplicación está definida en el archivo app.py, donde se van incorporando todos los dashboards desarrollados. Cada uno está organizado por separado en su propio archivo dentro de la carpeta pages, lo que hace que el proyecto sea más limpio y fácil de mantener. Para añadirlos a la aplicación principal, simplemente se utiliza una función llamada init\_dashboard que los integra automáticamente.
+
+En el codigo \ref{lst:app.py}, se puede ver un ejemplo de cómo está estructurado este archivo.
+
+\begin{listing}[h!]
+\caption{Código del contenido de app.py.}
+\label{lst:app.py}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+
+from flask import Flask, render_template
+import pages.dashboard1 as page_1a
+import pages.dashboard2 as page_1c
+...
+
+app = Flask(name)
+app = page_1a.init_dashboard(app)
+app = page_1c.init_dashboard(app)
+...
+
+@app.route("/")
+def index():
+return render_template("index.html", active_page="dashboard")
+
+@app.route("/documentacion")
+def documentacion():
+return render_template("documentacion.html", active_page="documentacion")
+
+if name == "main":
+app.run(debug=True, host="0.0.0.0", port=5000)
+
+\end{minted}
+\end{listing}
+
+La página principal de la aplicación está definida en el archivo index.html y presenta una pagina donde se muestran todos los dashboards disponibles. Cada dashboard aparece como una imagen del gráfico y un título, y al hacer clic sobre ella, el usuario accede directamente al dashboard correspondiente.
+
+El código \ref{lst:main.html} es un ejemplo de un fragmento del código de index.html, donde se representa una imagen con su titulo y con su referencia a la pagina de esa dashboard.
+
+\begin{listing}[h!]
+\caption{Ejemplo de dashboard en index.html.}
+\label{lst:main.html}
+\begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{python}
+
+<a href="/1a/" class="dashboard-card">
+    <img src="{{ url_for('static', filename='../static/dashboard1.png') }}" alt="Dashboard 1A">
+    <span>Dashboard 1A</span>
+</a>
+
+\end{minted}
+\end{listing}
+
+Por último, todo el diseño visual de la aplicación está definido en un archivo CSS propio ubicado en la carpeta static. Este archivo se encarga de dar estilo a la pagina de dashboards, controlando aspectos como los colores, tamaños, márgenes o fuentes.
 
 \section{Discriminación de genero de usuarios}
 
@@ -884,7 +975,7 @@ El script \ref{lst:genero_estimado} utiliza las siguientes bibliotecas:
 \end{itemize}
 
 
-El script \ref{lst:genero_estimado} comienza conectándose a la base de datos PostgreSQL utilizando la biblioteca psycopg2. Luego, crea una nueva columna llamada gender en la tabla common\_user, pero solo la primera vez que se ejecuta, ya que en ejecuciones posteriores, este paso es omitido si la columna ya existe. A continuación, se extraen los usuarios cuyos géneros aún no están definidos, es decir, aquellos que tienen el valor NULL o unknown en el campo de género. Utilizando la biblioteca gender\_guesser, el script estima el género de los usuarios basándose en su primer nombre. Además, se asegura de corregir posibles errores relacionados con las mayúsculas o minúsculas en los nombres, capitalizando correctamente la primera letra del primer nombre para evitar errores de detección. Finalmente, actualiza la base de datos con los géneros estimados para estos usuarios. De este modo, el dato de género ahora está disponible para futuros análisis, permitiendo incorporar esta variable en los estudios de comportamiento de los usuarios.
+El script \ref{lst:genero_estimado} comienza conectándose a la base de datos PostgreSQL utilizando la biblioteca Psycopg2. Luego, crea una nueva columna llamada gender en la tabla common\_user, pero solo la primera vez que se ejecuta, ya que en ejecuciones posteriores, este paso es omitido si la columna ya existe. A continuación, se extraen los usuarios cuyos géneros aún no están definidos, es decir, aquellos que tienen el valor NULL o unknown en el campo de género. Utilizando la biblioteca gender\_guesser, el script estima el género de los usuarios basándose en su primer nombre. Además, se asegura de corregir posibles errores relacionados con las mayúsculas o minúsculas en los nombres, capitalizando correctamente la primera letra del primer nombre para evitar errores de detección. Finalmente, actualiza la base de datos con los géneros estimados para estos usuarios. De este modo, el dato de género ahora está disponible para futuros análisis, permitiendo incorporar esta variable en los estudios de comportamiento de los usuarios.
 
 
 
@@ -925,13 +1016,6 @@ La Tabla \ref{tbl:sql-tables} presenta las tablas SQL de las que se extrae la in
 
 \end{table}
 
-\begin{figure}[H]
-    \centering
-\includegraphics[height=0.65\textheight]{img/resumen_dashboards.png}
-    \caption{Resumen visual de los dashboards}
-    \label{fig:resumen_dashboards}
-\end{figure}
-
 
 
 \section{dashboard 1A}
@@ -964,7 +1048,7 @@ En otras palabras, si el usuario ha realizado varias sesiones o intentos en un m
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/1a.png}
+  \includegraphics[width=1.1\textwidth]{img/1a.png}
   \caption{Dash 1a.}\label{fig:1a}
 \end{figure}
 
@@ -972,7 +1056,7 @@ Desde el punto de vista del usuario, el usuario ve un dashboard y un cuadro de t
 
 El dashboard \ref{fig:1a} presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo Lollipop . Este tipo de visualización es una variación de un diagrama de barras, la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
 
-Elegí un gráfico del tipo Lollipop donde cada ejercicio aparece en función del tiempo total que el usuario le dedica, porque de esa manera es muy fácil ver de un vistazo en cuáles actividades pasa más tiempo. Al ordenar los ejercicios de mayor a menor duración, no estamos siguiendo el orden alfabético ni el listado original, sino que dejamos claro cuáles son realmente prioritarios para cada usuario. Esto hace que, nada más mirar el gráfico, se aprecie enseguida que, por ejemplo, el ejercicio “global\_navigation” ocupa la mayor parte de la sesión, mientras que el ejercicio “opticalflow\_teleop” apenas tiene unos minutos, sin necesidad de fijarse en cada número. De este modo, cuando hay varias tareas con duraciones muy distintas, facilita compararlas sin confusiones ni búsquedas innecesarias.
+Elegí un gráfico del tipo \textit{Lollipop} donde cada ejercicio aparece en función del tiempo total que el usuario le dedica, porque de esa manera es muy fácil ver de un vistazo en cuáles actividades pasa más tiempo. Al ordenar los ejercicios de mayor a menor duración, no estamos siguiendo el orden alfabético ni el listado original, sino que dejamos claro cuáles son realmente prioritarios para cada usuario. Esto hace que, nada más mirar el gráfico, se aprecie enseguida que, por ejemplo, el ejercicio “global\_navigation” ocupa la mayor parte de la sesión, mientras que el ejercicio “opticalflow\_teleop” apenas tiene unos minutos, sin necesidad de fijarse en cada número. De este modo, cuando hay varias tareas con duraciones muy distintas, facilita compararlas sin confusiones ni búsquedas innecesarias.
 
 Gracias a ello podemos obtener varias conclusiones:
 
@@ -1012,7 +1096,7 @@ A partir de la consulta \ref{lst:sql_duration_sessions_per_country} se genera un
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/1c.png}
+  \includegraphics[width=1.1\textwidth]{img/1c.png}
   \caption{Dash 1c.}\label{fig:1c}
 \end{figure}
 
@@ -1024,7 +1108,7 @@ Del análisis del mapa \ref{fig:1c}, se obtienen las siguientes conclusiones:
 
 \begin{itemize}
 
-  \item \textbf{Alta duración promedio en España:} Esto indica un uso intensivo y sesiones posiblemente más prolongadas en comparación con otros países, donde el uso puede ser más breve o esporádico.
+  \item \textbf{Alta duración promedio en España y Portugal:} Esto indica que, en países como España y Portugal, las sesiones tienden a ser más largas, lo que refleja un uso más intensivo de la plataforma. No significa necesariamente que haya más sesiones en esos países, sino que, en promedio, los usuarios pasan más tiempo en cada sesión en comparación con otros lugares, donde el uso puede ser más breve o intermitente.
 
   \item \textbf{Bajas duraciones promedio en ciertos países:} Podrían indicar una adopción más reciente, menor familiaridad con la plataforma o simplemente menos disponibilidad de tiempo por parte de los usuarios.
 
@@ -1058,7 +1142,7 @@ Una vez obtenidos los resultados, se cargan en un DataFrame de Pandas con el pai
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/2a.png}
+  \includegraphics[width=1.1\textwidth]{img/2a.png}
   \caption{Dash 2a.}\label{fig:2a}
 \end{figure}
 
@@ -1074,14 +1158,14 @@ Del análisis del mapa \ref{fig:2a}, se obtienen las siguientes conclusiones:
 
   \item \textbf{Diferencias geográficas claras:} Algunos continentes como África o Asia presentan en general un uso más bajo, salvo excepciones, lo que podría señalar oportunidades de expansión o barreras de adopción actuales.
 
-  \item \textbf{Utilidad para la gestión de Unibotics:} Este dashboard ayuda a visualizar en qué países la plataforma tiene mayor presencia, facilitando decisiones sobre campañas, traducción de contenidos o inversiones para mejorar el servicio. Además, señala qué zonas podrían beneficiarse más de nuevas colaboraciones educativas.
+  \item \textbf{Utilidad para la gestión de Unibotics:} Este dashboard permite identificar en qué países la plataforma tiene mayor presencia, lo que facilita la toma de decisiones estratégicas relacionadas con campañas, traducción de contenidos o inversiones para mejorar el servicio. También ayuda a detectar regiones con potencial para nuevas colaboraciones educativas. Por ejemplo, se observa un alto número de sesiones en Rumanía, lo cual podría ser una oportunidad para contactar con el equipo de gestión de Unibotics en ese país, entender cómo están trabajando allí y comparar el rendimiento de los usuarios con el de España. Este análisis comparativo puede proporcionar información valiosa para implementar mejoras en ambas regiones.
   
 \end{itemize}
 
 
 \section{dashboard 2C}
 
-Este dashboard muestra la evolución mensual del número de sesiones iniciadas en Unibotics a lo largo del año 2024, diferenciando también entre usuarios masculinos y femeninos. El objetivo es analizar cómo varía el uso de la plataforma mes a mes y si existen diferencias significativas por género.
+Este dashboard muestra la evolución mensual del número de sesiones iniciadas en Unibotics a lo largo del año, para ello tiene un desplegable que actualiza el dashboard en función del año seleccionado, diferenciando también entre usuarios masculinos y femeninos. El objetivo es analizar cómo varía el uso de la plataforma mes a mes y si existen diferencias significativas por género.
 
 Los datos provienen de las tablas log\_session y common\_user,la consulta SQL \ref{lst:sql_monthly_sessions_gender_2024} realiza una agregación mensual,teniendo en cuenta: el total de sesiones iniciadas en cada mes,el número de sesiones realizadas por usuarias (género femenino)y el número de sesiones realizadas por usuarios (género masculino).
 
@@ -1096,7 +1180,7 @@ COUNT(CASE WHEN u.gender = 'F' THEN 1 END) AS female_sessions,
 COUNT(CASE WHEN u.gender = 'M' THEN 1 END) AS male_sessions
 FROM public.log_session s
 JOIN public.common_user u ON s.username = u.username
-WHERE EXTRACT(YEAR FROM s.start_date) = 2024
+WHERE EXTRACT(YEAR FROM s.start_date) = %s
 GROUP BY month
 ORDER BY month;
     \end{minted}
@@ -1107,11 +1191,11 @@ Una vez extraídos, los datos se procesan en Pandas para asegurarse de que los m
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/2c.png}
+  \includegraphics[width=1.1\textwidth]{img/2c.png}
   \caption{Dash 2c.}\label{fig:2c}
 \end{figure}
 
-El dashboard \ref{fig:2c} utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año. Se incluyen tres líneas:
+El dashboard \ref{fig:2c} utiliza un gráfico de líneas para representar la evolución de las sesiones durante el año seleccionado. Se incluyen tres líneas:
 
 \begin{itemize}
   \item Total de sesiones (en azul).
@@ -1120,11 +1204,24 @@ El dashboard \ref{fig:2c} utiliza un gráfico de líneas para representar la evo
 \end{itemize}
 
 
-Cada punto en el gráfico representa el número de sesiones registradas en ese mes para cada categoría.
+Cada punto en el gráfico representa el número de sesiones registradas en ese mes para cada grupo.
 
 Escogí un gráfico de líneas con tres trazos (total de sesiones, sesiones femeninas y sesiones masculinas) porque así se puede ver mes a mes cómo crece o baja cada grupo al mismo tiempo. Al dibujar una línea distinta para mujeres y hombres, junto con la del total, es muy sencillo notar si, por ejemplo, en junio ambos géneros suben de forma paralela o si en octubre ellas repuntan mientras ellos se mantienen estables. Además, los colores ayudan a identificar rápidamente picos o caídas en cada categoría sin tener que mirar varios gráficos por separado, de modo que se aprecia de inmediato cómo se comporta la plataforma a lo largo de 2024.
 
-Explicar conclusiones porque de aqui mas alla de que en verano nadie hace nada no se que mas decir.
+\begin{itemize}
+
+  \item \textbf{Más actividad en otoño:} A partir de septiembre se nota un aumento claro en las sesiones, llegando al punto más alto en otoño. Es lógico, ya que coincide con el inicio del curso académico y mucha gente vuelve a conectarse y retomar actividades.
+
+  \item \textbf{Bajada en verano:} En verano, sobre todo en agosto, la actividad cae bastante. Prácticamente nadie se conecta al ser vacaciones. Es algo a tener en cuenta al planificar campañas o recursos.
+
+  \item \textbf{Inicio de año tranquilo:} De enero a junio, el uso de la plataforma se mantiene bastante estable, sin grandes subidas ni bajadas. Es un periodo con ritmo más pausado, pero constante.
+
+  \item \textbf{Más sesiones de chicos que de chicas:} Durante todo el año, se registran más sesiones masculinas que femeninas. Esto podría dar pie a pensar en cómo animar a más chicas a usar la plataforma.
+
+  \item \textbf{Utilidad para la gestión de Unibotics:} Conocer estos patrones ayuda a tomar mejores decisiones: cuándo lanzar campañas, en qué meses reforzar el soporte o cómo organizar colaboraciones educativas para que tengan más impacto.
+
+\end{itemize}
+
 
 
 \section{dashboard 3A}
@@ -1150,7 +1247,7 @@ Después de obtener los datos, se aplica una transformación logarítmica al val
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3a.png}
+  \includegraphics[width=1.1\textwidth]{img/3a.png}
   \caption{Dash 3a.}\label{fig:3a}
 \end{figure}
 
@@ -1199,16 +1296,19 @@ Una vez extraídos los datos, se calcula el logaritmo de la duración total para
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3bb.png}
+  \includegraphics[width=1.1\textwidth]{img/3bb.png}
   \caption{Dash 3b.}\label{fig:3b}
 \end{figure}
 
 En este dashboard \ref{fig:3b} cada ejercicio se representa en el eje horizontal, mientras que en el eje vertical se muestra el logaritmo del tiempo total invertido por los usuarios. Para cada ejercicio, el boxplot muestra:
 
-La mediana de las duraciones (línea central del rectángulo).
-El rango intercuartílico (el ancho de la caja), que representa la mayoría de los usuarios.
-Los valores extremos o atípicos (puntos dispersos fuera de la caja).
+\begin{itemize}
 
+ \item La mediana de las duraciones (línea central del rectángulo).
+ \item El rango intercuartílico (el ancho de la caja), que representa la mayoría de los usuarios.
+ \item Los valores extremos o atípicos (puntos dispersos fuera de la caja).
+  
+\end{itemize}
 Gracias a este tipo de gráfico es posible visualizar de forma clara cómo varía la dedicación de los usuarios en cada ejercicio, y detectar si hay muchos usuarios que dedican tiempos muy distintos o si la mayoría se concentra en valores similares. Además, se muestran todos los puntos individuales sobre los diagramas, lo que permite ver mejor la dispersión real de los datos.
 
 Este dashboard permite comparar rápidamente el comportamiento de los usuarios en cada ejercicio. A partir de los datos, se pueden destacar los siguientes puntos importantes:
@@ -1246,7 +1346,7 @@ ORDER BY exercise;
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth, keepaspectratio]{img/3c.png}
+  \includegraphics[width=1.1\textwidth]{img/3c.png}
   \caption{Dash 3c.}\label{fig:3c}
 \end{figure}
 

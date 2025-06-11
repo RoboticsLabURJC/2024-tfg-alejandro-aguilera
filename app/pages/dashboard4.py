@@ -49,7 +49,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 2C: Sesiones por Mes", className="title-large"),
+        html.H1("Sesiones por Mes", className="title-large"),
 
         dcc.Dropdown(
             id="year-selector",
@@ -104,13 +104,31 @@ def init_dashboard(server):
         ))
 
         fig.update_layout(
-            title=f"Número de Sesiones por Mes en {selected_year}",
-            xaxis_title="Mes",
-            yaxis_title="Número de Sesiones",
+            title=dict(
+                text=f"Número de Sesiones por Mes en {selected_year}",
+                font=dict(size=24)
+            ),
+            xaxis=dict(
+                title=dict(
+                    text="Mes",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16)
+            ),
+            yaxis=dict(
+                title=dict(
+                    text="Número de Sesiones",
+                    font=dict(size=20)
+                ),
+                tickfont=dict(size=16)
+            ),
+            legend=dict(
+                font=dict(size=14)
+            ),
             plot_bgcolor="white",
             autosize=True,
             height=800,
-            margin=dict(l=0, r=0, t=30, b=0)
+            margin=dict(l=60, r=40, t=60, b=60)
         )
 
         return fig
