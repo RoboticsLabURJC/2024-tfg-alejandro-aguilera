@@ -25,8 +25,8 @@ description: "Seguimiento y documentación del proyecto 2024-TFG. RoboticsLab UR
 Este Trabajo de Fin de Grado consiste en crear una herramienta que permita extraer, analizar y visualizar los registros que contienen información sobre la actividad y el comportamiento de los usuarios en la plataforma.
 
 ## Estado actual
-- **Última revision de Felipe:**03-06-2025   
-- **Progreso más reciente:**06-06-2025   
+- **Última revision de Felipe:**10-06-2025   
+- **Progreso más reciente:**12-06-2025   
 - **Tareas pendientes:** [Leer](progreso/tareaspendientes.md) 
 
 ## Entradas de progreso
@@ -40,6 +40,7 @@ Los avances diarios/semanales están en `docs/progreso/`.
 | 31-05-2025 | Cambios punto 3 de la memoria  | [Leer](progreso/2025-05-31.md) |
 | 02-06-2025 | Cambios Apendice A | [Leer](progreso/2025-06-02.md) |
 | 06-06-2025 | Cambios en muchos lados | [Leer](progreso/2025-06-06.md) |
+| 12-06-2025 | Memoria casi terminada | [Leer](progreso/2025-06-12.md) |
 
 ## Documentación y recursos
 - **Memoria completa (PDF):** [memoria/memoria.pdf](memoria/memoria.pdf)  
