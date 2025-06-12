@@ -1,4 +1,3 @@
-
 title: TFG Alejandro Aguilera (Weblog)
 description: Documentación del TFG en la URJC
 minimal_mistakes_skin: air
@@ -51,3 +50,17 @@ defaults:
     values:
       layout: single
       author_profile: true
+
+# ✅ Añadir navegación personalizada (menú superior)
+navigation:
+  - title: "Inicio"
+    url: /
+  - title: "Gráfica 1"
+    url: /grafica1/
+  - title: "Posts"
+    url: /year-archive/
+  - title: "Categorías"
+    url: /categories/
+  - title: "Etiquetas"
+    url: /tags/
+
