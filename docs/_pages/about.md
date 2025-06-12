@@ -1,12 +1,13 @@
 ---
-title: Sobre mí
+title: "About Me"
 permalink: /about/
+author_profile: true
 ---
 
-<img src="/assets/images/bio-photo.jpg" width="150" style="border-radius:50%">
+<img src="/assets/images/perfil.jpg" width="150" style="border-radius:50%">
 
 **Alejandro Aguilera**  
-Estudiante del Grado en Ingeniería en la URJC.  
-Aquí relato el desarrollo y aprendizaje del TFG sobre patrones de uso en plataformas web robóticas.
+Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso.
 
 GitHub: [@aaguilera13](https://github.com/aaguilera13)
+
