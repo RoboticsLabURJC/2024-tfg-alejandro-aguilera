@@ -1,30 +1,57 @@
-title: "TFG Alejandro Aguilera"
-description: "Seguimiento del Trabajo de Fin de Grado en la URJC"
+title: TFG Alejandro Aguilera (Weblog)
+description: Documentación sobre el desarrollo del Trabajo de Fin de Grado
+minimal_mistakes_skin: air
+search: true
+
+markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: /page:num/
+
+include:
+  - _pages
+
 plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
   - jekyll-include-cache
 
 author:
-  name: "Alejandro Aguilera"
-  avatar: "/docs/logo.png"
-  bio: "Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso."
+  name   : "Alejandro Aguilera"
+  avatar : "/assets/images/bio-photo.jpg"
+  bio    : "Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso."
   location: "Madrid, España"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/TU_USUARIO"
 
-collections:
-  progreso:
-    output: true
-    permalink: /progreso/:name/
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/"
 
 defaults:
   - scope:
       path: ""
-      type: progreso
+      type: posts
     values:
       layout: single
-      author_profile: false
+      author_profile: true
       read_time: true
+      comments: true
+      share: true
+      related: true
 
-# 💥 Esto es lo que faltaba:
-include:
-  - _progreso
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
