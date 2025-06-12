@@ -1,0 +1,27 @@
+title: "TFG Alejandro Aguilera"
+description: "Blog de seguimiento del TFG en RoboticsLab URJC"
+remote_theme: mmistakes/minimal-mistakes
+plugins:
+  - jekyll-include-cache
+  - jekyll-feed
+
+author:
+  name: "Alejandro Aguilera"
+  avatar: "/docs/logo.png"
+  bio: "Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso."
+  location: "Madrid, España"
+
+collections:
+  progreso:
+    output: true
+    permalink: /progreso/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: progreso
+    values:
+      layout: single
+      author_profile: false
+      read_time: true
+
