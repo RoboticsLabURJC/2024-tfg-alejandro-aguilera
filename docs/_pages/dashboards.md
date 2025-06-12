@@ -1,7 +1,7 @@
 ---
 title: Visualización de Dashboards
 layout: single
-permalink: /dashboard/
+permalink: /dashboards/
 ---
 
 ## Gráfica 1: Ejercicios por Usuario
