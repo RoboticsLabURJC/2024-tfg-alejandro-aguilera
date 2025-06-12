@@ -1,7 +1,7 @@
 ---
-title: Visualización ejercicios (Carlosip)
+title: Visualización Gráfica 1
 layout: single
-permalink: /grafica-carlosip/
+permalink: /grafica1/
 ---
 
 <iframe src="{{ site.baseurl }}/assets/grafica1.html"
@@ -9,3 +9,4 @@ permalink: /grafica-carlosip/
         height="800px"
         frameborder="0">
 </iframe>
+
