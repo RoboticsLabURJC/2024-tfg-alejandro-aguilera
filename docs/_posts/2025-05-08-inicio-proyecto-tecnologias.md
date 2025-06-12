@@ -1,45 +1,60 @@
 ---
 title: "Inicio del proyecto y primeras tecnologías utilizadas"
 date: 2025-05-08
-categories: [Weblog]
-tags: [Python, Dash, PostgreSQL, Pandas, PyCharm]
+categories:
+  - Weblog
+tags:
+  - Python
+  - Dash
+  - PostgreSQL
+  - Unibotics
+  - PyCharm
+  - Objetivos
 ---
 
-Esta semana he comenzado oficialmente el desarrollo de mi TFG, centrado en el análisis de patrones de actividad de usuarios en una plataforma web de robótica.
+Inicio del proyecto con primeros avances en la redacción de objetivos y recopilación de tecnologías base.
 
 ## Tema 1: Introducción
 
+### Avances
+
 - Objetivo general redactado.
-- Objetivos específicos pendientes de revisión con el tutor.
-- Planificación y estructura aún por desarrollar.
+- Objetivos específicos pendientes (a la espera del tutor).
+- No iniciada aún la planificación.
+- Estructura del documento aún sin definir.
 
 ## Tema 2: Tecnologías utilizadas
 
-- Python
-- Dash
-- PyCharm
-- Pandas
-- PostgreSQL
-- Psycopg2
+- **Python**, **Dash**, **Pandas**, **Psycopg2**
+- IDE utilizado: **PyCharm**
+- Base de datos: **PostgreSQL**
 
 ## Tema 3: Arquitectura de Unibotics
 
-- Documentación base completada.
-- Apéndice A con diagramas e imágenes.
-- Pendiente: incluir ejemplos de código en LaTeX.
+- Documentada toda la arquitectura de Unibotics.
+- Explicada la base de datos y su funcionamiento.
+- Apéndice A creado con ejemplos.
+
+### Pendiente
+
+- Añadir ejemplos de código en LaTeX.
 
 ## Tema 4: Dash
 
-- Primeros dashboards listos.
-- Imágenes añadidas (algunas por ajustar).
-- Falta insertar SQL como código en LaTeX.
+- Descripción general de dashboards e imágenes insertadas.
 
-## Conclusiones
+### Pendiente
 
-Aún sin avances. Prioridad baja por ahora.
+- Ajustar tamaño de imágenes.
+- Aprender a incluir código SQL en LaTeX.
 
-### Próximos pasos:
+## Tema 5: Conclusiones
 
-1. Revisar planificación.
-2. Ajustar imágenes.
-3. Codificar ejemplos SQL en LaTeX.
+No iniciado.
+
+## Próximos pasos
+
+1. Esperar los objetivos de Felipe.  
+2. Revisar planificación y estructura.  
+3. Ajustar imágenes y código SQL.  
+4. Revisión con tutor.
