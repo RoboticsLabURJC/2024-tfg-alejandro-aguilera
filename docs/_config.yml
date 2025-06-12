@@ -7,7 +7,7 @@ plugins:
 
 author:
   name: "Alejandro Aguilera"
-  avatar: "/docs/logo.png"
+  avatar: "logo.png"
   bio: "Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso."
   location: "Madrid, España"
 
