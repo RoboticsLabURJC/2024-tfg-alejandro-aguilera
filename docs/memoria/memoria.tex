@@ -381,13 +381,15 @@ se inserta una dedicatoria corta \\}
 %\addcontentsline{toc}{chapter}{Agradecimientos} % si queremos que aparezca en el índice
 \markboth{AGRADECIMIENTOS}{AGRADECIMIENTOS} % encabezado 
 
-Aquí vienen los agradecimientos\ldots
+Lo primero, quiero dar las gracias a mis padres, por apoyarme incluso cuando no sabía ni qué quería estudiar, por tener paciencia conmigo y ayudarme en todo lo que fuese posible.
 
-Hay más espacio para explayarse y explicar a quién agradeces su apoyo o ayuda para
-haber acabado el proyecto: familia, pareja, amigos, compañeros de clase\ldots
+A mis amigos de siempre, Corox, Héctor, Luis, los dos Migueles, Guille y Manu. Gracias por estar ahí, por las risas de siempre y por esos planes de última hora que ayudaban a desconectar cuando la universidad se hacía cuesta arriba.
 
-También hay quien, en algunos casos, hasta agradecer a su tutor o tutores del proyecto
-la ayuda prestada\ldots
+A mi amigo Daniel, que aunque ahora vive en Argentina, todo sigue como si siguiera aquí. Gracias por estar, por ayudarme y apoyarme, sin importar la distancia.
+
+A mis compañeros de carrera, con los que he compartido gran parte de mi tiempo estos últimos cinco años. En especial a Miguel e Iván, que han pasado de ser compañeros a ser amigos de verdad.
+
+Y por último, gracias a Felipe, mi tutor, por darme la oportunidad de hacer este trabajo, por guiarme durante todo el proceso, resolver mis dudas y estar siempre dispuesto a ayudar. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen
@@ -1385,31 +1387,55 @@ Para eso, en Linux tenemos aspell, que se ejecuta de la siguiente manera desde l
 \section{Aplicación de lo aprendido}
 \label{sec:aplicacion}
 
-Aquí viene lo que has aprendido durante el Grado/Máster y que has aplicado en el TFG/TFM. Una buena idea es poner las asignaturas más relacionadas y comentar en un párrafo los conocimientos y habilidades puestos en práctica.
+En el grado en Ingeniería en Tecnologías de Telecomunicación se tocan muchas ramas distintas: electrónica, señales, redes, antenas, programación, entre muchas otras. Sin embargo, para el desarrollo de este trabajo, las asignaturas que más me han servido son aquellas orientadas a la programación, al desarrollo de software y a la gestión de datos. Durante la creación de la herramienta he podido aplicar gran parte de lo aprendido a lo largo de estos años, donde quiero destacar especialmente las siguientes asignaturas:
 
 \begin{enumerate}
-  \item a
-  \item b
+  
+    \item \textbf{Fundamentos de la Programación.} Fue mi primera toma de contacto con la programación y donde, poco a poco, le fui cogiendo el gusto. Sentó las bases que me han acompañado durante toda la carrera.
+
+    \item \textbf{Programación de Sistemas de Telecomunicación.} Supuso un paso más en dificultad, con desarrollos más complejos que me obligaron a pensar de forma más estructurada. Aquí empecé a enfrentarme a retos reales de programación.
+
+    \item \textbf{Desarrollo de Aplicaciones Telemáticas.} Aprendí muchos conceptos útiles relacionados con HTML, CSS y el desarrollo de interfaces. Fue clave para entender cómo se construyen las capas visuales y cómo interactúan con la lógica del servidor.
+
+    \item \textbf{Servicios y Aplicaciones Telemáticas.} Esta fue, sin duda, la asignatura más crucial para este TFG. Aprendí a trabajar con Python y Django, a estructurar un proyecto completo, a usar bases de datos, a hacer peticiones HTTP, y en general, a construir algo que se parece mucho a una aplicación real. 
+
+    \item \textbf{Ingeniería de Sistemas de Información.} Aquí aprendí casi todo lo que sé sobre bases de datos, desde su diseño hasta cómo manejarlas correctamente. Ha sido fundamental para entender y extraer los datos de la base de datos de Unibotics.
+
+    \item \textbf{Ingeniería de Sistemas Telemáticos.} Además de reforzar conocimientos de programación orientada a objetos con Java, esta asignatura me enseñó algo muy importante: cómo buscar documentación y soluciones por mi cuenta para resolver problemas de programación.
+
+    \item \textbf{Sistemas Operativos.} Me permitió profundizar aún más en programación y en el uso de herramientas del sistema operativo. Aprendí, por ejemplo, a usar Docker, lo cual ha sido crucial en este proyecto.
+
+    \item \textbf{Estadística y Control de Calidad.} Me ayudó a entender cómo interpretar correctamente los datos y cómo representarlos de forma clara y útil.
+
 \end{enumerate}
 
 
 \section{Lecciones aprendidas}
 \label{sec:lecciones_aprendidas}
 
-Aquí viene lo que has aprendido en el Trabajo Fin de Grado/Máster.
+Aunque durante el desarrollo del proyecto he podido aplicar muchos conocimientos adquiridos a lo largo de la carrera, también me he encontrado con situaciones nuevas que me han obligado a aprender por el camino. Gracias a eso, he podido adquirir nuevas habilidades y enfrentarme a retos que antes no sabía cómo resolver. A continuación, resumo algunas de las cosas nuevas que he aprendido durante este trabajo:
 
 \begin{enumerate}
-  \item Aquí viene uno.
-  \item Aquí viene otro.
+    \item Mejora de mis conocimientos sobre bases de datos.
+    \item Aprendizaje y uso de la biblioteca Dash para la creación de visualizaciones interactivas.
+    \item Comprensión de cómo representar datos de forma adecuada según el contexto.
+    \item Desarrollo de habilidades en análisis gráfico para interpretar correctamente los datos y entender qué significan.
+    \item Aprendizaje de programación en LaTeX.
+    \item Mejora en el seguimiento y planificación de proyectos.
+    \item Refuerzo y mejora de mis habilidades programando en Python.
 \end{enumerate}
 
 
 \section{Trabajos futuros}
 \label{sec:trabajos_futuros}
 
-Ningún proyecto ni software se termina, así que aquí vienen ideas y funcionalidades que estaría bien tener implementadas en el futuro.
+Aunque este proyecto ha llegado a su fin en esta etapa, hay muchas líneas de desarrollo y mejora que pueden abordarse en el futuro para seguir ampliando las funcionalidades y el valor de la plataforma.
 
-Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
+Actualmente, el trabajo ha concluido con la integración de varios dashboards mediante Flask, como solución temporal debido a un bug en la plataforma de Unibotics que impide incrustar correctamente las gráficas desarrolladas con Dash. Uno de los objetivos prioritarios a futuro será, una vez la administración de Unibotics resuelva ese error, integrar de forma nativa estos dashboards con Dash en la propia plataforma, lo mejorara la integración visual y funcional del sistema.
+
+Además, este trabajo se ha desarrollado con los datos disponibles en el momento, pero la plataforma está en constante crecimiento. A medida que se incremente la actividad de los usuarios, y con ella el volumen de información almacenada, será posible generar estadísticas mucho más completas y variadas. Contar con más datos permitirá hacer análisis más precisos, identificar tendencias y estudiar el comportamiento de los usuarios en mayor profundidad.
+
+También es importante tener en cuenta que, con el tiempo, podrían añadirse nuevas variables a la base de datos, lo cual abriría la puerta a explorar nuevos indicadores y tipos de análisis. Por ejemplo, se podrían estudiar patrones de uso, evolución del rendimiento de los usuarios, o realizar comparaciones entre distintos periodos o grupos.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
