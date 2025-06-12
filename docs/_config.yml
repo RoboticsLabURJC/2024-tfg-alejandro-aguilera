@@ -33,6 +33,8 @@ footer:
 
 include:
   - _pages
+  - assets/css
+
 
 defaults:
   - scope:
