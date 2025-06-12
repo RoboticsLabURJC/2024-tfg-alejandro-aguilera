@@ -11,14 +11,14 @@ Esta gráfica muestra cuánto tiempo ha dedicado un usuario a cada ejercicio. Es
 
 ---
 
-## Gráfica 2: Distribución temporal
-Aquí se observa cómo varía la actividad del usuario a lo largo del tiempo. Ayuda a identificar patrones semanales o mensuales.
+## Gráfica 2: Duración promedio de sesión por pais
+texto.
 
-<iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica2.html" width="100%" height="600px" frameborder="0"></iframe>
 
 ---
 
-## Gráfica 3: Rendimiento por tipo de ejercicio
+## Gráfica 3: Duración total de sesiones por pais
 Este gráfico compara el rendimiento del usuario según distintas categorías de ejercicios, como percepción o coordinación.
 
 <iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="600px" frameborder="0"></iframe>
