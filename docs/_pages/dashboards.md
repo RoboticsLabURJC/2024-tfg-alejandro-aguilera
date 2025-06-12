@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 ## Gráfica 1: Ejercicios por Usuario
-El dashboard **1A** permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
+Este dashboard permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
 
 Para obtener esta información, el dashboard se conecta directamente a la base de datos **PostgreSQL** de *Unibotics*. Una vez establecida la conexión, la aplicación **Dash** ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el cuadro de texto.
 
@@ -42,7 +42,30 @@ Esto permite observar, por ejemplo, que el ejercicio `global_navigation` ocupa l
 ---
 
 ## Gráfica 2: Duración promedio de sesión por pais
-texto.
+
+Este dashboard tiene como objetivo mostrar la duración promedio de las sesiones de los usuarios de **Unibotics**, agrupadas por país. A través de un mapa mundial interactivo, se representa gráficamente qué países presentan una mayor o menor media de tiempo por sesión, permitiendo identificar patrones geográficos en el uso de la plataforma.
+
+La información utilizada en este dashboard se obtiene desde la tabla `log_session`. La consulta SQL utilizada agrupa los datos por país, calcula la suma total de duración y el número total de sesiones por país. Posteriormente, se calcula en Python la duración promedio dividiendo ambos valores. La consulta es la siguiente:
+
+`SELECT country, SUM(duration) AS total_duration, COUNT(*) AS session_count FROM public.log_session WHERE country IS NOT NULL AND duration > 0 GROUP BY country HAVING COUNT(*) > 0 ORDER BY total_duration DESC;`
+
+A partir de esta consulta se genera un **DataFrame de Pandas** con el país y su respectiva duración promedio de sesión, que luego se utiliza para crear la visualización correspondiente. Este cálculo permite representar una métrica más equilibrada que la duración total y proporciona una mejor medida de cómo interactúan los usuarios con la plataforma en promedio.
+
+El dashboard utiliza un **mapa coroplético**, generado mediante *Plotly Express*, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. Se utiliza una **paleta de colores continua personalizada**, diseñada para resaltar visualmente los valores extremos (puedes definir si prefieres, por ejemplo, `Viridis`, `Plasma`, `Turbo`, etc.).
+
+Se eligió un mapa coroplético porque este tipo de visualización muestra de forma muy clara cómo se distribuye la duración total de sesiones a lo largo del mundo. Al asignar un color a cada país según su valor de duración, se puede identificar al instante qué regiones concentran más actividad y cuáles menos, sin necesidad de leer tablas o listas. El degradado de colores refuerza la percepción de diferencias entre países y también facilita ver patrones globales.
+
+## Conclusiones
+
+- **Alta duración promedio en España y Portugal:**  
+  Esto indica que, en países como España y Portugal, las sesiones tienden a ser más largas, lo que refleja un uso más intensivo de la plataforma. No significa necesariamente que haya más sesiones en esos países, sino que, en promedio, los usuarios pasan más tiempo en cada sesión en comparación con otros lugares, donde el uso puede ser más breve o intermitente.
+
+- **Bajas duraciones promedio en ciertos países:**  
+  Podrían indicar una adopción más reciente, menor familiaridad con la plataforma o simplemente menos disponibilidad de tiempo por parte de los usuarios.
+
+- **Utilidad para la administración de Unibotics:**  
+  El dashboard permite identificar mercados con mayor impacto y uso sostenido, facilitando decisiones sobre soporte, localización de contenidos y planes de expansión, al tiempo que señala aquellas regiones donde el uso es bajo, lo que puede inspirar estrategias específicas de difusión, colaboración educativa o mejoras en el acceso a la plataforma.
+
 
 <iframe src="{{ site.baseurl }}/assets/grafica2.html" width="100%" height="600px" frameborder="0"></iframe>
 
