@@ -13,11 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: TFG 2024 Félix Martínez (Weblog)
-email: felixmaral131@gmail.com
+title: TFG 2024 Alejandro Aguilera (Weblog)
+email: aa.aguilerlopez@gmail.com
 description: Documentación sobre el desarrollo de Trabajo de Fin de Grado
 #twitter_username: username
-github_username: felixmaral
+github_username: aaguilera13
 minimal_mistakes_skin: air
 search: true
 
