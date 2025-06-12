@@ -1,6 +1,12 @@
 ---
+title: Sobre mí
 permalink: /about/
-title: "About Me"
 ---
 
-Soy Alejandro, estudiante de Ingeniería de Telecomunicaciones en la Universidad Rey Juan Carlos.
+<img src="/assets/images/bio-photo.jpg" width="150" style="border-radius:50%">
+
+**Alejandro Aguilera**  
+Estudiante del Grado en Ingeniería en la URJC.  
+Aquí relato el desarrollo y aprendizaje del TFG sobre patrones de uso en plataformas web robóticas.
+
+GitHub: [@aaguilera13](https://github.com/aaguilera13)
