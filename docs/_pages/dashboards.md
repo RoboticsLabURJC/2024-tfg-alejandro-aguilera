@@ -207,7 +207,7 @@ Este dashboard permite **comparar rápidamente el comportamiento de los usuarios
 - **Orientación para diseñadores de contenidos:**  
   Facilita evaluar si los ejercicios generan el trabajo esperado o si convendría añadir ayudas o dividir las actividades en partes más manejables.
 
-<iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica6.html" width="100%" height="600px" frameborder="0"></iframe>
 
 ---
 
@@ -234,5 +234,5 @@ Esta representación es útil para entender mejor el comportamiento real de los 
 Este dashboard aporta información complementaria a la que ofrece el 3B y permite a docentes y diseñadores tomar decisiones más precisas en relación con la estructura de los ejercicios y la experiencia de usuario en la plataforma.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica7.html" width="100%" height="600px" frameborder="0"></iframe>
 
