@@ -2,6 +2,7 @@
 title: Visualización de Dashboards
 layout: single
 permalink: /dashboards/
+author_profile: true
 ---
 
 ## Gráfica 1: Ejercicios por Usuario
