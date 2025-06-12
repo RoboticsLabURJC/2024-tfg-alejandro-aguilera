@@ -1,14 +1,13 @@
 title: "TFG Alejandro Aguilera"
-description: "Blog de seguimiento del TFG en RoboticsLab URJC"
+description: "Seguimiento del Trabajo de Fin de Grado en la URJC"
 remote_theme: mmistakes/minimal-mistakes
 plugins:
   - jekyll-include-cache
-  - jekyll-feed
 
 author:
   name: "Alejandro Aguilera"
-  avatar: "logo.png"
-  bio: "Estudiante de la URJC trabajando en un TFG sobre análisis de patrones de uso."
+  avatar: "/docs/logo.png"
+  bio: "Estudiante de Ingeniería de la URJC"
   location: "Madrid, España"
 
 collections:
