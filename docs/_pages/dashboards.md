@@ -37,7 +37,7 @@ Esto permite observar, por ejemplo, que el ejercicio `global_navigation` ocupa l
 - **Distribución del tiempo de aprendizaje:**  
   El conjunto de todas las duraciones permite ver cómo el usuario ha distribuido su tiempo en la plataforma. Un perfil equilibrado mostraría duraciones similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios dominando la mayor parte del tiempo total.
 
-<iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica1.html" width="100%" height="900px" frameborder="0"></iframe>
 
 ---
 
@@ -67,7 +67,7 @@ Se eligió un mapa coroplético porque este tipo de visualización muestra de fo
   El dashboard permite identificar mercados con mayor impacto y uso sostenido, facilitando decisiones sobre soporte, localización de contenidos y planes de expansión, al tiempo que señala aquellas regiones donde el uso es bajo, lo que puede inspirar estrategias específicas de difusión, colaboración educativa o mejoras en el acceso a la plataforma.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica2.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica2.html" width="100%" height="900px" frameborder="0"></iframe>
 
 ---
 
@@ -98,7 +98,7 @@ Se eligió un mapa coroplético porque, al igual que en el caso del dashboard 1C
   Este dashboard permite identificar en qué países la plataforma tiene mayor presencia, lo que facilita la toma de decisiones estratégicas relacionadas con campañas, traducción de contenidos o inversiones para mejorar el servicio. También ayuda a detectar regiones con potencial para nuevas colaboraciones educativas. Por ejemplo, se observa un alto número de sesiones en Rumanía, lo cual podría ser una oportunidad para contactar con el equipo de gestión de Unibotics en ese país, entender cómo están trabajando allí y comparar el rendimiento de los usuarios con el de España. Este análisis comparativo puede proporcionar información valiosa para implementar mejoras en ambas regiones.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica3.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica3.html" width="100%" height="900px" frameborder="0"></iframe>
 
 ---
 
@@ -133,7 +133,7 @@ Se eligió un gráfico de líneas con tres trazos (total, mujeres y hombres) por
   Conocer estos patrones temporales y de género permite tomar decisiones más informadas, como cuándo lanzar campañas, en qué meses reforzar el soporte técnico o cómo organizar colaboraciones educativas para maximizar su impacto.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica4.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica4.html" width="100%" height="900px" frameborder="0"></iframe>
 
 ---
 
@@ -169,7 +169,7 @@ Este análisis permite detectar de un vistazo si la mayoría de los usuarios se 
   Facilita detectar si el ejercicio está bien equilibrado en cuanto a dificultad, o si sería necesario hacer ajustes para mejorar la experiencia de aprendizaje.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica5.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica5.html" width="100%" height="900px" frameborder="0"></iframe>
 
 ---
 
@@ -207,7 +207,8 @@ Este dashboard permite **comparar rápidamente el comportamiento de los usuarios
 - **Orientación para diseñadores de contenidos:**  
   Facilita evaluar si los ejercicios generan el trabajo esperado o si convendría añadir ayudas o dividir las actividades en partes más manejables.
 
-<iframe src="{{ site.baseurl }}/assets/grafica6.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica6.html" width="100%" height="900px" frameborder="0"></iframe>
+
 
 ---
 
@@ -234,5 +235,5 @@ Esta representación es útil para entender mejor el comportamiento real de los 
 Este dashboard aporta información complementaria a la que ofrece el 3B y permite a docentes y diseñadores tomar decisiones más precisas en relación con la estructura de los ejercicios y la experiencia de usuario en la plataforma.
 
 
-<iframe src="{{ site.baseurl }}/assets/grafica7.html" width="100%" height="600px" frameborder="0"></iframe>
+<iframe src="{{ site.baseurl }}/assets/grafica7.html" width="100%" height="900px" frameborder="0"></iframe>
 
