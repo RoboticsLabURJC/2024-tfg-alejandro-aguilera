@@ -1372,17 +1372,22 @@ Esta representación es útil para entender mejor el comportamiento real dentro 
 \section{Consecución de objetivos}
 \label{sec:consecucion-objetivos}
 
-Esta sección es la sección espejo de las dos primeras del capítulo de objetivos, donde se planteaba el objetivo general y se elaboraban los específicos.
+\section{Consecución de objetivos}
 
-Es aquí donde hay que debatir qué se ha conseguido y qué no. 
-Cuando algo no se ha conseguido, se ha de justificar, en términos de qué problemas se han encontrado y qué medidas se han tomado para mitigar esos problemas.
+A lo largo del desarrollo de este Trabajo Fin de Grado, se han ido cumpliendo de forma progresiva y satisfactoria los objetivos que se plantearon al inicio. El objetivo principal, que consistía en crear una herramienta capaz de extraer, analizar y visualizar los registros de actividad de los usuarios en la plataforma Unibotics, se ha alcanzado plenamente, consolidando así el trabajo realizado a lo largo del proyecto.
 
-Y si has llegado hasta aquí, siempre es bueno pasarle el corrector ortográfico, que las erratas quedan fatal en la memoria final.
-Para eso, en Linux tenemos aspell, que se ejecuta de la siguiente manera desde la línea de \emph{shell}:
+En cuanto a los objetivos específicos:
 
-\begin{minted}{bash}
-  aspell --lang=es_ES -c memoria.tex
-\end{minted}
+\begin{itemize}
+    \item \textbf{Extracción de datos:} Se ha logrado una recopilación estructurada y precisa de la información almacenada en la base de datos de Unibotics. Se utilizaron consultas SQL optimizadas para obtener los datos relevantes de las diferentes tablas, asegurando su calidad y consistencia para el posterior análisis. Gracias a este proceso, ahora es posible aprovechar de forma más clara y ordenada toda la información histórica que recoge la plataforma..
+    
+    \item \textbf{Análisis de estadísticas básicas:} Se han calculado métricas fundamentales como el número de sesiones por usuario, la duración de uso por ejercicio y la frecuencia de acceso. Estos datos han permitido identificar patrones generales de comportamiento dentro de la plataforma, facilitando la comprensión del uso que hacen los usuarios con la plataforma. Además, este análisis ha ayudado a ver formas en las que se podría mejorar la plataforma o hacer que la experiencia de aprendizaje puedar ser más personalizada para cada usuario.
+    
+    \item \textbf{Representación gráfica de la información:} Se han creado varios dashboards interactivos usando Dash y Plotly, todos integrados en una aplicación web sencilla mediante Flask. Estas visualizaciones permiten ver de forma clara y rápida cómo están usando la plataforma los usuarios, lo que resulta útil tanto para profesores como para administradores de Unibotics o diseñadores de ejercicios que quieran orientar nuevos proyectos. Además, se ha puesto atención en que todo se vea bien y sea fácil de usar, para que cualquier persona pueda moverse por la aplicación sin complicaciones.
+
+\end{itemize}
+
+Además, se ha implementado un sistema para estimar el género de los usuarios, lo cual ha permitido incluir análisis desagregados por sexo, aportando una variable adicional al estudio del comportamiento.
 
 \section{Aplicación de lo aprendido}
 \label{sec:aplicacion}
