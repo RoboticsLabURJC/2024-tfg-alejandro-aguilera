@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación</title>
+    <title>Trabajo de fin de grado</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -15,7 +15,7 @@
                     <a href="{{ url_for('index') }}">Dashboard</a>
                 </li>
                 <li {% if active_page == 'documentacion' %}class="active"{% endif %}>
-                    <a href="{{ url_for('documentacion') }}">Documentación</a>
+                    <a href="{{ url_for('documentacion') }}">Trabajo de fin de grado</a>
                 </li>
                 <li>
                     <a href="https://unibotics.org" target="_blank">UNIBOTICS</a>

@@ -15,7 +15,7 @@
                         <a href="{{ url_for('index') }}">Dashboard</a>
                     </li>
                     <li {% if active_page == 'documentacion' %}class="active"{% endif %}>
-                        <a href="{{ url_for('documentacion') }}">Documentación</a>
+                        <a href="{{ url_for('documentacion') }}">Trabajo de fin de grado</a>
                     </li>
                     <li>
                         <a href="https://unibotics.org" target="_blank">Unibotics</a>
@@ -30,31 +30,31 @@
                 <div class="dashboard-grid">
                     <a href="/1a/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard1.png') }}" alt="Dashboard 1A">
-                        <span>Dashboard 1A</span>
+                        <span>Duración de cada ejercicio por usuario</span>
                     </a>
                     <a href="/1c/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard2.png') }}" alt="Dashboard 1C">
-                        <span>Dashboard 1C</span>
+                        <span>Distribución geográfica de la duración promedio de sesiones</span>
                     </a>
                     <a href="/2a/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard3.png') }}" alt="Dashboard 2A">
-                        <span>Dashboard 2A</span>
+                        <span>Distribución geográfica de la duración total (acumulada) de sesiones</span>
                     </a>
                     <a href="/2c/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard4.png') }}" alt="Dashboard 2C">
-                        <span>Dashboard 2C</span>
+                        <span>Evolución temporal del número total de sesiones</span>
                     </a>
                     <a href="/3a/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard5.png') }}" alt="Dashboard 3A">
-                        <span>Dashboard 3A</span>
+                        <span>Distribución de frecuencia de usuarios con similar duración total por ejercicio</span>
                     </a>
                     <a href="/3b/" class="dashboard-card">
                         <img src="{{ url_for('static', filename='../static/dashboard6.png') }}" alt="Dashboard 3B">
-                        <span>Dashboard 3B</span>
+                        <span>Distribución del tiempo invertido por usuario en cada ejercicio</span>
                     </a>
                     <a href="/3c/" class="dashboard-card center-last">
                         <img src="{{ url_for('static', filename='../static/dashboard7.png') }}" alt="Dashboard 3C">
-                        <span>Dashboard 3C</span>
+                        <span>Distribución del tiempo de sesión por usuario en cada ejercicio</span>
                     </a>
                 </div>
             </main>
