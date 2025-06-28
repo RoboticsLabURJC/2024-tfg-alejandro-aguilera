@@ -49,7 +49,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Sesiones por Mes", className="title-large"),
+        html.H1("Evolución temporal del número total de sesiones", className="title-large"),
 
         dcc.Dropdown(
             id="year-selector",

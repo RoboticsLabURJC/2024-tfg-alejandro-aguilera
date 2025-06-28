@@ -41,7 +41,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Boxplot por Ejercicio", className="title-large"),
+        html.H1("Distribución del tiempo invertido por usuario en cada ejercicio", className="title-large"),
 
         dcc.Graph(id="boxplot-all-exercises", className="graph-boxplot"),
 

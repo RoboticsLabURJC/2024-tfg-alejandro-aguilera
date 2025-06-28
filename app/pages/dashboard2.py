@@ -43,7 +43,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Dashboard 1C: Mapa de Duración Promedio de Sesión por País", className="title-large"),
+        html.H1("Distribución geográfica de la duración promedio de sesiones", className="title-large"),
 
         dcc.Graph(id="world-map", className="graph-map"),
 

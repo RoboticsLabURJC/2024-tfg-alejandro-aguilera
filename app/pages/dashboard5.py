@@ -65,7 +65,7 @@ def init_dashboard(server):
     exercise_options = [{"label": ex, "value": ex} for ex in get_exercise_list()]
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Frecuencia de Usuarios por Duración", className="title-large"),
+        html.H1("Distribución de frecuencia de usuarios con similar duración total por ejercicio", className="title-large"),
 
         dcc.Dropdown(
             id="exercise-dropdown",

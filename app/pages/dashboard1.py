@@ -38,7 +38,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(className="dashboard-container", children=[
-        html.H1("Análisis de Ejercicios por Usuario", className="title-large"),
+        html.H1("Duración de cada ejercicio por usuario", className="title-large"),
         dcc.Input(
             id="username-input",
             type="text",
