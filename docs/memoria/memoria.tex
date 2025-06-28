@@ -1156,7 +1156,8 @@ A partir de la consulta~\ref{lst:sql_duration_sessions_per_country} se genera un
   \label{fig:1c}
 \end{figure}
 
-El \textit{dashboard}~\ref{fig:1c} utiliza un mapa coroplético, generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.\footnote{(Es posible indicar aquí el nombre exacto del esquema de color usado, por ejemplo: \texttt{Viridis}, \texttt{Blues}, \texttt{YlOrRd}, etc.)}
+El \textit{dashboard}~\ref{fig:1c} utiliza un mapa coroplético, generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
+
 
 Se ha elegido un mapa coroplético porque este tipo de visualización permite mostrar de forma clara cómo se distribuye la duración promedio de las sesiones a lo largo del mundo. Al asignar un color a cada país según su valor de duración, se puede identificar al instante qué regiones concentran más actividad y cuáles menos, sin necesidad de consultar tablas o listas. El degradado de colores refuerza la percepción de diferencias entre países y facilita la identificación de patrones globales.
 
@@ -1201,7 +1202,8 @@ Una vez obtenidos los resultados, se cargan en un \texttt{DataFrame} de \texttt{
   \label{fig:2a}
 \end{figure}
 
-El \textit{dashboard}~\ref{fig:2a} utiliza un mapa coroplético (\textit{choropleth map}), generado mediante Plotly Express, en el que cada país se colorea en función de la duración total de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado, se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.\footnote{Puedes especificar aquí el nombre exacto de la escala usada, como \texttt{Viridis}, \texttt{Blues}, etc.}
+El \textit{dashboard}~\ref{fig:2a} utiliza un mapa coroplético (\textit{choropleth map}), generado mediante Plotly Express, en el que cada país se colorea en función de la duración total de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado, se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
+
 
 Se ha elegido un mapa coroplético porque, al igual que en el caso anterior~\ref{sec:dash1c}, permite ver de un vistazo cómo se distribuye la duración total de sesiones por país: cada país se colorea según su valor, mostrando de forma inmediata qué regiones concentran más actividad y cuáles menos, sin necesidad de consultar tablas o listas.
 
