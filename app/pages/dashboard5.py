@@ -43,7 +43,7 @@ def get_exercise_duration_distribution(exercise_id):
             FROM public.log_exercises
             WHERE exercise = %s
             GROUP BY username
-            HAVING SUM(duration) > 0
+            HAVING SUM(duration) > 200
             ORDER BY total_duration;
         """
         df = pd.read_sql(query, conn, params=[exercise_id])

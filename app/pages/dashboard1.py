@@ -20,7 +20,7 @@ def get_user_exercise_data(username):
             FROM public.log_exercises
             WHERE username = %s
             GROUP BY exercise
-            HAVING SUM(duration) > 0  
+            HAVING SUM(duration) > 200  
             ORDER BY total_duration DESC;
         """
         df = pd.read_sql(query, conn, params=[username])

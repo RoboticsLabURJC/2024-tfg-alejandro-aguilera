@@ -19,7 +19,7 @@ def get_session_durations_per_exercise():
         query = """
             SELECT exercise, duration
             FROM public.log_exercises
-            WHERE duration > 0
+            WHERE duration > 200
             ORDER BY exercise;
         """
         df = pd.read_sql(query, conn)

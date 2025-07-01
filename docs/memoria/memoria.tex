@@ -56,6 +56,8 @@
 %%-- Hay que cargarlo antes que las traducciones
 \usepackage{listing}                    % Listados de código
 
+\interfootnotelinepenalty=10000 %% Completely prevent breaking of footnotes
+
 % Traducciones en XeLaTeX
 \usepackage{polyglossia}
 \setmainlanguage{spanish}    % Comenta esta línea si tu memoria es en inglés
@@ -122,6 +124,7 @@
 \usepackage{multicol}                   % multiple column layout facilities
 \usepackage{colortbl}                   % For coloured tables
 \usepackage{pdflscape}						% Landscape (horizontal) page mode
+
 
 %%-- Bibliografía con Biblatex y Biber
 % Más info:
@@ -469,15 +472,25 @@ Por ejemplo, la instalación de entornos como ROS2 y Gazebo \cite{rico2025concis
 
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el que probar nuestros códigos, ya que, a diferencia de otras materias, la robótica es un campo cuyo aprendizaje se basa en la prueba y el error.
 
+Ante estas dificultades, han surgido en los últimos años diversas plataformas online que intentan facilitar el aprendizaje de la robótica mediante simuladores y entornos accesibles desde el navegador. Algunas de ellas, como TheConstruct, ASIMOVO o Unibotics, permiten a los usuarios programar robots virtuales sin necesidad de instalar entornos complejos ni contar con hardware físico. La Figura \ref{fig:plataformas_robotica} muestra algunos ejemplos de estas plataformas.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/roboticas.png}
+    \caption{Plataformas web de simulación y programación de robots: TheConstruct, ASIMOVO y Unibotics.}
+    \label{fig:plataformas_robotica}
+\end{figure}
+
 Este trabajo de fin de grado gira en torno a Unibotics \cite{uniboticsWebsite}, una plataforma web que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
 
 Sin embargo, a pesar de sus ventajas, aún existen áreas de Unibotics que podrían mejorarse. Plataformas de enseñanza online como Moodle \cite{einhardt2016moodle} llevan años aprovechando los datos de interacción de sus usuarios, como el acceso a recursos, la participación en foros o el tiempo dedicado a cada unidad, para generar informes que ayudan a los docentes a identificar dónde se quedan atascados los alumnos y adaptar el contenido en consecuencia.
 
 En Unibotics sucede algo similar: todos los códigos de programación, tiempos de actividad y de resolución de ejercicios ya se recogen en PostgreSQL, pero por ahora esos registros solo se almacenan, sin extraerles ningún valor añadido. Si aplicáramos a Unibotics las mismas técnicas de analítica de comportamiento que utiliza Moodle, podríamos conocer en detalle cómo afrontan los retos los estudiantes, detectar automáticamente los puntos de bloqueo y ofrecer pistas o ejercicios de refuerzo personalizados. De este modo, la plataforma dejaría de ser solo un simulador interactivo y se convertiría en una herramienta inteligente capaz de guiar el aprendizaje de la robótica de forma dinámica y adaptada a cada usuario.
 
-Dada esta situación, este proyecto quiere proporcionar una herramienta que permita extraer y procesar estos datos. Además, se diseñarán unos \textit{dashboards}  interactivos, donde se podrá ver de forma clara y detallada toda la información obtenida de la base de datos.
+Dada esta situación, este proyecto quiere proporcionar una herramienta que permita extraer y procesar estos datos. Además, se diseñarán unos \textit{dashboards} interactivos, donde se podrá ver de forma clara y detallada toda la información obtenida de la base de datos.
 
-Con la implementación de estos \textit{dashboards} , se busca que los profesores puedan ver de forma rápida y sencilla el trabajo realizado por sus alumnos, lo cual podrá facilitarles la enseñanza de la robótica a sus alumnos.
+Con la implementación de estos \textit{dashboards}, se busca que los profesores puedan ver de forma rápida y sencilla el trabajo realizado por sus alumnos, lo cual podrá facilitarles la enseñanza de la robótica a sus alumnos.
+
 
 \section{Objetivos}
 \label{sec:seccion}
@@ -1082,7 +1095,6 @@ En los siguientes apartados expondré de forma individual cada uno de los \texti
 \label{sec:dash1a}
 
 Este \textit{dashboard} permite analizar la duración total que un usuario ha dedicado a cada ejercicio de la plataforma.
-
 Para obtener la información de duración por ejercicio, el \textit{dashboard} se conecta directamente a la base de datos PostgreSQL de Unibotics mencionada anteriormente. Una vez establecida la conexión, la aplicación Dash ejecuta una consulta SQL parametrizada con el nombre de usuario introducido en el campo de entrada.
 
 La consulta SQL~\ref{lst:sql_total_duration_per_exercise} aprovecha la funcionalidad de agrupación y agregación de SQL: se filtran los registros por el usuario seleccionado y luego se agrupan por el identificador del ejercicio, calculando la suma de todos los tiempos asociados. La información se obtiene de la tabla \texttt{log\_session}.
@@ -1095,12 +1107,12 @@ SELECT exercise, SUM(duration) AS total_duration
 FROM public.log_exercises
 WHERE username = %s
 GROUP BY exercise
-HAVING SUM(duration) > 0
+HAVING SUM(duration) > 200
 ORDER BY total_duration DESC;
 \end{minted}
 \end{listing}
 
-De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula \texttt{GROUP BY} agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada \texttt{SUM()} para sumar los datos de cada grupo. En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un \texttt{DataFrame} de \texttt{pandas} para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
+De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula \texttt{GROUP BY} agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada \texttt{SUM()} para sumar los datos de cada grupo. En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Para evitar que aparezcan ejercicios con tiempos irrelevantes, se han descartado aquellos cuya duración total es inferior a 200 segundos, entendiendo que esas sesiones tan cortas son de usuarios que han cotilleado algún que otro ejercicio, pero que realmente no le han dedicado tiempo. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un \texttt{DataFrame} de \texttt{pandas} para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
 
 \begin{figure}[H]
   \centering
@@ -1293,12 +1305,13 @@ SELECT username, SUM(duration) as total_duration
 FROM public.log_exercises
 WHERE exercise = %s
 GROUP BY username
-HAVING SUM(duration) > 0
+HAVING SUM(duration) > 200
 ORDER BY total_duration;
 \end{minted}
 \end{listing}
 
-Después de obtener los datos, aplico una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada.
+Después de obtener los datos, aplico una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada. Además, se han descartado los usuarios cuya dedicación total al ejercicio es inferior a 200 segundos, entendiendo que esas sesiones tan cortas suelen corresponder a casos en los que simplemente han cotilleado el ejercicio sin llegar a trabajar realmente en él.
+
 
 \begin{figure}[H]
   \centering
@@ -1333,7 +1346,7 @@ Este análisis ayuda a comprender con mayor profundidad cómo se comportan los u
 
 Este \textit{dashboard} muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja, también llamados \textit{boxplots}, aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
 
-Los datos se obtienen de la tabla \texttt{log\_exercises}, y mediante la consulta SQL~\ref{lst:sql_total_duration_per_exercise_user} agrupo la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado es mayor que cero.
+Los datos se obtienen de la tabla \texttt{log\_exercises}, y mediante la consulta SQL~\ref{lst:sql_total_duration_per_exercise_user} agrupo la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado supera los 200 segundos, para evitar incluir sesiones demasiado breves que suelen corresponder a usuarios que simplemente han cotilleado un ejercicio sin dedicarle tiempo real.
 
 \begin{listing}[h!]
 \caption{Consulta SQL para obtener duración total por ejercicio y usuario.}
@@ -1343,12 +1356,13 @@ SELECT exercise, username, SUM(duration) as total_duration
 FROM public.log_exercises
 WHERE duration > 0
 GROUP BY exercise, username
-HAVING SUM(duration) > 0
+HAVING SUM(duration) > 200
 ORDER BY exercise;
 \end{minted}
 \end{listing}
 
 Una vez extraídos los datos, calculo el logaritmo de la duración total para cada usuario. Esto se hace para normalizar los valores, ya que algunos usuarios pueden tener tiempos muy pequeños y otros muy grandes, y la escala logarítmica ayuda a visualizar mejor esa variabilidad.
+
 
 \begin{figure}[H]
   \centering
@@ -1365,7 +1379,7 @@ En este \textit{dashboard}~\ref{fig:3b}, cada ejercicio se representa en el eje 
   \item Los valores extremos o atípicos (puntos dispersos fuera de la caja).
 \end{itemize}
 
-Gracias a este tipo de gráfico, es posible visualizar de forma clara cómo varía la dedicación de los usuarios en cada ejercicio y detectar si hay muchos usuarios que dedican tiempos muy distintos o si la mayoría se concentra en valores similares. Además, se muestran todos los puntos individuales sobre los diagramas, lo que permite ver mejor la dispersión real de los datos.
+Gracias a este tipo de gráfico, es posible visualizar de forma clara cómo varía la dedicación de los usuarios en cada ejercicio, entendida como el sumatorio de todo el tiempo de sesiones que una persona ha acumulado en dicho ejercicio. Esto permite detectar si hay muchos usuarios que dedican tiempos muy distintos o si la mayoría se concentra en valores similares. Además, se muestran todos los puntos individuales sobre los diagramas, lo que permite ver mejor la dispersión real de los datos.
 
 Este \textit{dashboard} me permite comparar rápidamente el comportamiento de los usuarios en cada ejercicio. A partir de los datos, destaco los siguientes puntos importantes:
 
@@ -1388,7 +1402,7 @@ El \textit{dashboard}~\ref{fig:3c} es muy similar al~\ref{fig:3b}, ya que tambi�
 
 Mientras que en el \textit{dashboard}~\ref{fig:3b} sumaba todas las sesiones de un usuario para un ejercicio determinado, en este caso estudio cada sesión por separado, sin agruparlas. Además, también aplico una escala logarítmica para representar mejor las diferencias en los tiempos, ya que algunas sesiones pueden durar solo unos pocos segundos y otras mucho más.
 
-Para obtener estos datos, utilizo la consulta SQL~\ref{lst:sql_duration_ordered_by_exercise}, que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración concreta de esa sesión.
+Para obtener estos datos, utilizo la consulta SQL~\ref{lst:sql_duration_ordered_by_exercise}, que selecciona, para cada registro de sesión, el nombre del ejercicio y la duración concreta de esa sesión. Se ha aplicado un filtro para excluir sesiones muy breves (menos de 200 segundos), entendiendo que suelen corresponder a usuarios que han accedido puntualmente sin llegar a trabajar de forma efectiva en el ejercicio.
 
 \begin{listing}[h!]
 \caption{Consulta SQL para obtener duración y ejercicio ordenados por ejercicio.}
@@ -1396,10 +1410,11 @@ Para obtener estos datos, utilizo la consulta SQL~\ref{lst:sql_duration_ordered_
 \begin{minted}[breaklines, fontsize=\footnotesize, baselinestretch=1]{sql}
 SELECT exercise, duration
 FROM public.log_exercises
-WHERE duration > 0
+WHERE duration > 200
 ORDER BY exercise;
 \end{minted}
 \end{listing}
+
 
 \begin{figure}[H]
   \centering
@@ -1517,11 +1532,13 @@ En este apéndice se presentan ejemplos de las consultas SQL utilizadas para ext
 
 Una base de datos está organizada en tablas, donde cada fila representa un registro (por ejemplo, un ejercicio o un usuario), y cada columna representa un campo de ese registro (por ejemplo, el nombre de un usuario o la duración de un ejercicio). A continuación, se detallan algunas de las tablas más relevantes para este proyecto.
 
+
 \begin{table}[!htb]
 \centering
-\caption{Muestra de registros de \texttt{Log\_exercises}.}
+\caption{Muestra de registros de la tabla \texttt{Log\_exercises}.}
 \label{tbl:log_exercises_sample}
-\begin{tabular}{r l l l r l}
+{\footnotesize
+\hspace*{-0.75cm}\begin{tabular}{r l l l r l}
 \toprule
 \textbf{id} & \textbf{username} & \textbf{start\_date} & \textbf{end\_date} & \textbf{duration} & \textbf{exercise} \\
 \midrule
@@ -1538,31 +1555,35 @@ Una base de datos está organizada en tablas, donde cada fila representa un regi
 308 & mariamh     & 2021-12-01 17:32:19.370519 & 2021-12-01 17:46:46.955035 & 867.584516 & rescue\_people      \\
 \bottomrule
 \end{tabular}
+} % end footnotesize font
 \end{table}
+
 
 
 La tabla \ref{tbl:log_exercises_sample} muestra los registros de las sesiones de ejercicios realizadas por los usuarios. Cada fila representa una sesión, y los campos incluyen información sobre el usuario, el ejercicio realizado, la fecha de inicio y finalización, y la duración de la sesión.
 
 \begin{table}[!htb]
-\centering
-\caption{Muestra de registros de \texttt{Log\_session}.}
+%\centering
+\caption{Muestra de registros de la tabla \texttt{Log\_session}.}
 \label{tbl:log_session_sample}
-\begin{tabular}{r l l l r l l l l}
+{\scriptsize
+\hspace*{-1.5cm}\begin{tabular}{r l l l r r l c c}
 \toprule
 \textbf{id} & \textbf{username} & \textbf{start\_date} & \textbf{end\_date} & \textbf{duration} & \textbf{client\_ip} & \textbf{browser} & \textbf{country} & \textbf{alpha\_2} \\
 \midrule
-377 & superManuel & 2021-06-07 10:05:04.455056 & 2021-06-07 10:50:31.317011 & 2726.861955 & 83.32.26.250 & Mozilla/5.0 (X11; Linux x86\_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36               & Spain & ES \\
-378 & superManuel & 2021-06-04 14:18:34.770146 & 2021-06-04 18:34:38.774011 & 15244.003865 & 83.32.26.250 & Mozilla/5.0 (X11; Ubuntu; Linux x86\_64; rv:89.0) Gecko/20100101 Firefox/89.0                                   & Spain & ES \\
-379 & davidrol    & 2021-06-07 11:55:21.250197 & 2021-06-07 11:55:21.250203 &    0.000006 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
-380 & Civantos    & 2021-06-06 00:32:46.037435 & 2021-06-06 00:32:46.037439 &    0.000004 & 83.56.241.36 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
-381 & civantos    & 2021-06-09 14:29:13.635510 & 2021-06-09 14:29:13.635518 &    0.000008 & 176.87.44.2  & Mozilla/5.0 (iPhone; CPU iPhone OS 14\_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1 & Spain & ES \\
-382 & paulam09    & 2021-06-09 14:33:13.324971 & 2021-06-09 14:33:13.324975 &    0.000004 & 176.83.221.178 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
-383 & davidrol    & 2021-06-09 15:59:18.707238 & 2021-06-09 15:59:18.707242 &    0.000004 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 & Spain & ES \\
-384 & davidrol    & 2021-06-09 18:02:36.714896 & 2021-06-09 18:33:13.979659 & 1837.264763 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
-385 & davidrol    & 2021-06-10 12:08:24.930763 & 2021-06-10 13:36:08.206773 & 5263.276010 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
-386 & davidrol    & 2021-06-10 13:36:13.849895 & 2021-06-10 13:36:13.849901 &    0.000006 & 88.11.226.27 & Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0                                & Spain & ES \\
+377 & superManuel & 2021-06-07 10:05:04.455056 & 2021-06-07 10:50:31.317011 & 2726.861955 & 83.32.26.250 & Mozilla/5.0 ... & Spain & ES \\
+378 & superManuel & 2021-06-04 14:18:34.770146 & 2021-06-04 18:34:38.774011 & 15244.003865 & 83.32.26.250 & Mozilla/5.0 ...  & Spain & ES \\
+379 & davidrol    & 2021-06-07 11:55:21.250197 & 2021-06-07 11:55:21.250203 &    0.000006 & 88.11.226.27 & Mozilla/5.0  ...  & Spain & ES \\
+380 & Civantos    & 2021-06-06 00:32:46.037435 & 2021-06-06 00:32:46.037439 &    0.000004 & 83.56.241.36 & Mozilla/5.0  ...  & Spain & ES \\
+381 & civantos    & 2021-06-09 14:29:13.635510 & 2021-06-09 14:29:13.635518 &    0.000008 & 176.87.44.2  & Mozilla/5.0  ... & Spain & ES \\
+382 & paulam09    & 2021-06-09 14:33:13.324971 & 2021-06-09 14:33:13.324975 &    0.000004 & 176.83.221.178 & Mozilla/5.0 ...  & Spain & ES \\
+383 & davidrol    & 2021-06-09 15:59:18.707238 & 2021-06-09 15:59:18.707242 &    0.000004 & 88.11.226.27 & Mozilla/5.0  ...  & Spain & ES \\
+384 & davidrol    & 2021-06-09 18:02:36.714896 & 2021-06-09 18:33:13.979659 & 1837.264763 & 88.11.226.27 & Mozilla/5.0 ...  & Spain & ES \\
+385 & davidrol    & 2021-06-10 12:08:24.930763 & 2021-06-10 13:36:08.206773 & 5263.276010 & 88.11.226.27 & Mozilla/5.0 ...  & Spain & ES \\
+386 & davidrol    & 2021-06-10 13:36:13.849895 & 2021-06-10 13:36:13.849901 &    0.000006 & 88.11.226.27 & Mozilla/5.0  ...  & Spain & ES \\
 \bottomrule
 \end{tabular}
+} % end footnotesize font
 \end{table}
 
 
@@ -1571,34 +1592,36 @@ La tabla \ref{tbl:log_session_sample} contiene información sobre los registros 
 
 \begin{table}[!htb]
 \centering
-\caption{Muestra de registros de \texttt{Exercises}.}
+\caption{Muestra de registros de la tabla \texttt{Exercises}.}
 \label{tbl:exercises_sample}
-\begin{tabular}{r l l l l l l}
+{\scriptsize
+\hspace*{-1.5cm}\begin{tabular}{r l p{2cm} p{4cm} p{2.75cm} p{1.5cm} p{2.75cm}}
 \toprule
 \textbf{id} & \textbf{exercise\_id}       & \textbf{name}              & \textbf{description}                                                                                                 & \textbf{tags}                                                         & \textbf{status} & \textbf{template}                                                               \\
 \midrule
-1  & follow\_line           & Follow Line            & The goal of this exercise is to perform a PID reactive control capable of following the line painted on the racing circuit. & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/exercises/static/exercises/follow\_line.html           \\
-2  & vacuum\_cleaner        & Vacuum Cleaner         & Vacuum Cleaner exercise using React and RAM                                                                                    & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/vacuum\_cleaner.html        \\
-3  & autoparking            & Autoparking            & Autoparking exercise testing                                                                                                    & \{\texttt{"tags"}:[\texttt{"AUTONOMOUS DRIVING"},\texttt{"SERVICE ROBOTS"},\texttt{"ROS2"}]\} & ACTIVE         & RoboticsAcademy/exercises/static/exercises/autoparking.html           \\
-4  & follow\_person         & Follow Person          & Follow a person with kobuki robot                                                                                               & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/follow\_person.html        \\
-5  & vacuum\_cleaner\_loc   & Localized Vacuum Cleaner & Localized vacuum cleaner                                                                                                        & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"MOBILE ROBOTS"},\texttt{"SERVICE ROBOTS"}]\}     & ACTIVE         & RoboticsAcademy/exercises/static/exercises/vacuum\_cleaner\_loc.html \\
-6  & global\_navigation     & Global Navigation      & Global navigation exercise using REACT and RAM                                                                                  & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/global\_navigation.html    \\
-7  & rescue\_people         & Rescue People          & Rescue People exercise                                                                                                          & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/rescue\_people.html        \\
-8  & obstacle\_avoidance    & Obstacle Avoidance     & Obstacle Avoidance exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/exercises/static/exercises/obstacle\_avoidance.html   \\
-9  & 3d\_reconstruction     & 3D Reconstruction      & 3D Reconstruction exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"},\texttt{"COMPUTER VISION"}]\}       & ACTIVE         & RoboticsAcademy/exercises/static/exercises/3d\_reconstruction.html    \\
-10 & amazon\_warehouse      & Amazon Warehouse       & Control an amazon-like robot to organize a warehouse                                                                            & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/amazon\_warehouse.html     \\
-11 & montecarlo\_laser\_loc & Montecarlo Laser Loc   & Calculate the position of the robot based on the                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/exercises/static/exercises/montecarlo\_laser\_loc.html \\
+1  & follow\_line           & Follow Line            & The goal of this exercise is to perform a PID reactive control capable of following the line painted on the racing circuit. & \{\texttt{"tags"}:[\texttt{"ROS2"},  \texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/... /follow\_line.html           \\
+2  & vacuum\_cleaner        & Vacuum Cleaner         & Vacuum Cleaner exercise using React and RAM                                                                                    & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /vacuum\_cleaner.html        \\
+3  & autoparking            & Autoparking            & Autoparking exercise testing                                                                                                    & \{\texttt{"tags"}:[\texttt{"AUTONOMOUS DRIVING"},\texttt{"SERVICE ROBOTS"},\texttt{"ROS2"}]\} & ACTIVE         & RoboticsAcademy/... /autoparking.html           \\
+4  & follow\_person         & Follow Person          & Follow a person with kobuki robot                                                                                               & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /follow\_person.html        \\
+5  & vacuum\_cleaner\_loc   & Localized Vacuum Cleaner & Localized vacuum cleaner                                                                                                        & \{\texttt{"tags"}:[\texttt{"ROS2"}, \texttt{"MOBILE ROBOTS"},\texttt{"SERVICE ROBOTS"}]\}     & ACTIVE         & RoboticsAcademy/... /vacuum\_cleaner\_loc.html \\
+6  & global\_navigation     & Global Navigation      & Global navigation exercise using REACT and RAM                                                                                  & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /global\_navigation.html    \\
+7  & rescue\_people         & Rescue People          & Rescue People exercise                                                                                                          & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /rescue\_people.html        \\
+8  & obstacle\_avoidance    & Obstacle Avoidance     & Obstacle Avoidance exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"}, \texttt{"AUTONOMOUS DRIVING"}]\}    & ACTIVE         & RoboticsAcademy/... /obstacle\_avoidance.html   \\
+9  & 3d\_reconstruction     & 3D Reconstruction      & 3D Reconstruction exercise using React and RAM                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"}, \texttt{"COMPUTER VISION"}]\}       & ACTIVE         & RoboticsAcademy/... /3d\_reconstruction.html    \\
+10 & amazon\_warehouse      & Amazon Warehouse       & Control an amazon-like robot to organize a warehouse                                                                            & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /amazon\_warehouse.html     \\
+11 & montecarlo\_laser\_loc & Montecarlo Laser Loc   & Calculate the position of the robot based on the                                                                                 & \{\texttt{"tags"}:[\texttt{"ROS2"}]\}                                  & ACTIVE         & RoboticsAcademy/... /montecarlo\_laser\_loc.html \\
 \bottomrule
 \end{tabular}
+} % end footnotesize font
 \end{table}
 
 La tabla \ref{tbl:exercises_sample} almacena información sobre los diferentes ejercicios disponibles en la plataforma, como el nombre del ejercicio, su descripción, los tags asociados y su estado. Cada fila de esta tabla corresponde a un ejercicio específico.
 
 \begin{table}[!htb]
 \centering
-\caption{Muestra de registros de \texttt{Common\_user}.}
+\caption{Muestra de registros de la tabla \texttt{Common\_user}.}
 \label{tbl:common_user_sample}
-\begin{tabular}{r l l l l l}
+\hspace*{-1cm}\begin{tabular}{r l c l l c}
 \toprule
 \textbf{id} & \textbf{last\_login}            & \textbf{is\_superuser} & \textbf{username}     & \textbf{first\_name}      & \textbf{gender} \\
 \midrule
@@ -1622,7 +1645,7 @@ La tabla \ref{tbl:common_user_sample} contiene información sobre los usuarios r
 
 A continuación, ya teniendo en contexto como se almacena la información en las tablas de la base de datos, se presentan ejemplos de consultas SQL que permiten extraer información relevante de las tablas mencionadas anteriormente. Estas consultas pueden ser utilizadas para analizar el comportamiento de los usuarios, las sesiones de ejercicio y el desempeño en los diferentes ejercicios.
 
-\section{Ejemplo 1: Listado de usuarios que han realizado un ejercicio concreto}
+\section[Listado de usuarios que han realizado un ejercicio]{Ejemplo 1: Listado de usuarios que han realizado un ejercicio concreto}
 
 Si queremos saber todos los usuarios que han ejecutado un ejercicio concreto como puede ser \texttt{rescue\_people}, basta con:
 
