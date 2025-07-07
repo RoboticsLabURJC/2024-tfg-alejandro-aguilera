@@ -374,8 +374,8 @@ Móstoles/Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 20XX
 \chapter*{}
 %\pagenumbering{Roman} % para comenzar la numeración de paginas en numeros romanos
 \begin{flushright}
-\textit{Aquí normalmente \\
-se inserta una dedicatoria corta \\}
+\textit{"Un lenguaje de programación es un medio para expresar ideas" \\
+--- Paul Graham\\}
 \end{flushright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -402,7 +402,7 @@ Y por último, gracias a Felipe, mi tutor, por darme la oportunidad de hacer est
 %\addcontentsline{toc}{chapter}{Resumen} % si queremos que aparezca en el índice
 \markboth{RESUMEN}{RESUMEN} % encabezado
 
-Este trabajo de fin de Grado tiene como objetivo principal entender mejor la interacción que se da entre los usuarios con la plataforma web Unibotics. Esta es una herramienta pensada para facilitar el aprendizaje de la robótica mediante simulaciones en entornos 3D. Gracias a esta plataforma, los estudiantes pueden crear y probar sus programas sin necesidad de configurar complejos entornos de programación, lo que hace el proceso más accesible y fomenta la experimentación.
+Este Trabajo de Fin de Grado tiene como objetivo principal entender mejor la interacción que se da entre los usuarios y la plataforma web Unibotics. Esta es una herramienta pensada para facilitar el aprendizaje de la robótica mediante simulaciones en entornos 3D. Gracias a esta plataforma, los estudiantes pueden crear y probar sus programas sin necesidad de configurar complejos entornos de programación, lo que hace el proceso más accesible y fomenta la experimentación.
 
 El proyecto se ha centrado en desarrollar un sistema capaz de extraer, procesar y mostrar de forma visual los datos que genera la propia plataforma sobre la actividad de sus usuarios. Para ello, se han utilizado tecnologías como Python, Pandas, Dash, Flask y PostgreSQL, junto con contenedores Docker para facilitar su despliegue local, lo que ha hecho viable tanto analizar los datos como crear \textit{dashboards}  adaptados a diferentes patrones de uso.
 
@@ -472,16 +472,22 @@ Por ejemplo, la instalación de entornos como ROS2 y Gazebo \cite{rico2025concis
 
 Otro gran problema del aprendizaje de la robótica es el coste de un robot en el que probar nuestros códigos, ya que, a diferencia de otras materias, la robótica es un campo cuyo aprendizaje se basa en la prueba y el error.
 
-Ante estas dificultades, han surgido en los últimos años diversas plataformas online que intentan facilitar el aprendizaje de la robótica mediante simuladores y entornos accesibles desde el navegador. Algunas de ellas, como TheConstruct, ASIMOVO o Unibotics, permiten a los usuarios programar robots virtuales sin necesidad de instalar entornos complejos ni contar con hardware físico. La Figura \ref{fig:plataformas_robotica} muestra algunos ejemplos de estas plataformas.
+Ante estas dificultades, han surgido en los últimos años diversas plataformas online que intentan facilitar el aprendizaje de la robótica mediante simuladores y entornos accesibles desde el navegador. Algunas de ellas, como TheConstruct \cite{theConstructWebsite}, ASIMOV \cite{asimovWebsite} o Unibotics \cite{uniboticsWebsite}, permiten a los usuarios programar robots virtuales sin necesidad de instalar entornos complejos ni contar con hardware físico. Las (figuras~\ref{fig:plataformas_robotica},~\ref{fig:unibotics}) muestran algunos ejemplos de estas plataformas.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/roboticas.png}
-    \caption{Plataformas web de simulación y programación de robots: TheConstruct, ASIMOVO y Unibotics.}
+    \includegraphics[width=1.1\textwidth]{img/roboticas.png}
+    \caption{Plataformas web de simulación y programación de robots: TheConstruct y ASIMOVO.}
     \label{fig:plataformas_robotica}
 \end{figure}
 
-Este trabajo de fin de grado gira en torno a Unibotics \cite{uniboticsWebsite}, una plataforma web que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{img/unibotics.png}
+    \caption{Plataformas web de simulación y programación de robots: Unibotics.}
+    \label{fig:unibotics}
+\end{figure}
+Este trabajo de fin de grado gira entorno a Unibotics, una plataforma web que nace como solución a estos problemas. Unibotics permite a los usuarios acceder a ejercicios interactivos de robótica, en los cuales podrán programar robots y simularlos en escenarios 3D sin la necesidad de tener el robot de forma física y sin tener que instalar ningún tipo de programa.
 
 Sin embargo, a pesar de sus ventajas, aún existen áreas de Unibotics que podrían mejorarse. Plataformas de enseñanza online como Moodle \cite{einhardt2016moodle} llevan años aprovechando los datos de interacción de sus usuarios, como el acceso a recursos, la participación en foros o el tiempo dedicado a cada unidad, para generar informes que ayudan a los docentes a identificar dónde se quedan atascados los alumnos y adaptar el contenido en consecuencia.
 
@@ -582,9 +588,18 @@ En el contexto de este proyecto, Pandas resulta una opción adecuada, ya que la 
 
 Dash es una herramienta de Python que permite crear aplicaciones web interactivas de forma sencilla \cite{schroeder2022book,dashPlotlyDocumentation}.
 
-En este proyecto, se utilizó Dash porque facilita la creación de visualizaciones interactivas y atractivas para representar los datos obtenidos de la plataforma Unibotics. Gracias a esta herramienta, es posible generar interfaces gráficas en las que los usuarios pueden interactuar con los datos de forma intuitiva, mediante filtros, menús desplegables u otros controles dinámicos. Esto resulta especialmente útil para representar información compleja de manera clara y accesible.
+En este proyecto, se utilizó Dash porque facilita la creación de visualizaciones interactivas y atractivas para representar los datos obtenidos de la expressplataforma Unibotics. Gracias a esta herramienta, es posible generar interfaces gráficas en las que los usuarios pueden interactuar con los datos de forma intuitiva, mediante filtros, menús desplegables u otros controles dinámicos. Esto resulta especialmente útil para representar información compleja de manera clara y accesible.
 
 Además, Dash se integra fácilmente con otras bibliotecas del ecosistema Python, lo que permite construir visualizaciones dinámicas de diversos tipos, como gráficos de barras, líneas o incluso mapas interactivos.
+
+\subsection{Plotly}
+\label{subsec:plotly}
+
+Plotly es una biblioteca de Python que permite crear gráficos interactivos de forma sencilla. Es muy utilizada en proyectos de análisis de datos y ciencia de datos por su facilidad de uso y su capacidad para mostrar información de manera clara y dinámica en el navegador \cite{plotlyDocumentation}.
+
+En este proyecto, se utilizó Plotly para construir los gráficos que luego se integraron en los \textit{dashboards} creados con Dash. Aunque Dash se encarga de la parte de la interfaz web, es Plotly quien genera realmente los gráficos: barras, líneas, pastel, mapas de calor, entre otros.
+
+Una de las ventajas de Plotly es que permite personalizar muchos aspectos de los gráficos, como los colores, títulos, leyendas o etiquetas, lo que ayuda a que los datos se entiendan mejor y se vean más profesionales.
 
 \subsection{Psycopg2}
 \label{subsec:psycopg2}
@@ -594,6 +609,8 @@ Psycopg2 es una librería de Python que permite establecer conexiones con bases 
 En este proyecto, se utilizó Psycopg2 para realizar operaciones como la extracción, inserción y modificación de datos directamente desde scripts en Python. Esta biblioteca ofrece una interfaz sencilla para gestionar conexiones con la base de datos y ejecutar comandos SQL de forma segura, ayudando a prevenir vulnerabilidades comunes, como la inyección de SQL.
 
 Además, su integración con bibliotecas como Pandas, como se explicó en la subsección~\ref{subsec:Pandas}, permite cargar los resultados de las consultas directamente en estructuras de datos tabulares, lo que facilita su análisis y posterior representación visual mediante Dash (véase subsección~\ref{subsec:dash}).
+
+
 
 \section{Flask}
 \label{sec:Flask}
@@ -818,7 +835,8 @@ df["avg_duration"] = df["avg_duration"].round(2)
 \end{minted}
 \end{listing}
 
-Una vez agrupados y ordenados los datos, la parte más relevante del proceso ha sido el diseño de las visualizaciones usando \texttt{Dash} (sección~\ref{subsec:dash}), que permitió construir \textit{dashboards} interactivos adaptados a los distintos análisis planteados. A lo largo del desarrollo, se aprovecharon las múltiples opciones que ofrece la biblioteca Dash para mostrar los datos con distintos tipos de gráficos (mapas, líneas, barras, histogramas, \textit{boxplot}), eligiendo en cada caso la representación más adecuada según la naturaleza de los datos \cite{rGraphGallery}.
+Una vez agrupados y ordenados los datos, la parte más relevante del proceso ha sido el diseño de las visualizaciones usando \texttt{Dash} (sección~\ref{subsec:dash}) y \texttt{Plotly} (sección~\ref{subsec:plotly}) , que permitió construir \textit{dashboards} interactivos adaptados a los distintos análisis planteados. A lo largo del desarrollo, se aprovecharon las múltiples opciones que ofrece las bibliotecas Dash y Plotly para mostrar los datos con distintos tipos de gráficos (mapas, líneas, barras, histogramas, \textit{boxplot}), eligiendo en cada caso la representación más adecuada según la naturaleza de los datos \cite{rGraphGallery}.
+
 
 Cada \textit{dashboard} está compuesto por una serie de componentes visuales que se combinan para construir la interfaz interactiva. Estos componentes se definen utilizando elementos de tipo HTML (como títulos, contenedores o enlaces) y controles dinámicos proporcionados por Dash, como \texttt{dcc.Input} (para introducir texto) o \texttt{dcc.Dropdown} (para seleccionar opciones). Estos elementos permiten al usuario interactuar con la aplicación. Por ejemplo, en el \textit{dashboard} de la sección~\ref{sec:dash1a}, el código~\ref{lst:dcc_input_example} permite escribir un nombre de usuario para filtrar los datos.
 
@@ -1112,29 +1130,52 @@ ORDER BY total_duration DESC;
 \end{minted}
 \end{listing}
 
-De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula \texttt{GROUP BY} agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada \texttt{SUM()} para sumar los datos de cada grupo. En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Para evitar que aparezcan ejercicios con tiempos irrelevantes, se han descartado aquellos cuya duración total es inferior a 200 segundos, entendiendo que esas sesiones tan cortas son de usuarios que han cotilleado algún que otro ejercicio, pero que realmente no le han dedicado tiempo. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un \texttt{DataFrame} de \texttt{pandas} para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
+De este modo, la propia consulta realiza el cálculo de la duración total (en segundos) acumulada para cada ejercicio realizado por el usuario indicado. La cláusula \texttt{GROUP BY} agrupa las filas que tienen el mismo valor de ejercicio y aplica la función agregada \texttt{SUM()} para sumar los datos de cada grupo. En otras palabras, si el usuario ha realizado varias sesiones o intentos en un mismo ejercicio, todos esos tiempos se suman en un único resultado por ejercicio. Para evitar que aparezcan ejercicios con tiempos irrelevantes, se han descartado aquellos cuya duración total es inferior a 200 segundos, entendiendo que esas sesiones tan cortas son de usuarios que han revisado superficialmente algún que otro ejercicio, pero que realmente no le han dedicado tiempo. Esta consulta retorna una tabla con dos columnas: el nombre de cada ejercicio y la suma de la duración total que el usuario ha invertido en él. Dichos resultados se cargan en un \texttt{DataFrame} de \texttt{pandas} para su manipulación en la aplicación y posteriormente se emplean para generar la visualización.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1.1\textwidth]{img/1a.png}
-  \caption{Análisis de la duración de cada uno de los ejercicios por usuario. En este ejemplo, la figura representa los datos registrados para el usuario con identificador carlosip.}
+  \caption{Análisis de la duración de cada uno de los ejercicios por usuario. En este ejemplo, la figura representa los datos registrados para el usuario con identificador Alberto.}
   \label{fig:1a}
 \end{figure}
 
-Desde el punto de vista del usuario, el sistema muestra un \textit{dashboard} y un cuadro de texto (figura~\ref{fig:1a}) donde se puede introducir el nombre de usuario cuya duración total por ejercicio se desea consultar. Una vez introducido, se carga automáticamente la información correspondiente a ese usuario.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/1aa.png}
+  \caption{Análisis de la duración de cada uno de los ejercicios por usuario. En este ejemplo, la figura representa los datos registrados para el usuario con identificador Diego\_Encabo.}
+  \label{fig:1aa}
+\end{figure}
 
-El \textit{dashboard}~\ref{fig:1a} presenta los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo \textit{Lollipop}. Este tipo de visualización es una variación del diagrama de barras, donde la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/1aaa.png}
+  \caption{Análisis de la duración de cada uno de los ejercicios por usuario. En este ejemplo, la figura representa los datos registrados para el usuario con identificador granizp.}
+  \label{fig:1aaa}
+\end{figure}
 
-Se ha elegido un gráfico del tipo \textit{Lollipop} en el que cada ejercicio aparece en función del tiempo total que el usuario le ha dedicado, ya que de esta forma es muy fácil identificar de un vistazo en qué actividades ha pasado más tiempo. Al ordenar los ejercicios de mayor a menor duración, se prioriza la información relevante del comportamiento del usuario, evitando un orden alfabético que podría ocultar patrones útiles. Así, por ejemplo, puede observarse que el ejercicio \texttt{global\_navigation} ocupa la mayor parte de la sesión, mientras que \texttt{opticalflow\_teleop} apenas tiene unos minutos, sin necesidad de analizar cada número individualmente. Este enfoque facilita la comparación entre tareas con duraciones muy distintas, evitando confusiones o búsquedas innecesarias.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/1aaaa.png}
+  \caption{Análisis de la duración de cada uno de los ejercicios por usuario. En este ejemplo, la figura representa los datos registrados para el usuario con identificador superManuel.}
+  \label{fig:1aaaa}
+\end{figure}
+
+Desde el punto de vista del usuario, el sistema muestra un \textit{dashboard} y un cuadro de texto (figuras~\ref{fig:1a},~\ref{fig:1aa},~\ref{fig:1aaa},~\ref{fig:1aaa}) donde se puede introducir el nombre de usuario cuya duración total por ejercicio se desea consultar. Una vez introducido, se carga automáticamente la información correspondiente a ese usuario.
+
+El \textit{dashboard} mostrado en las figuras~\ref{fig:1a},~\ref{fig:1aa},~\ref{fig:1aaa} y~\ref{fig:1aaaa} presentan los datos mediante un gráfico horizontal de líneas con puntos, también conocido como gráfico tipo \textit{Lollipop}. Este tipo de visualización es una variación del diagrama de barras, donde la barra tradicional se transforma en una línea delgada y el valor se resalta con un marcador circular al final.
+
+Se ha elegido un gráfico del tipo \textit{Lollipop} en el que cada ejercicio aparece en función del tiempo total que el usuario le ha dedicado, ya que de esta forma es muy fácil identificar de un vistazo en qué actividades ha pasado más tiempo. Al ordenar los ejercicios de mayor a menor duración, se prioriza la información relevante del comportamiento del usuario, evitando un orden alfabético que podría ocultar patrones útiles. Así, por ejemplo, puede observarse en la imagen \ref{fig:1a} que el ejercicio \texttt{vacum\_cleanner\_loc} ocupa la mayor parte de la sesión, mientras que \texttt{global\_navegation} apenas tiene unos minutos, sin necesidad de analizar cada número individualmente. Este enfoque facilita la comparación entre tareas con duraciones muy distintas, evitando confusiones o búsquedas innecesarias.
 
 Gracias a ello, pueden extraerse varias conclusiones:
 
 \begin{itemize}
   \item \textbf{Identificación de ejercicios más y menos trabajados:} Las longitudes de las líneas revelan de un vistazo cuáles son los ejercicios en los que el usuario ha invertido más tiempo y cuáles menos.
+  Analizando los ejemplos concretos mostrados en las figuras~\ref{fig:1a},~\ref{fig:1aa},~\ref{fig:1aaa} y~\ref{fig:1aaaa},  se observa que los ejercicios a los que estos alumnos dedican más tiempo, en comparación con otros, son \texttt{Global\_Navigation}, \texttt{Follow\_Line}, \texttt{Obstacle\_Avoidance}, \texttt{Rescue\_People y Vacuum\_Cleaner\_loc}, siendo estos dos últimos en los que invierten una mayor cantidad de tiempo.
 
   \item \textbf{Detección de patrones de esfuerzo o dificultad:} Una duración total muy elevada en un ejercicio puede indicar que el usuario ha tenido dificultades, ha necesitado múltiples intentos prolongados o que se trata de una tarea extensa. Por el contrario, duraciones muy bajas podrían sugerir que el ejercicio se completó rápidamente o incluso fue abandonado. En ambos casos, los valores extremos de la distribución temporal pueden señalar ejercicios que requieren atención específica al evaluar el progreso.
 
   \item \textbf{Distribución del tiempo de aprendizaje:} El conjunto de duraciones permite observar cómo el usuario ha distribuido su tiempo en la plataforma. Un perfil equilibrado mostraría tiempos similares entre ejercicios, mientras que un perfil más desequilibrado tendría unos pocos ejercicios concentrando la mayor parte del tiempo total.
+  En los ejemplos concretos de las Figuras~\ref{fig:1a} (usuario Alberto) y~\ref{fig:1aa} (usuario Diego\_Encabo), se aprecian dos perfiles claramente diferenciados. Mientras que Alberto concentró gran parte de su tiempo en el ejercicio \texttt{Vacuum\_Cleaner\_loc} y dedicó significativamente menos tiempo al resto, Diego\_Encabo mostró una distribución más equilibrada, con tiempos relativamente similares entre los distintos ejercicios, a pesar de que también dedicó más atención a algunos en particular.
 \end{itemize}
 
 
@@ -1169,7 +1210,7 @@ A partir de la consulta~\ref{lst:sql_duration_sessions_per_country} se genera un
   \label{fig:1c}
 \end{figure}
 
-El \textit{dashboard}~\ref{fig:1c} utiliza un mapa coroplético, generado mediante Plotly Express, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
+El \textit{dashboard}~\ref{fig:1c} utiliza un mapa coroplético, generado mediante Plotly, en el que cada país se colorea en función de la duración promedio de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
 
 
 Se ha elegido un mapa coroplético porque este tipo de visualización permite mostrar de forma clara cómo se distribuye la duración promedio de las sesiones a lo largo del mundo. Al asignar un color a cada país según su valor de duración, se puede identificar al instante qué regiones concentran más actividad y cuáles menos, sin necesidad de consultar tablas o listas. El degradado de colores refuerza la percepción de diferencias entre países y facilita la identificación de patrones globales.
@@ -1215,7 +1256,7 @@ Una vez obtenidos los resultados, se cargan en un \texttt{DataFrame} de \texttt{
   \label{fig:2a}
 \end{figure}
 
-El \textit{dashboard}~\ref{fig:2a} utiliza un mapa coroplético (\textit{choropleth map}), generado mediante Plotly Express, en el que cada país se colorea en función de la duración total de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado, se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
+El \textit{dashboard}~\ref{fig:2a} utiliza un mapa coroplético (\textit{choropleth map}), generado mediante Plotly, en el que cada país se colorea en función de la duración total de sesión. Cuanto mayor es la duración, más intenso es el color asignado, siguiendo una escala cromática progresiva desde tonos claros hasta colores más saturados. En el ejemplo mostrado, se emplea una paleta de colores continua personalizada para resaltar visualmente los valores extremos.
 
 
 Se ha elegido un mapa coroplético porque, al igual que en el caso anterior~\ref{sec:dash1c}, permite ver de un vistazo cómo se distribuye la duración total de sesiones por país: cada país se colorea según su valor, mostrando de forma inmediata qué regiones concentran más actividad y cuáles menos, sin necesidad de consultar tablas o listas.
@@ -1310,7 +1351,7 @@ ORDER BY total_duration;
 \end{minted}
 \end{listing}
 
-Después de obtener los datos, aplico una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada. Además, se han descartado los usuarios cuya dedicación total al ejercicio es inferior a 200 segundos, entendiendo que esas sesiones tan cortas suelen corresponder a casos en los que simplemente han cotilleado el ejercicio sin llegar a trabajar realmente en él.
+Después de obtener los datos, aplico una transformación logarítmica al valor de duración total. Esto se hace para reducir la dispersión de los datos: como hay usuarios que pueden haber pasado desde unos pocos segundos hasta varias horas en un mismo ejercicio, el uso de una escala logarítmica permite ver toda la distribución de una forma más equilibrada. Además, se han descartado los usuarios cuya dedicación total al ejercicio es inferior a 200 segundos, entendiendo que esas sesiones tan cortas suelen corresponder a casos en los que simplemente han revisado superficialmente el ejercicio sin llegar a trabajar realmente en él.
 
 
 \begin{figure}[H]
@@ -1320,7 +1361,28 @@ Después de obtener los datos, aplico una transformación logarítmica al valor 
   \label{fig:3a}
 \end{figure}
 
-El \textit{dashboard}~\ref{fig:3a} muestra los datos en un histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical representa el número de usuarios que tienen una duración dentro de cada rango.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/3aa.png}
+  \caption{Histograma que representa la frecuencia (número de usuarios) de la duración total en segundos (escala log.) por ejercicio. La figura muestra los resultados obtenidos para el ejercicio global\_navegation.}
+  \label{fig:3aa}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/3aaa.png}
+  \caption{Histograma que representa la frecuencia (número de usuarios) de la duración total en segundos (escala log.) por ejercicio. La figura muestra los resultados obtenidos para el ejercicio vacum\_cleaner\_loc.}
+  \label{fig:3aaa}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{img/3aaaa.png}
+  \caption{Histograma que representa la frecuencia (número de usuarios) de la duración total en segundos (escala log.) por ejercicio. La figura muestra los resultados obtenidos para el ejercicio obstacle\_avoidance.}
+  \label{fig:3aaaa}
+\end{figure}
+
+El \textit{dashboard} mostrado en las Figuras~\ref{fig:3a},\ref{fig:3aa},\ref{fig:3aaa} y~\ref{fig:3aaaa} presenta los datos en forma de histograma, donde el eje horizontal representa el logaritmo de la duración total (en segundos) y el eje vertical indica el número de usuarios cuya duración se encuentra dentro de cada rango.
 
 Cada barra del histograma indica cuántos usuarios cayeron en ese intervalo de duraciones. Como los valores varían mucho entre usuarios, apliqué la función logarítmica en el eje X para comprimir la escala. De ese modo, en lugar de tener muchas barras amontonadas en valores muy bajos y solo algunos casos aislados al final, se obtienen intervalos más balanceados.
 
@@ -1330,14 +1392,20 @@ Al observar el histograma, se puede identificar de un vistazo si la mayoría se 
 
 Este análisis ayuda a comprender con mayor profundidad cómo se comportan los usuarios al realizar un ejercicio determinado. A partir de esta información, destaco los siguientes aspectos:
 
+
+
 \begin{itemize}
-  \item \textbf{Distribución de los tiempos:} Permite observar si la mayoría de los usuarios completan el ejercicio en tiempos similares o si existen grandes diferencias entre ellos.
+  \item \textbf{Distribución de los tiempos:} Permite observar si la mayoría de los usuarios completan el ejercicio en tiempos similares o si existen grandes diferencias entre ellos.  
+  Por ejemplo, en el ejercicio \texttt{follow\_line} (Figura~\ref{fig:3a}), la distribución muestra una gran variabilidad, con usuarios repartidos a lo largo de todo el rango de duración, lo que sugiere comportamientos diversos al afrontar el ejercicio. En contraste, en \texttt{global\_navigation} (Figura~\ref{fig:3aa}) se observa una distribución más concentrada, donde la mayoría de los usuarios dedican tiempos similares (log entre 10 y 12), lo que indica un comportamiento más homogéneo.
 
-  \item \textbf{Tiempos agrupados en valores bajos:} Pueden indicar que el ejercicio es sencillo o que muchos usuarios dedicaron poco tiempo, posiblemente porque lo abandonaron pronto.
+  \item \textbf{Tiempos agrupados en valores bajos:} Pueden indicar que el ejercicio es sencillo o que muchos usuarios dedicaron poco tiempo, posiblemente porque lo abandonaron pronto.  
+  En el caso de \texttt{vacuum\_cleaner\_loc} (Figura~\ref{fig:3aaa}), se observa un grupo de usuarios con tiempos muy bajos (log entre 6 y 8), lo que podría indicar que algunos usuarios abandonaron el ejercicio antes de completarlo o que lo resolvieron muy rápidamente. Esta información es útil para detectar si el ejercicio necesita una introducción más clara o una dificultad más progresiva.
 
-  \item \textbf{Gran variedad de tiempos:} Sugiere que el ejercicio tiene un nivel de dificultad variable o que permite explorar distintas soluciones, lo que implica más tiempo dedicado por parte de los usuarios.
+  \item \textbf{Gran variedad de tiempos:} Sugiere que el ejercicio tiene un nivel de dificultad variable o que permite explorar distintas soluciones, lo que implica más tiempo dedicado por parte de los usuarios.  
+  Un ejemplo representativo es el ejercicio \texttt{follow\_line} (Figura~\ref{fig:3a}), cuyo histograma muestra una distribución extendida a lo largo de un amplio rango de tiempos, con múltiples picos en diferentes intervalos. Esto indica que algunos usuarios lo completaron rápidamente, mientras que otros necesitaron considerablemente más tiempo, posiblemente debido a distintas estrategias o a dificultades encontradas durante la realización del ejercicio.
 
-  \item \textbf{Utilidad para los profesores:} Este análisis facilita detectar si el ejercicio está bien equilibrado en dificultad o si requiere ajustes para mejorar la experiencia de aprendizaje.
+  \item \textbf{Utilidad para los profesores:} Este análisis facilita detectar si el ejercicio está bien equilibrado en dificultad o si requiere ajustes para mejorar la experiencia de aprendizaje.  
+  Por ejemplo, la concentración de tiempos observada en \texttt{global\_navigation} (Figura~\ref{fig:3aa}) sugiere que el ejercicio está bien ajustado en términos de dificultad y duración esperada. En cambio, en \texttt{obstacle\_avoidance} (Figura~\ref{fig:3aaaa}) se observa una distribución más asimétrica, con una acumulación clara de usuarios en rangos medios-altos (log entre 10 y 12), lo que puede indicar que el ejercicio presenta una dificultad sostenida que podría requerir apoyo adicional para ciertos perfiles de estudiantes.
 \end{itemize}
 
 
@@ -1346,7 +1414,7 @@ Este análisis ayuda a comprender con mayor profundidad cómo se comportan los u
 
 Este \textit{dashboard} muestra cómo se distribuye el tiempo que cada usuario ha dedicado a distintos ejercicios de Unibotics. Utiliza diagramas de caja, también llamados \textit{boxplots}, aplicando una escala logarítmica para representar mejor las diferencias entre los usuarios.
 
-Los datos se obtienen de la tabla \texttt{log\_exercises}, y mediante la consulta SQL~\ref{lst:sql_total_duration_per_exercise_user} agrupo la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado supera los 200 segundos, para evitar incluir sesiones demasiado breves que suelen corresponder a usuarios que simplemente han cotilleado un ejercicio sin dedicarle tiempo real.
+Los datos se obtienen de la tabla \texttt{log\_exercises}, y mediante la consulta SQL~\ref{lst:sql_total_duration_per_exercise_user} agrupo la información por nombre de ejercicio y por usuario, sumando la duración total que cada uno ha dedicado a cada ejercicio. Solo se consideran aquellos casos donde el tiempo total registrado supera los 200 segundos, para evitar incluir sesiones demasiado breves que suelen corresponder a usuarios que simplemente han revisado superficialmente un ejercicio sin dedicarle tiempo real.
 
 \begin{listing}[h!]
 \caption{Consulta SQL para obtener duración total por ejercicio y usuario.}
